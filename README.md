@@ -1,5 +1,9 @@
 # restyle
 
+[![Build Status](https://travis-ci.org/eoneill/eyeglass-restyle.svg)](https://travis-ci.org/eoneill/eyeglass-restyle)
+[![Version](https://img.shields.io/npm/v/eyeglass-restyle.svg)](https://www.npmjs.com/package/eyeglass-restyle)
+[![License](https://img.shields.io/npm/l/eyeglass-restyle.svg)](./LICENSE)
+
 `restyle` is an [`eyeglass`](/sass-eyeglass/eyeglass) framework for authoring configurable, composable UI definitions.
 
 ## Installation
