@@ -4,7 +4,9 @@
 [![Version](https://img.shields.io/npm/v/eyeglass-restyle.svg)](https://www.npmjs.com/package/eyeglass-restyle)
 [![License](https://img.shields.io/npm/l/eyeglass-restyle.svg)](./LICENSE)
 
-`restyle` is an [`eyeglass`](/sass-eyeglass/eyeglass) framework for authoring configurable, composable UI definitions.
+`restyle` is an [`eyeglass`][eyeglass] framework for authoring configurable, composable UI definitions.
+
+[eyeglass]: https://github.com/sass-eyeglass/eyeglass
 
 ## Installation
 
@@ -13,7 +15,9 @@ $ npm install --save-dev eyeglass-restyle
 ````
 ### Installing eyeglass
 
-`restyle` depends on `eyeglass` being installed, so check out the [`eyeglass` installation docs](/sass-eyeglass/eyeglass)
+`restyle` depends on `eyeglass` being installed, so check out the [`eyeglass` installation docs][eyeglass_install]
+
+[eyeglass_install]: https://github.com/sass-eyeglass/eyeglass#user-content-installing-eyeglass
 
 ## Usage
 
