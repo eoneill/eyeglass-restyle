@@ -1,0 +1,15 @@
+@import 'restyle/noconflict';
+
+$data: (
+  function: (restyle, -restyle--main),
+  mixin: (restyle, -restyle--main)
+);
+
+@each $type, $names in $data {
+  @each $name in $names {
+    // TODO - support variable-exists as well
+    $existsFn: "#{$type}-exists";
+    $result: call($existsFn, $name);
+    /* #{$type} `#{$name}` exists? #{$result} */
+  }
+}

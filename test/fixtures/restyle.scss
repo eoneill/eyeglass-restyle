@@ -1,0 +1,153 @@
+@import 'restyle';
+
+%extend-test {
+  extended: true;
+}
+
+@include restyle-add-state((
+  hover: '&:hover, &.hover, &:focus, &.focus'
+));
+
+@function custom-border($border, $opacity) {
+  @return (
+    border: $border,
+    border-color: rgba(nth($border, 3), $opacity)
+  );
+}
+
+@include restyle-add(tester, (
+  color: multiple-values(
+    red,
+    rgba(red, 0.8)
+  ),
+  multivalues: multiple-values(
+    -webkit-true,
+    true,
+    '@var.simple',
+    '@this.color'
+  ),
+  multivalues2: '@this.multivalues',
+
+  '@restyle.function custom-border': (2px solid red, 0.8),
+
+  font-size: 10px,
+  '@restyle.var simple': simple,
+
+  '&.test': (
+    test: '@var.simple',
+    color: '@root.color',
+    '& > .child': (
+      'color{1}': '@root.color',
+      'color{2}': '@this.@parent.color',
+      'color{3}': '@this.@parent.@parent.color'
+    ),
+
+    '@restyle.states': (
+      hover: (
+        test: '@var.simple',
+        color: '@this.@parent.color',
+        nested-state: true
+      )
+    )
+  ),
+
+  '@restyle.states': (
+    hover: (
+      color: purple,
+
+      '& .sub': (
+        color: orange,
+        nested-selector: true
+      )
+    )
+  )
+));
+
+@include restyle-add(button, (
+  color: green,
+  font-size: 14px,
+  border: 1px solid red,
+  font-color: '@this.border-color',
+  border-color: '@this.color',
+
+  border-radius: 5px nomixin,
+
+  '@extend': '%extend-test',
+
+  '@restyle.var foo': pink,
+  '@restyle.var bar': '@this.color',
+
+  // modifiers...
+  '@restyle.modifiers': (
+    small: (
+      font-size: 12px,
+      '@restyle.var foo': purple
+    ),
+    in a container: (
+      color: '@var.foo',
+      font-color: '@var.bar',
+      border: null
+    ),
+
+    // test an alias
+    close: (
+      '@restyle.alias': close-button // this is equivalent to doing `restyle(close-button)`
+    )
+  ),
+  // states...
+  '@restyle.states': (
+    hover: (
+      color: white
+    ),
+    '&.one-off-custom-state': (
+      color: blue
+    )
+  )
+));
+
+@include restyle-add(close-button, (
+  font-size: 2em
+));
+
+// we need to register these components so that the grammar engine is aware of them
+@include restyle-add(dialog);
+@include restyle-add(container);
+
+
+.should-be-large-primary-button {
+  @include restyle('large primary button');
+}
+
+.should-be-large-primary-button {
+  @include restyle(large primary button);
+}
+
+.should-be-close-button-in-dialog {
+  @include restyle(close-button in a dialog);
+}
+
+.should-be-small-button-in-container {
+  @include restyle((description: small button in a container));
+}
+
+.should-be-small-button-in-container {
+  @include restyle((type: button, description: small in a container));
+}
+
+.should-be-button-with-content {
+  @include restyle(button) {
+    color: red;
+  }
+}
+
+.should-be-close-button {
+  @include restyle(small close button);
+}
+
+.should-be-close-button {
+  @include restyle(close-button);
+}
+
+.should-be-a-tester {
+  @include restyle(tester);
+}

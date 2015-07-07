@@ -1,0 +1,46 @@
+.btn {
+  display: inline-block;
+  padding: 5px 10px;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid #3079ed;
+  border-radius: 2px;
+  background-color: #4787ed;
+  color: white;
+  cursor: pointer; }
+  .btn:hover {
+    background-color: #357ae8;
+    border-color: #2f5bb7; }
+  .btn[disabled] {
+    border-color: #3079ed;
+    background-color: #4787ed;
+    color: white;
+    opacity: 0.8;
+    cursor: default; }
+  .btn.secondary {
+    display: inline-block;
+    padding: 5px 10px;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    background-color: whitesmoke;
+    color: #444444;
+    cursor: pointer; }
+    .btn.secondary:hover {
+      background-color: #e0e0e0;
+      color: #333333; }
+    .btn.secondary[disabled] {
+      border-color: rgba(0, 0, 0, 0.1);
+      background-color: whitesmoke;
+      color: #444444;
+      opacity: 0.8;
+      cursor: default; }
+
+.btn-close {
+  close-button: true; }
+
+.btn-close-inherit {
+  close-button: true; }

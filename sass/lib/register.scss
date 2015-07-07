@@ -1,0 +1,22 @@
+@import "./shared";
+
+/// @alias restyle-add
+@function -restyle--add($name, $definition: null) {
+  @if (map-get($-restyle--registered-components, $name)) {
+    @warn "A component named `#{$name}` already exists";
+  }
+
+  // add the name to the known types...
+  $-restyle--registered-types: append($-restyle--registered-types, $name) !global;
+
+  // add the definition to the map...
+  $-restyle--registered-components: map-merge($-restyle--registered-components, (
+    #{$name}: $definition
+  )) !global;
+  @return true;
+}
+
+/// @alias restyle-add
+@mixin -restyle--add($name, $definition: null) {
+  $tmp: -restyle--add($name, $definition);
+}

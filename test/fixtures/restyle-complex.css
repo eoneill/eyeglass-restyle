@@ -1,0 +1,149 @@
+.should-be-test {
+  color: red;
+  margin: 5px;
+  font-size: 10px;
+  border-color: red; }
+  .should-be-test.test {
+    simple: simple;
+    color: red; }
+    .should-be-test.test > .child {
+      color1: red;
+      color2: red;
+      color3: red;
+      simple: simple2; }
+    .should-be-test.test:hover, .should-be-test.test.hover, .should-be-test.test:focus, .should-be-test.test.focus {
+      test: simple;
+      color: red; }
+  .should-be-test:hover, .should-be-test.hover, .should-be-test:focus, .should-be-test.focus {
+    color: purple; }
+    .should-be-test:hover .sub, .should-be-test.hover .sub, .should-be-test:focus .sub, .should-be-test.focus .sub {
+      color: orange; }
+
+.should-be-fancy-test {
+  color: green;
+  font-size: 10px;
+  border-color: green;
+  simple: simple; }
+  .should-be-fancy-test.test {
+    simple: simple;
+    color: green; }
+    .should-be-fancy-test.test > .child {
+      color1: green;
+      color2: green;
+      color3: green;
+      simple: simple2; }
+    .should-be-fancy-test.test:hover, .should-be-fancy-test.test.hover, .should-be-fancy-test.test:focus, .should-be-fancy-test.test.focus {
+      test: simple;
+      color: green; }
+  .should-be-fancy-test:hover, .should-be-fancy-test.hover, .should-be-fancy-test:focus, .should-be-fancy-test.focus {
+    color: purple; }
+    .should-be-fancy-test:hover .sub, .should-be-fancy-test.hover .sub, .should-be-fancy-test:focus .sub, .should-be-fancy-test.focus .sub {
+      color: orange; }
+
+.should-be-fancy-test {
+  color: green;
+  font-size: 10px;
+  border-color: green;
+  simple: simple; }
+  .should-be-fancy-test.test {
+    simple: simple;
+    color: green; }
+    .should-be-fancy-test.test > .child {
+      color1: green;
+      color2: green;
+      color3: green;
+      simple: simple2; }
+    .should-be-fancy-test.test:hover, .should-be-fancy-test.test.hover, .should-be-fancy-test.test:focus, .should-be-fancy-test.test.focus {
+      test: simple;
+      color: green; }
+  .should-be-fancy-test:hover, .should-be-fancy-test.hover, .should-be-fancy-test:focus, .should-be-fancy-test.focus {
+    color: purple; }
+    .should-be-fancy-test:hover .sub, .should-be-fancy-test.hover .sub, .should-be-fancy-test:focus .sub, .should-be-fancy-test.focus .sub {
+      color: orange; }
+
+.should-be-simple-test {
+  margin: 5px;
+  font-size: 10px; }
+  .should-be-simple-test:hover, .should-be-simple-test.hover, .should-be-simple-test:focus, .should-be-simple-test.focus {
+    color: purple; }
+    .should-be-simple-test:hover .sub, .should-be-simple-test.hover .sub, .should-be-simple-test:focus .sub, .should-be-simple-test.focus .sub {
+      color: orange; }
+
+.should-be-simple-test-and-fancy-test {
+  color: green;
+  font-size: 10px;
+  border-color: green;
+  simple: simple; }
+  .should-be-simple-test-and-fancy-test.test {
+    simple: simple;
+    color: green; }
+    .should-be-simple-test-and-fancy-test.test > .child {
+      color1: green;
+      color2: green;
+      color3: green;
+      simple: simple2; }
+    .should-be-simple-test-and-fancy-test.test:hover, .should-be-simple-test-and-fancy-test.test.hover, .should-be-simple-test-and-fancy-test.test:focus, .should-be-simple-test-and-fancy-test.test.focus {
+      test: simple;
+      color: green; }
+  .should-be-simple-test-and-fancy-test:hover, .should-be-simple-test-and-fancy-test.hover, .should-be-simple-test-and-fancy-test:focus, .should-be-simple-test-and-fancy-test.focus {
+    color: purple; }
+    .should-be-simple-test-and-fancy-test:hover .sub, .should-be-simple-test-and-fancy-test.hover .sub, .should-be-simple-test-and-fancy-test:focus .sub, .should-be-simple-test-and-fancy-test.focus .sub {
+      color: orange; }
+
+.should-be-simple-fancy-test {
+  font-size: 10px;
+  simple: simple; }
+  .should-be-simple-fancy-test:hover, .should-be-simple-fancy-test.hover, .should-be-simple-fancy-test:focus, .should-be-simple-fancy-test.focus {
+    color: purple; }
+    .should-be-simple-fancy-test:hover .sub, .should-be-simple-fancy-test.hover .sub, .should-be-simple-fancy-test:focus .sub, .should-be-simple-fancy-test.focus .sub {
+      color: orange; }
+
+.should-be-fancy-simple-test {
+  font-size: 10px;
+  simple: simple; }
+  .should-be-fancy-simple-test:hover, .should-be-fancy-simple-test.hover, .should-be-fancy-simple-test:focus, .should-be-fancy-simple-test.focus {
+    color: purple; }
+    .should-be-fancy-simple-test:hover .sub, .should-be-fancy-simple-test.hover .sub, .should-be-fancy-simple-test:focus .sub, .should-be-fancy-simple-test.focus .sub {
+      color: orange; }
+
+.should-be-simple-test-and-fancy-test {
+  color: green;
+  font-size: 10px;
+  border-color: green;
+  simple: simple; }
+  .should-be-simple-test-and-fancy-test.test {
+    simple: simple;
+    color: green; }
+    .should-be-simple-test-and-fancy-test.test > .child {
+      color1: green;
+      color2: green;
+      color3: green;
+      simple: simple2; }
+    .should-be-simple-test-and-fancy-test.test:hover, .should-be-simple-test-and-fancy-test.test.hover, .should-be-simple-test-and-fancy-test.test:focus, .should-be-simple-test-and-fancy-test.test.focus {
+      test: simple;
+      color: green; }
+  .should-be-simple-test-and-fancy-test:hover, .should-be-simple-test-and-fancy-test.hover, .should-be-simple-test-and-fancy-test:focus, .should-be-simple-test-and-fancy-test.focus {
+    color: purple; }
+    .should-be-simple-test-and-fancy-test:hover .sub, .should-be-simple-test-and-fancy-test.hover .sub, .should-be-simple-test-and-fancy-test:focus .sub, .should-be-simple-test-and-fancy-test.focus .sub {
+      color: orange; }
+
+.should-be-fancy-test {
+  color: green;
+  font-size: 10px;
+  border-color: green;
+  simple: simple; }
+  .should-be-fancy-test.test {
+    simple: simple;
+    color: green; }
+    .should-be-fancy-test.test > .child {
+      color1: green;
+      color2: green;
+      color3: green;
+      simple: simple2; }
+    .should-be-fancy-test.test:hover, .should-be-fancy-test.test.hover, .should-be-fancy-test.test:focus, .should-be-fancy-test.test.focus {
+      test: simple;
+      color: green; }
+  .should-be-fancy-test:hover, .should-be-fancy-test.hover, .should-be-fancy-test:focus, .should-be-fancy-test.focus {
+    color: purple; }
+    .should-be-fancy-test:hover .sub, .should-be-fancy-test.hover .sub, .should-be-fancy-test:focus .sub, .should-be-fancy-test.focus .sub {
+      color: orange; }

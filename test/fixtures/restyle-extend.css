@@ -1,0 +1,25 @@
+.before-extend {
+  color: green;
+  position: relative; }
+  .before-extend.hover {
+    color: blue; }
+  .before-extend.modified {
+    color: red;
+    position: relative; }
+    .before-extend.modified.hover {
+      color: blue; }
+
+.after-extend {
+  color: black;
+  position: relative; }
+  .after-extend.hover {
+    color: blue; }
+  .after-extend.focus {
+    color: purple; }
+  .after-extend.modified {
+    color: red;
+    position: absolute; }
+    .after-extend.modified.hover {
+      color: blue; }
+    .after-extend.modified.focus {
+      color: purple; }

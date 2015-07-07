@@ -1,0 +1,108 @@
+@import 'restyle';
+
+@include restyle-add(test-cmpt, (
+  color: green,
+  width: 100%,
+  font-size: 10px,
+
+  // modifiers...
+  '@restyle.modifiers': (
+    drop-all: (
+      '@restyle.remove': all
+    ),
+    drop-color: (
+      '@restyle.remove': color
+    ),
+    drop-width-font-size: (
+      '@restyle.remove': width font-size
+    ),
+    drop-all-new: (
+      '@restyle.remove': all,
+      color: blue,
+      height: 10px
+    )
+  )
+));
+
+@include restyle-add(test-states, (
+  color: green,
+  '@restyle.states': (
+    hover: (
+      color: blue
+    ),
+    focus: (
+      color: purple
+    )
+  ),
+  '@restyle.modifiers': (
+    drop-states: (
+      '@restyle.remove': states
+    ),
+    drop-hover-state: (
+      '@restyle.remove': '@states.hover'
+    )
+  )
+));
+
+@include restyle-add(test-selectors, (
+  color: green,
+  '.first': (
+    color: blue
+  ),
+  '.second': (
+    color: red
+  ),
+  '@restyle.modifiers': (
+    drop-selectors: (
+      '@restyle.remove': selectors
+    ),
+    drop-first-selector: (
+      '@restyle.remove': '.first'
+    )
+  )
+));
+
+.should-have-all-styles {
+  @include restyle(test-cmpt);
+}
+
+.should-have-no-styles {
+  @include restyle(drop-all test-cmpt);
+}
+
+.should-have-no-color {
+  @include restyle(drop-color test-cmpt);
+}
+
+.should-have-no-width-font-size {
+  @include restyle(drop-width-font-size test-cmpt);
+}
+
+.should-have-color-blue-height-10px {
+  @include restyle(drop-all-new test-cmpt);
+}
+
+.should-have-hover-focus-state {
+  @include restyle(test-states);
+}
+
+.should-have-no-state {
+  @include restyle(drop-states test-states);
+}
+
+.should-have-focus-state {
+  @include restyle(drop-hover-state test-states);
+}
+
+
+.should-have-two-selectors {
+  @include restyle(test-selectors);
+}
+
+.should-have-no-selectors {
+  @include restyle(drop-selectors test-selectors);
+}
+
+.should-have-second-selector {
+  @include restyle(drop-first-selector test-selectors);
+}

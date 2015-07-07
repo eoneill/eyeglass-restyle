@@ -1,0 +1,202 @@
+@import "./shared";
+
+/// given a grammar, retrieves style definition
+/// @param    {Map|List|String} $grammars... - the grammars to process
+/// @returns  {Map} the styles as a map
+@function -restyle--styles-from-grammar($grammars...) {
+  @return -restyle--styles-from-grammar-js($grammars, $-restyle--registered-types, $-restyle--registered-components);
+}
+
+/// helper function to determine if the value includes a `nomixin` attribute
+/// @param    {*} $value - the value to check
+/// @returns  {Boolean} whether or not the value includes `nomixin` attribute
+@function -restyle--should-skip-mixin($value) {
+  @return type-of($value) == list and (index($value, nomixin) != null);
+}
+
+/// removes an item from a list
+/// @param    {List} $list - the list to check
+/// @param    {*} $reject - the value to reject from the list
+/// @returns  {List} the list without the rejected items
+@function -restyle--list-remove($list, $reject) {
+  $separator: list-separator($list);
+  $new-list: ();
+  @each $item in $list {
+    @if ($item != $reject) {
+      $new-list: append($new-list, $item, $separator);
+    }
+  }
+  @return $new-list;
+}
+
+/// checks whether or not a custom styler exists for a given property/value/method combination
+/// @param    {String} $property - the property
+/// @param    {String} $value - the value
+/// @param    {String} $method - the method
+/// @returns  {Boolean}
+@function -restyle--has-custom-styler($property, $value, $method: pre) {
+  @return mixin-exists('restyle-custom-styler') and function-exits('restyle-has-custom-styler') and restyle-has-custom-styler($property, $value, $method);
+}
+
+/// given a state name, will look up it's selector in the `state-mappings` config
+/// @param    {String} $state - the state to search for
+/// @returns  {String} the computed selector
+@function -restyle--get-state-selector($state) {
+  @if (-restyle--is-selector-js($state)) {
+    @return $state;
+  }
+  $state-mappings: -restyle--config(state-mappings);
+
+  $selector: map-get($state-mappings, $state);
+  @return if($selector, $selector, "&.#{$state}");
+}
+
+/// outputs @content into a placeholder, and then extends it,
+///  if the placeholder already exists, just extend it
+/// @param    {String} $placeholder - the placeholder name to use
+/// @param    {Boolean} $output - if `false`, will only create the placeholder, but not extend it
+/// @param    {Boolean} $extend - if `false`, will force the content to be output in the current context, and not extended
+/// @content
+@mixin -restyle--smart-content($placeholder, $output: true, $extend: true) {
+  @if $placeholder and map-get($-restyle--config, smart-content-enabled) and $extend {
+    @if type-of($placeholder) != string {
+      $placeholder: -restyle--placeholder-name($placeholder);
+    }
+
+    // if we haven't already registered this placeholder...
+    @if not index($-restyle--registered-smart-placeholders, $placeholder) {
+      // create it...
+      @at-root #{$placeholder} {
+        @content;
+      }
+      // and register it...
+      $-restyle--registered-smart-placeholders: append($-restyle--registered-smart-placeholders, $placeholder) !global;
+    }
+    @if $output {
+      @extend #{$placeholder} !optional;
+    }
+  }
+  @elseif $output {
+    @content;
+  }
+}
+
+/// given a set of data will generate a hashed placeholder name
+/// @param    {*} $data - the data to process
+/// @returns  {String} the hashed placeholder name
+@function -restyle--placeholder-name($data) {
+  @return unquote("%restyle-#{-restyle--checksum-js($data)}");
+}
+
+/// given a map of styles, outputs the styles into CSS
+/// @param    {Map} $styles - the styles to process
+/// @param    {Boolean} $extend - whether or not to extend (depends on config `smart-content-enabled` being `true`)
+@mixin -restyle--styles($styles, $extend: true) {
+  @if $styles {
+    @include -restyle--smart-content($styles, $extend: $extend) {
+      @each $property, $value in $styles {
+        @if ($value != null) {
+          @if $value == -restyle-no-value {
+            $value: ();
+          }
+
+          $property: -restyle--normalize-property-js($property);
+
+          // if it's a multivalue object...
+          @if -restyle--is-multivalue-js($value) {
+            // iterate over each value
+            @each $val in map-get($value, "@restyle.multivalue") {
+              @include -restyle--styles((
+                #{$property}: $val
+              ), $extend: $extend)
+            }
+          }
+
+          @else {
+            // for mixins, we need to do some custom work
+            // check to see if we have a custom output styler (pre)
+            @if -restyle--has-custom-styler($property, $value, pre) {
+              @include restyle-custom-styler($property, $value, $method: pre);
+            }
+
+            @if ($property == "@restyle.states") {
+              @each $state-name, $state in $value {
+                #{-restyle--get-state-selector($state-name)} {
+                  @include -restyle--styles($state);
+                }
+              }
+            }
+            @else if ($property == "@restyle.functions") {
+              $calls: map-get($value, calls);
+              @each $function, $args in $calls {
+                @include -restyle--styles(call($function, $args...));
+              }
+            }
+            @else if (-restyle--is-selector-js($property)) {
+              #{$property} {
+                @include -restyle--styles($value);
+              }
+            }
+            @else if (-restyle--should-skip-mixin($value)) {
+              #{$property}: -restyle--list-remove($value, nomixin);
+            }
+
+            // for mixins, we need to do some custom work
+            // check to see if we have a custom output styler (pre)
+            @else if -restyle--has-custom-styler($property, $value, pre) {
+              @include restyle-custom-styler($property, $value, $method: pre);
+            }
+
+            // special case for @extend
+            @else if($property == '@extend') {
+              @if (type-of($value) == list) {
+                @each $v in $value {
+                  @extend #{$v} !optional;
+                }
+              }
+              @else {
+                @extend #{$value} !optional;
+              }
+            }
+
+            // special case for @media
+            @else if($property == '@media') {
+              @each $query, $styles in $value {
+                @media #{$query} {
+                  @include -restyle--styles($styles);
+                }
+              }
+            }
+
+            // check to see if we have a custom output styler (post)
+            @else if -restyle--has-custom-styler($property, $value, post) {
+              @include restyle-custom-styler($property, $value, $method: post);
+            }
+
+            @else if mixin-exists($property) {
+              /* TODO - invoke mixin */
+            }
+
+            @else {
+              #{$property}: $value;
+            }
+          }
+        }
+      }
+    }
+
+    // any original block content passed in...
+    // if we're using smart content...
+    @if map-get($-restyle--config, smart-content-enabled) and $extend {
+      // intentionally break out of the context
+      & {
+        @content;
+      }
+    }
+    // otherwise...
+    @else {
+      // just put it here
+      @content;
+    }
+  }
+}

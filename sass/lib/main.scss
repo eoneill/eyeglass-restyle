@@ -1,0 +1,18 @@
+/// @alias    restyle
+@function -restyle--main($descriptors...) {
+  $grammars: -restyle--grammars($descriptors...);
+  @return -restyle--styles-from-grammar($grammars...);
+}
+
+/// @alias    restyle
+@mixin -restyle--main($descriptors...) {
+  $styles: -restyle--main($descriptors...);
+  @include -restyle--styles($styles) {
+    @content;
+  }
+}
+
+/// @alias    restyle-diff
+@mixin -restyle--diff($original, $other) {
+  @warn "TODO - diff";
+}

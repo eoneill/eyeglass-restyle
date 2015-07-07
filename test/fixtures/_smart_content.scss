@@ -1,0 +1,31 @@
+@import 'restyle';
+
+@include restyle-config(smart-content-enabled, true);
+
+%extend-test {
+  extended: true;
+}
+
+@include restyle-add-state((
+  hover: '&:hover, &.hover, &:focus, &.focus'
+));
+
+@include restyle-add(test, (
+  color: red,
+  height: 100%
+));
+
+@include restyle-add(test2, (
+  color: red,
+  height: 100%
+));
+
+
+
+.should-be-test {
+  @include restyle(test);
+}
+
+.should-be-test2 {
+  @include restyle(test2);
+}

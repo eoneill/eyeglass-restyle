@@ -1,0 +1,41 @@
+$-restyle--default-config: (
+  init: true,
+  state-mappings: (),
+  smart-content-enabled: false
+);
+$-restyle--config: $-restyle--default-config !default;
+$restyle-config: null !default;
+
+@function -restyle--config($key: $-restyle--no-value, $value: $-restyle--no-value) {
+  $has-incoming-map: type-of($key) == map;
+  $is-setter: $has-incoming-map or $value != $-restyle--no-value;
+  @if ($is-setter) {
+    // if it's a map...
+    @if ($has-incoming-map) {
+      // if the $value is `true`, replace it, otherwise merge it
+      $-restyle--config: if($value == true, $key, map-merge($-restyle--config, $key)) !global;
+    }
+    // otherwise
+    @else {
+      // update the value
+      $-restyle--config: map-merge($-restyle--config, (
+        #{$key}: $value
+      )) !global;
+    }
+    // return the updated config
+    @return $-restyle--config;
+  }
+
+  // otherwise, it's a getter
+  // if a $key exists, return the config entry. if a $key does not exist, return the entire config map
+  @return if($key == $-restyle--no-value, $-restyle--config, map-get($-restyle--config, $key));
+}
+
+@mixin -restyle--config($key: $-restyle--no-value, $value: $-restyle--no-value) {
+  $tmp: -restyle--config($key, $value);
+}
+
+@if type-of($restyle-config) == map {
+  @include -restyle--config($restyle-config);
+  $restyle-config: null !global;
+}

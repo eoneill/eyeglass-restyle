@@ -1,0 +1,45 @@
+.should-have-all-styles {
+  color: green;
+  width: 100%;
+  font-size: 10px; }
+
+.should-have-no-color {
+  width: 100%;
+  font-size: 10px; }
+
+.should-have-no-width-font-size {
+  color: green; }
+
+.should-have-color-blue-height-10px {
+  color: blue;
+  height: 10px; }
+
+.should-have-hover-focus-state {
+  color: green; }
+  .should-have-hover-focus-state.hover {
+    color: blue; }
+  .should-have-hover-focus-state.focus {
+    color: purple; }
+
+.should-have-no-state {
+  color: green; }
+
+.should-have-focus-state {
+  color: green; }
+  .should-have-focus-state.focus {
+    color: purple; }
+
+.should-have-two-selectors {
+  color: green; }
+  .should-have-two-selectors .first {
+    color: blue; }
+  .should-have-two-selectors .second {
+    color: red; }
+
+.should-have-no-selectors {
+  color: green; }
+
+.should-have-second-selector {
+  color: green; }
+  .should-have-second-selector .second {
+    color: red; }

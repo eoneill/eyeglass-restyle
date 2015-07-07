@@ -1,0 +1,26 @@
+@import "./shared";
+
+/// @alias restyle-extend
+@function -restyle--extend($name, $definition: null) {
+  @if (not map-get($-restyle--registered-components, $name)) {
+    @warn "Attempting to extend `#{$name}` but it does not exist. You should use `restyle-add()` instead.";
+    @return -restyle--add($name, $definition);
+  }
+
+  // get the current definition
+  $current-definition: map-get($-restyle--registered-components, $name);
+
+  // extend it
+  $extended-definition: -restyle--map-merge-deep($current-definition, $definition);
+
+  // and merge it back in
+  $-restyle--registered-components: map-merge($-restyle--registered-components, (
+    #{$name}: $extended-definition
+  )) !global;
+  @return true;
+}
+
+/// @alias restyle-extend
+@mixin -restyle--extend($name, $definition: null) {
+  $tmp: -restyle--extend($name, $definition);
+}

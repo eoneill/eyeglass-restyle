@@ -1,0 +1,27 @@
+@function -restyle--multiple-values($values...) {
+  @return (
+    '@restyle.multivalue': $values
+  );
+}
+
+@function -restyle--map-merge-deep($destination, $source: ()){
+  @if type-of($source) != map {
+    @return $destination;
+  }
+
+  @each $key, $value in $source {
+    // if the destination already has a a value, and the values are both maps...
+    $current-value: map-get($destination, $key);
+    @if ((type-of($current-value) == map) and (type-of($value) == map)) {
+      // recursively merge the values
+      $value: -restyle--map-merge-deep($current-value, $value);
+    }
+
+    // merge these values back into the destination
+    $destination: map-merge($destination, (
+      #{$key}: $value
+    ));
+  }
+
+  @return $destination;
+}

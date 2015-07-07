@@ -1,0 +1,53 @@
+@import 'restyle';
+
+@mixin extend {
+  @include restyle(extend-me);
+
+  &.modified {
+    @include restyle(modified extend-me);
+  }
+}
+
+@include restyle-add(extend-me, (
+  color: green,
+  position: relative,
+
+  // modifiers...
+  '@restyle.modifiers': (
+    modified: (
+      color: red
+    )
+  ),
+
+  // states...
+  '@restyle.states': (
+    hover: (
+      color: blue
+    )
+  )
+));
+
+.before-extend {
+  @include extend;
+}
+
+@include restyle-extend(extend-me, (
+  color: black,
+
+  // modifiers...
+  '@restyle.modifiers': (
+    modified: (
+      position: absolute
+    )
+  ),
+
+  '@restyle.states': (
+    focus: (
+      color: purple
+    )
+  )
+));
+
+.after-extend {
+  @include extend;
+}

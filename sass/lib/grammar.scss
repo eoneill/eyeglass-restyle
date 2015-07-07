@@ -1,0 +1,28 @@
+/// returns a grammar map given a descriptor
+/// @param    {Map|List|String} $descriptor - the descriptor to convert
+/// @returns  {Map} the grammar map
+@function -restyle--grammar($descriptor) {
+  $descriptor: if(type-of($descriptor) == map, $descriptor, (
+    description: $descriptor
+  ));
+
+  @return -restyle--grammar-from-description-js(
+    map-get($descriptor, description),
+    map-get($descriptor, type),
+    $-restyle--registered-types
+  );
+}
+
+/// returns a collection of grammar maps for a given collection of descriptors
+/// @param    {Map|List|String} $descriptors... - the descriptors to convert
+/// @returns  {List<Map>} the collection of grammar maps
+@function -restyle--grammars($descriptors...) {
+  $grammars: ();
+  @each $descriptor in $descriptors {
+    $grammar: -restyle--grammar($descriptor);
+    @if ($grammar) {
+      $grammars: append($grammars, $grammar);
+    }
+  }
+  @return $grammars;
+}

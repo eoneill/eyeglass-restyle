@@ -1,0 +1,29 @@
+# TODO
+
+## Docs
+- philosophy / goals
+- how grammar works
+- registering components
+- namespaced keys
+- multivalues
+- nested selectors
+- `@restyle.var` / `@var.foo`
+- `@this.foo` / `@this.parent.foo` / `@root.foo`
+- `@restyle.function`
+- `@restyle.states`
+- `@restyle.alias`
+- configuration (`restyle-config`)
+- errors / warnings
+- noconflict
+- smart content (currently doesn't work correctly)
+
+## README
+
+```
+## Resources
+
+- [Restyle Homepage](#TODO)
+- [Tutorials](#TODO)
+- [Documentation](#TODO)
+- [Configuration](#TODO)
+```

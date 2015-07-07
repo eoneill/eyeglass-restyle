@@ -1,0 +1,108 @@
+.should-be-large-primary-button, .should-be-small-button-in-container, .should-be-button-with-content {
+  extended: true; }
+
+.should-be-large-primary-button {
+  color: green;
+  font-size: 14px;
+  border: 1px solid red;
+  font-color: green;
+  border-color: green;
+  border-radius: 5px; }
+  .should-be-large-primary-button:hover, .should-be-large-primary-button.hover, .should-be-large-primary-button:focus, .should-be-large-primary-button.focus {
+    color: white; }
+  .should-be-large-primary-button.one-off-custom-state {
+    color: blue; }
+
+.should-be-large-primary-button {
+  color: green;
+  font-size: 14px;
+  border: 1px solid red;
+  font-color: green;
+  border-color: green;
+  border-radius: 5px; }
+  .should-be-large-primary-button:hover, .should-be-large-primary-button.hover, .should-be-large-primary-button:focus, .should-be-large-primary-button.focus {
+    color: white; }
+  .should-be-large-primary-button.one-off-custom-state {
+    color: blue; }
+
+.should-be-close-button-in-dialog {
+  font-size: 2em; }
+
+.should-be-small-button-in-container {
+  color: purple;
+  font-size: 12px;
+  font-color: purple;
+  border-color: purple;
+  border-radius: 5px; }
+  .should-be-small-button-in-container:hover, .should-be-small-button-in-container.hover, .should-be-small-button-in-container:focus, .should-be-small-button-in-container.focus {
+    color: white; }
+  .should-be-small-button-in-container.one-off-custom-state {
+    color: blue; }
+
+.should-be-small-button-in-container {
+  color: purple;
+  font-size: 12px;
+  font-color: purple;
+  border-color: purple;
+  border-radius: 5px; }
+  .should-be-small-button-in-container:hover, .should-be-small-button-in-container.hover, .should-be-small-button-in-container:focus, .should-be-small-button-in-container.focus {
+    color: white; }
+  .should-be-small-button-in-container.one-off-custom-state {
+    color: blue; }
+
+.should-be-button-with-content {
+  color: green;
+  font-size: 14px;
+  border: 1px solid red;
+  font-color: green;
+  border-color: green;
+  border-radius: 5px;
+  color: red; }
+  .should-be-button-with-content:hover, .should-be-button-with-content.hover, .should-be-button-with-content:focus, .should-be-button-with-content.focus {
+    color: white; }
+  .should-be-button-with-content.one-off-custom-state {
+    color: blue; }
+
+.should-be-close-button {
+  font-size: 2em; }
+
+.should-be-close-button {
+  font-size: 2em; }
+
+.should-be-a-tester {
+  color: red;
+  color: rgba(255, 0, 0, 0.8);
+  multivalues: -webkit-true;
+  multivalues: true;
+  multivalues: simple;
+  multivalues: red;
+  multivalues: rgba(255, 0, 0, 0.8);
+  multivalues2: -webkit-true;
+  multivalues2: true;
+  multivalues2: simple;
+  multivalues2: red;
+  multivalues2: rgba(255, 0, 0, 0.8);
+  font-size: 10px;
+  border: 2px solid red;
+  border-color: rgba(255, 0, 0, 0.8); }
+  .should-be-a-tester.test {
+    test: simple;
+    color: red;
+    color: rgba(255, 0, 0, 0.8); }
+    .should-be-a-tester.test > .child {
+      color: red;
+      color: rgba(255, 0, 0, 0.8);
+      color: red;
+      color: rgba(255, 0, 0, 0.8);
+      color: red;
+      color: rgba(255, 0, 0, 0.8); }
+    .should-be-a-tester.test:hover, .should-be-a-tester.test.hover, .should-be-a-tester.test:focus, .should-be-a-tester.test.focus {
+      test: simple;
+      color: red;
+      color: rgba(255, 0, 0, 0.8);
+      nested-state: true; }
+  .should-be-a-tester:hover, .should-be-a-tester.hover, .should-be-a-tester:focus, .should-be-a-tester.focus {
+    color: purple; }
+    .should-be-a-tester:hover .sub, .should-be-a-tester.hover .sub, .should-be-a-tester:focus .sub, .should-be-a-tester.focus .sub {
+      color: orange;
+      nested-selector: true; }

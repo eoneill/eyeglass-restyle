@@ -1,0 +1,23 @@
+@import "./shared";
+
+/// @alias restyle-add-state
+@mixin -restyle--add-state($state, $selector: null) {
+  $tmp: -restyle--add-state($state, $selector);
+}
+
+/// @alias restyle-add-state
+@function -restyle--add-state($state, $selector: null) {
+  // if the $state is not a map, convert it to one
+  @if (type-of($state) != map) {
+    $state: (
+      #{$state}: $selector
+    );
+  }
+
+  // get the current state mappings
+  $state-mappings: -restyle--config(state-mappings);
+  // merge the new state into the state-mappings and update the config value
+  $tmp: -restyle--config(state-mappings, map-merge($state-mappings, $state));
+
+  @return true;
+}

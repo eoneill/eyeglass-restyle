@@ -1,0 +1,92 @@
+// this exposes the aliased convenience methods
+@import "./noconflict";
+
+/// outputs the styles for the given descriptors
+/// @content
+/// @param    {Map|List|String} $descriptors... - the descriptors
+/// @outputs  the styles
+@mixin restyle($descriptors...) {
+  @include -restyle--main($descriptors...) {
+    @content;
+  }
+}
+
+/// returns the styles for the given descriptors
+/// @param    {Map|List|String} $descriptors... - the descriptors
+/// @returns  {Map} the style map
+@function restyle($descriptors...) {
+  @return -restyle--main($descriptors...);
+}
+
+/// returns a diff of two `restyle` objects
+/// TODO - need to implement this...
+/// @param    {Map|List|String} $original - the original `restyle` object
+/// @param    {Map|List|String} $other - the other `restyle` object to compare
+/// @returns  {Map} the style map
+//@function restyle-diff($original, $other) {
+//  @return -restyle--diff($original, $other);
+//}
+
+/// adds a new restyle definition
+/// @param    {String} $name - the name of the item to add
+/// @param    {Map} $definition - the definition
+@mixin restyle-add($name, $definition: null) {
+  @include -restyle--add($name, $definition);
+}
+
+/// adds a new restyle definition
+/// @param    {String} $name - the name of the item to add
+/// @param    {Map} $definition - the definition
+@function restyle-add($name, $definition: null) {
+  @return -restyle--add($name, $definition);
+}
+
+/// extends a restyle definition
+/// @param    {String} $name - the name of the item to extend
+/// @param    {Map} $definition - the definition
+@function restyle-extend($name, $definition: null) {
+  @return -restyle--extend($name, $definition);
+}
+
+/// convenience mixin for extending a restyle definition
+/// @param    {String} $name - the name of the item to extend
+/// @param    {Map} $definition - the definition
+@mixin restyle-extend($name, $definition: null) {
+  @include -restyle--extend($name, $definition);
+}
+
+/// adds a new state mapping
+/// @param    {String} $state - the state enum
+/// @param    {String} $selector - the mapping for the enum
+@mixin restyle-add-state($state, $selector: null) {
+  @include -restyle--add-state($state, $selector);
+}
+
+/// adds a new state mapping
+/// @param    {String} $state - the state enum
+/// @param    {String} $selector - the mapping for the enum
+@function restyle-add-state($state, $selector: null) {
+  @return -restyle--add-state($state, $selector);
+}
+
+/// converts individual arguments into a meta object that can be easily iterated over
+/// @param    {*} $values... - the values to store
+/// @returns  {Map} a Map with a single key `@restyle.multivalue` with the values stored as an list
+@function multiple-values($values...) {
+  @return -restyle--multiple-values($values...);
+}
+
+/// helper for getting/setting config values
+/// @param    {Map|String} $key - TODO
+/// @param    {*} $value - TODO
+/// @returns  {*} the entire config Map or the individual config value
+@function restyle-config($key: $-restyle--no-value, $value: $-restyle--no-value) {
+  @return -restyle--config($key, $value);
+}
+
+/// convenience mixin for invoking restyle-config function without having to use the function result
+/// @param    {Map|String} $key - TODO
+/// @param    {*} $value - TODO
+@mixin restyle-config($key: $-restyle--no-value, $value: $-restyle--no-value) {
+  @include -restyle--config($key, $value);
+}

@@ -1,0 +1,97 @@
+@import 'restyle';
+
+@include restyle-add-state(hover, '&:hover, &.hover, &:focus, &.focus');
+
+@include restyle-add(test, (
+  color: red,
+  margin: 5px,
+  font-size: 10px,
+  border-color: '@this.color',
+
+  // some variables
+  '@restyle.var simple': simple,
+
+  '&.test': (
+    simple: '@var.simple',
+    color: '@root.color',
+
+    '& > .child': (
+      '@restyle.var simple': simple2,
+      color1: '@root.color',
+      color2: '@this.@parent.color',
+      color3: '@this.@parent.@parent.color',
+      simple: '@var.simple'
+    ),
+
+    '@restyle.states': (
+      hover: (
+        test: '@var.simple',
+        color: '@this.@parent.color'
+      )
+    )
+  ),
+
+  '@restyle.modifiers': (
+    fancy: (
+      color: green,
+      margin: null,
+      simple: '@var.simple',
+    ),
+    simple: (
+      color: null,
+      '&.test': null
+    ),
+    nested-restyle: (
+      '@restyle': (simple test, fancy test)
+    ),
+    inherit-fancy: (
+      '@restyle.inherit': fancy
+    )
+  ),
+
+  '@restyle.states': (
+    hover: (
+      color: purple,
+
+      '& .sub': (
+        color: orange
+      )
+    )
+  )
+));
+
+.should-be-test {
+  @include restyle(test);
+}
+
+.should-be-fancy-test {
+  @include restyle(fancy test);
+}
+
+.should-be-fancy-test {
+  @include restyle('fancy test');
+}
+
+.should-be-simple-test {
+  @include restyle(simple test);
+}
+
+.should-be-simple-test-and-fancy-test {
+  @include restyle(simple test, fancy test);
+}
+
+.should-be-simple-fancy-test {
+  @include restyle(simple fancy test);
+}
+
+.should-be-fancy-simple-test {
+  @include restyle(fancy simple test);
+}
+
+.should-be-simple-test-and-fancy-test {
+  @include restyle(nested-restyle test);
+}
+
+.should-be-fancy-test {
+  @include restyle(inherit-fancy test);
+}

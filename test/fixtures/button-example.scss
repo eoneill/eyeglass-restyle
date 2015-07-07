@@ -1,0 +1,89 @@
+@import "restyle";
+
+// define our UI element...
+@include restyle-add(button, (
+  // Note that this is different from a Sass $variable. The Sass $variable will
+  //  be evaluated at definition time, whereas the special restyle variable is
+  //  evaluated at invocation time. This is important for the cascading
+  //  behavior of modifiers/states
+  '@restyle.var border-color': #3079ed,
+
+  display: inline-block,
+  padding: 5px 10px,
+  font-weight: bold,
+  text-align: center,
+  vertical-align: middle,
+  border: 1px solid '@var.border-color',
+  border-radius: 2px,
+  background-color: #4787ed,
+  color: #fff,
+  cursor: pointer,
+
+  '@restyle.states': (
+    hover: (
+      background-color: #357ae8,
+      border-color: #2f5bb7
+    ),
+
+    disabled: (
+      border-color: '@var.border-color',
+      // note that we can reference other values within the definition
+      background-color: '@root.background-color',
+      color: '@root.color',
+      opacity: 0.8,
+      cursor: default
+    )
+  ),
+  '@restyle.modifiers': (
+    secondary: (
+      '@restyle.var border-color': rgba(0, 0, 0, 0.1),
+      border: 1px solid '@var.border-color',
+      background-color: #f5f5f5,
+      color: #444,
+
+      '@restyle.states': (
+        hover: (
+          background-color: #e0e0e0,
+          border-color: null,
+          color: #333
+        )
+      )
+    ),
+
+    close: (
+      '@restyle.alias': close-button
+    ),
+
+    close-inherit: (
+      '@restyle.inherit': close
+    )
+  )
+));
+
+@include restyle-add(close-button, (
+  close-button: true
+));
+
+// register the states (note that this would be a "per app" configuration)
+@include restyle-add-state((
+  hover: '&:hover',
+  disabled: '&[disabled]'
+));
+
+// ...
+
+// now invoke it...
+.btn {
+  @include restyle(button);
+  &.secondary {
+    @include restyle(secondary button);
+  }
+}
+
+.btn-close {
+  @include restyle(close button);
+}
+
+.btn-close-inherit {
+  @include restyle(close-inherit button);
+}
