@@ -1,4 +1,4 @@
-# restyle [![Build Status](travis-ci-badge)](travis-ci) [![Version](npm-version-badge)](npm-version) [![License](license-badge)](license)
+# restyle [![Build Status][travis-ci-badge]][travis-badge] [![Version][npm-version-badge]][npm-version] [![License][license-badge]][license]
 
 `restyle` is an [`eyeglass`][eyeglass] framework for authoring configurable, composable UI definitions.
 
