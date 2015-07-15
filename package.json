@@ -51,6 +51,7 @@
     "gulp-git": "^1.2.4",
     "gulp-jsdoc": "^0.1.4",
     "gulp-mocha": "^2.1.2",
+    "gulp-prompt": "^0.1.2",
     "gulp-tag-version": "^1.2.1",
     "mocha": "^2.2.5",
     "sassdoc": "^2.1.15",
