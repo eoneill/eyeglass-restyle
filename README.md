@@ -1,12 +1,6 @@
-# restyle
-
-[![Build Status](https://travis-ci.org/eoneill/eyeglass-restyle.svg)](https://travis-ci.org/eoneill/eyeglass-restyle)
-[![Version](https://img.shields.io/npm/v/eyeglass-restyle.svg)](https://www.npmjs.com/package/eyeglass-restyle)
-[![License](https://img.shields.io/npm/l/eyeglass-restyle.svg)](./LICENSE)
+# restyle [![Build Status](travis-ci-badge)](travis-ci) [![Version](npm-version-badge)](npm-version) [![License](license-badge)](license)
 
 `restyle` is an [`eyeglass`][eyeglass] framework for authoring configurable, composable UI definitions.
-
-[eyeglass]: https://github.com/sass-eyeglass/eyeglass
 
 ## Installation
 
@@ -15,9 +9,7 @@ $ npm install --save-dev eyeglass-restyle
 ````
 ### Installing eyeglass
 
-`restyle` depends on `eyeglass` being installed, so check out the [`eyeglass` installation docs][eyeglass_install]
-
-[eyeglass_install]: https://github.com/sass-eyeglass/eyeglass#user-content-installing-eyeglass
+`restyle` depends on `eyeglass` being installed, so check out the [`eyeglass` installation docs][eyeglass-install]
 
 ## Usage
 
@@ -151,6 +143,17 @@ This is probably a bit complex for everyone, so stay tuned for some additional e
 
 ## License
 
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at [http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at [http://www.apache.org/licenses/LICENSE-2.0](apache-license)
 
 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+
+[travis-ci]: https://travis-ci.org/eoneill/eyeglass-restyle
+[travis-ci-badge]: https://img.shields.io/travis/eoneill/eyeglass-restyle.svg?style=flat-square
+[npm-version]: https://www.npmjs.com/package/eyeglass-restyle
+[npm-version-badge]: https://img.shields.io/npm/v/eyeglass-restyle.svg?style=flat-square
+[license]: ./LICENSE
+[license-badge]: https://img.shields.io/npm/l/eyeglass-restyle.svg?style=flat-square
+[eyeglass]: https://github.com/sass-eyeglass/eyeglass
+[eyeglass-install]: https://github.com/sass-eyeglass/eyeglass#user-content-installing-eyeglass
+[apache-license]: http://www.apache.org/licenses/LICENSE-2.0
