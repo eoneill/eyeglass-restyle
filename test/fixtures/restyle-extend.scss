@@ -8,7 +8,7 @@
   }
 }
 
-@include restyle-add(extend-me, (
+@include restyle-define(extend-me, (
   color: green,
   position: relative,
 

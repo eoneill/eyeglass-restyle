@@ -1,7 +1,11 @@
 @import "./shared";
 
-/// @alias restyle-add
-@function -restyle--add($name, $definition: null) {
+/// @alias restyle-define
+@function -restyle--define($name, $definition: null) {
+  $debug-message: "took {time} to add definition for `#{name}`";
+
+  $start-time: timer-start();
+
   @if (map-get($-restyle--registered-components, $name)) {
     @warn "A component named `#{$name}` already exists";
   }
@@ -13,10 +17,15 @@
   $-restyle--registered-components: map-merge($-restyle--registered-components, (
     #{$name}: $definition
   )) !global;
+
+  $tmp: -restyle--log($debug-message, "time:add", (
+    time: elapsed-time($start-time)
+  ));
+
   @return true;
 }
 
-/// @alias restyle-add
-@mixin -restyle--add($name, $definition: null) {
-  $tmp: -restyle--add($name, $definition);
+/// @alias restyle-define
+@mixin -restyle--define($name, $definition: null) {
+  $tmp: -restyle--define($name, $definition);
 }

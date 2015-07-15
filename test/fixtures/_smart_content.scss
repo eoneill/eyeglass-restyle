@@ -10,12 +10,12 @@
   hover: '&:hover, &.hover, &:focus, &.focus'
 ));
 
-@include restyle-add(test, (
+@include restyle-define(test, (
   color: red,
   height: 100%
 ));
 
-@include restyle-add(test2, (
+@include restyle-define(test2, (
   color: red,
   height: 100%
 ));

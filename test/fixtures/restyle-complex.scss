@@ -2,7 +2,7 @@
 
 @include restyle-add-state(hover, '&:hover, &.hover, &:focus, &.focus');
 
-@include restyle-add(test, (
+@include restyle-define(test, (
   color: red,
   margin: 5px,
   font-size: 10px,

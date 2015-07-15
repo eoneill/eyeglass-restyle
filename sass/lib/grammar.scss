@@ -1,16 +1,28 @@
+@import "timer";
+
 /// returns a grammar map given a descriptor
 /// @param    {Map|List|String} $descriptor - the descriptor to convert
 /// @returns  {Map} the grammar map
 @function -restyle--grammar($descriptor) {
+  $debug-message: "took {time} to parse the grammar for `#{inspect($descriptor)}`";
+
+  $start-time: timer-start();
+
   $descriptor: if(type-of($descriptor) == map, $descriptor, (
     description: $descriptor
   ));
 
-  @return -restyle--grammar-from-description-js(
+  $result: -restyle--grammar-from-description-js(
     map-get($descriptor, description),
     map-get($descriptor, type),
     $-restyle--registered-types
   );
+
+  $tmp: -restyle--log($debug-message, "time:grammar", (
+    time: elapsed-time($start-time)
+  ));
+
+  @return $result;
 }
 
 /// returns a collection of grammar maps for a given collection of descriptors

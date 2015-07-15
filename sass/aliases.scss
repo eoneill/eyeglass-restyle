@@ -28,22 +28,36 @@
 //}
 
 /// adds a new restyle definition
-/// @param    {String} $name - the name of the item to add
+/// @param    {String} $name - the name of the item to define
 /// @param    {Map} $definition - the definition
-@mixin restyle-add($name, $definition: null) {
-  @include -restyle--add($name, $definition);
+@mixin restyle-define($name, $definition: null) {
+  @include -restyle--define($name, $definition);
 }
 
 /// adds a new restyle definition
-/// @param    {String} $name - the name of the item to add
+/// @param    {String} $name - the name of the item to define
 /// @param    {Map} $definition - the definition
-@function restyle-add($name, $definition: null) {
-  @return -restyle--add($name, $definition);
+@function restyle-define($name, $definition: null) {
+  @return -restyle--define($name, $definition);
 }
 
-/// extends a restyle definition
-/// @param    {String} $name - the name of the item to extend
+/// adds a new restyle definition
+/// @param    {String} $name - the name of the item to define
 /// @param    {Map} $definition - the definition
+@function restyle-add($name, $definition: null) {
+  @warn "`restyle-add` will be deprecated in the next release, please use `restyle-define` instead";
+  @return restyle-define($name, $definition);
+}
+
+/// @alias    restyle-define
+/// @deprecated
+@mixin restyle-add($name, $definition: null) {
+  @warn "`restyle-add` will be deprecated in the next release, please use `restyle-define` instead";
+  @include restyle-define($name, $definition);
+}
+
+/// @alias    restyle-define
+/// @deprecated
 @function restyle-extend($name, $definition: null) {
   @return -restyle--extend($name, $definition);
 }

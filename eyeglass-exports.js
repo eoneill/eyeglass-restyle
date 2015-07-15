@@ -79,6 +79,16 @@ module.exports = function(eyeglass, sass) {
       "normalize-property($property)": function($property, done) {
         var result = toJS($property).replace(/\{.*\}/g, "");
         done(toSass(result));
+      },
+
+      "str-substitute($string, $data)": function($string, $data, done) {
+        var result = util.strSubstitute(toJS($string), toJS($data));
+        done(toSass(result));
+      },
+
+      "is-logging-enabled($type, $config)": function($type, $config, done) {
+        var result = util.isLoggingEnabled(toJS($config), toJS($type));
+        done(toSass(result));
       }
     })
   };

@@ -1,6 +1,6 @@
 @import 'restyle';
 
-@include restyle-add(test-cmpt, (
+@include restyle-define(test-cmpt, (
   color: green,
   width: 100%,
   font-size: 10px,
@@ -24,7 +24,7 @@
   )
 ));
 
-@include restyle-add(test-states, (
+@include restyle-define(test-states, (
   color: green,
   '@restyle.states': (
     hover: (
@@ -44,7 +44,7 @@
   )
 ));
 
-@include restyle-add(test-selectors, (
+@include restyle-define(test-selectors, (
   color: green,
   '.first': (
     color: blue

@@ -25,3 +25,29 @@
 
   @return $destination;
 }
+
+@function -restyle--is-logging-enabled($type) {
+  @return -restyle--is-logging-enabled-js($type, -restyle--config(log));
+}
+
+@function -restyle--log($message, $type: null, $data: (), $severity: log) {
+  // if a type is set, make sure the type logging is enabled
+  @if ($type and not -restyle--is-logging-enabled($type)) {
+    @return null;
+  }
+
+  // adjust the type
+  $type: if($type, "restyle:#{$type}", "restyle");
+
+  // adjust the message
+  $message: "[#{$type}] #{-restyle--str-substitute-js($message, $data)}";
+
+  // log based on severity
+  @if ($severity == warn) {
+    @warn $message;
+  }
+  @else if ($severity != silent) {
+    @debug $message;
+  }
+  @return $message;
+}

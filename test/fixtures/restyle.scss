@@ -15,7 +15,7 @@
   );
 }
 
-@include restyle-add(tester, (
+@include restyle-define(tester, (
   color: multiple-values(
     red,
     rgba(red, 0.8)
@@ -63,7 +63,7 @@
   )
 ));
 
-@include restyle-add(button, (
+@include restyle-define(button, (
   color: green,
   font-size: 14px,
   border: 1px solid red,
@@ -105,13 +105,13 @@
   )
 ));
 
-@include restyle-add(close-button, (
+@include restyle-define(close-button, (
   font-size: 2em
 ));
 
 // we need to register these components so that the grammar engine is aware of them
-@include restyle-add(dialog);
-@include restyle-add(container);
+@include restyle-define(dialog);
+@include restyle-define(container);
 
 
 .should-be-large-primary-button {
