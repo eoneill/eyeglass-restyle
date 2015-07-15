@@ -45,7 +45,7 @@
       '@restyle': (simple test, fancy test)
     ),
     inherit-fancy: (
-      '@restyle.inherit': fancy
+      '@restyle.extends': fancy
     )
   ),
 
