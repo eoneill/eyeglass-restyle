@@ -192,7 +192,8 @@
             }
 
             @else {
-              #{$property}: $value;
+              // this is a temporary hack until node-sass correctly supported quoted strings
+              #{$property}: if($property == content, quote($value), $value);
             }
           }
         }

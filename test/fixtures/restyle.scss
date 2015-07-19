@@ -72,6 +72,8 @@
 
   border-radius: 5px nomixin,
 
+  content: "should be quoted",
+
   '@extend': '%extend-test',
 
   '@restyle.var foo': pink,

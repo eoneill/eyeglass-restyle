@@ -7,7 +7,8 @@
   border: 1px solid red;
   font-color: green;
   border-color: green;
-  border-radius: 5px; }
+  border-radius: 5px;
+  content: "should be quoted"; }
   .should-be-large-primary-button:hover, .should-be-large-primary-button.hover, .should-be-large-primary-button:focus, .should-be-large-primary-button.focus {
     color: white; }
   .should-be-large-primary-button.one-off-custom-state {
@@ -19,7 +20,8 @@
   border: 1px solid red;
   font-color: green;
   border-color: green;
-  border-radius: 5px; }
+  border-radius: 5px;
+  content: "should be quoted"; }
   .should-be-large-primary-button:hover, .should-be-large-primary-button.hover, .should-be-large-primary-button:focus, .should-be-large-primary-button.focus {
     color: white; }
   .should-be-large-primary-button.one-off-custom-state {
@@ -33,7 +35,8 @@
   font-size: 12px;
   font-color: purple;
   border-color: purple;
-  border-radius: 5px; }
+  border-radius: 5px;
+  content: "should be quoted"; }
   .should-be-small-button-in-container:hover, .should-be-small-button-in-container.hover, .should-be-small-button-in-container:focus, .should-be-small-button-in-container.focus {
     color: white; }
   .should-be-small-button-in-container.one-off-custom-state {
@@ -44,7 +47,8 @@
   font-size: 12px;
   font-color: purple;
   border-color: purple;
-  border-radius: 5px; }
+  border-radius: 5px;
+  content: "should be quoted"; }
   .should-be-small-button-in-container:hover, .should-be-small-button-in-container.hover, .should-be-small-button-in-container:focus, .should-be-small-button-in-container.focus {
     color: white; }
   .should-be-small-button-in-container.one-off-custom-state {
@@ -57,6 +61,7 @@
   font-color: green;
   border-color: green;
   border-radius: 5px;
+  content: "should be quoted";
   color: red; }
   .should-be-button-with-content:hover, .should-be-button-with-content.hover, .should-be-button-with-content:focus, .should-be-button-with-content.focus {
     color: white; }
