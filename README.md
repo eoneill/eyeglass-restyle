@@ -1,6 +1,6 @@
-# restyle [![Build Status][travis-ci-badge]][travis-ci] [![Version][npm-version-badge]][npm-version] [![License][license-badge]][license]
+# reSTYLE [![Build Status][travis-ci-badge]][travis-ci] [![Version][npm-version-badge]][npm-version] [![License][license-badge]][license]
 
-`restyle` is an [`eyeglass`][eyeglass] framework for authoring configurable, composable UI definitions.
+reSTYLE is an [`eyeglass`][eyeglass] framework for authoring configurable, composable UI definitions.
 
 ## Installation
 
@@ -9,7 +9,7 @@ $ npm install --save-dev eyeglass-restyle
 ````
 ### Installing eyeglass
 
-`restyle` depends on `eyeglass` being installed, so check out the [`eyeglass` installation docs][eyeglass-install]
+reSTYLE depends on `eyeglass` being installed, so check out the [`eyeglass` installation docs][eyeglass-install]
 
 ## Usage
 
@@ -65,7 +65,7 @@ Take the following button styles...
 }
 ```
 
-We can convert this to a `restyle` definition as follows:
+We can convert this to a reSTYLE definition as follows:
 
 ```scss
 @import "restyle";
