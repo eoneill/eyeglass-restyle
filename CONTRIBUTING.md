@@ -2,13 +2,13 @@
 
 0. Fork **reSTYLE**
   - New to GitHub? Read this great article about [forking and contributing to open-source projects on GitHub](https://help.github.com/articles/fork-a-repo)
-0. Update the [Issue Tracker](/issues)
+0. Update the [Issue Tracker](http://github.com/eoneill/eyeglass-restyle/issues)
   - if there's already an open ticket, feel free to comment on it or ask any follow up questions
   - if there isn't a ticket, create one and let us know what you plan to do
   - we like to keep an open dialog with developers :)
 0. Code away!
 0. Update or create test cases for your changes
-0. Make sure all tests are passing `npm test` (or `gulp test`)
+0. Make sure all tests are passing `$ npm test` (or `$ gulp test`)
 0. Commit and push your changes (referencing any related issues in the comment)
 0. Finally, create a [Pull Request](https://help.github.com/articles/creating-a-pull-request)
 
