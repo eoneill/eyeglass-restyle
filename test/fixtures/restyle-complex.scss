@@ -95,3 +95,101 @@
 .should-be-fancy-test {
   @include restyle(inherit-fancy test);
 }
+
+
+
+
+@include restyle-define(selectorTest, (
+  '&::before': (
+    color: green
+  ),
+
+  '@restyle.modifiers': (
+    selectorA: (
+      '&::before': (
+        color: red
+      )
+    ),
+    selectorB: (
+      '&::before': (
+        color: blue
+      )
+    )
+  )
+));
+
+.should-be-selectorTest-green {
+  @include restyle(selectorTest);
+}
+
+.should-be-selectorTest-red {
+  @include restyle(selectorA selectorTest);
+}
+
+.should-be-selectorTest-blue {
+  @include restyle(selectorB selectorTest);
+}
+
+.should-be-selectorTest-blue {
+  @include restyle(selectorA selectorB selectorTest);
+}
+
+
+@include restyle-define(headline, (
+  color: blue,
+  font-weight: bold,
+  text-transform: uppercase,
+  font-family: sans-serif,
+
+  '@restyle.modifiers': (
+    large: (
+      padding-top: 0,
+      position: relative,
+      font-size: 50px,
+      // add a nifty separator bar
+      '&::before': (
+        background-color: blue,
+        bottom: 12px,
+        content: "",
+        height: 8px,
+        left: 0,
+        position: absolute,
+        right: 0
+      ),
+      '& > another': (
+        color: green,
+        height: 100%
+      )
+    ),
+
+    full-width: (
+      color: red,
+      '&::before': (
+        position: static,
+        left: -100%,
+        right: -100%,
+        color: green
+      ),
+      '& > another': (
+        color: pink
+      )
+    )
+  )
+));
+
+
+.should-be-headline {
+  @include restyle(headline);
+}
+
+.should-be-headline-large {
+  @include restyle(large headline);
+}
+
+.should-be-headline-fullwidth {
+  @include restyle(full-width headline);
+}
+
+.should-be-headline-large-fullwidth {
+  @include restyle(large full-width headline);
+}
