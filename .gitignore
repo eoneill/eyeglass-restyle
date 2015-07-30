@@ -31,3 +31,6 @@ node_modules
 
 # Generated docs
 /codedoc
+
+# code coverage
+/coverage

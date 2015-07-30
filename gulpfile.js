@@ -9,6 +9,7 @@ require("./build/docco")(gulp);
 require("./build/jsdoc")(gulp);
 require("./build/release")(gulp);
 require("./build/publish")(gulp);
+require("./build/coverage")(gulp);
 
 gulp.task("default", ["test"]);
 
