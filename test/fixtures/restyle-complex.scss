@@ -42,7 +42,8 @@
       '&.test': null
     ),
     nested-restyle: (
-      '@restyle': (simple test, fancy test)
+      '@restyle': (simple test, fancy test),
+      font-size: 16px // test overriding a property from a nested restyle
     ),
     inherit-fancy: (
       '@restyle.extends': fancy
