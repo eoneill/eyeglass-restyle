@@ -178,18 +178,22 @@ var testData = [
   }
 ];
 
-testData.forEach(function(test) {
-  function testGrammar() {
+
+
+describe("grammar", function() {
+  function testGrammar(test) {
     return new Grammar(test.data.description, test.data.type, knownTypes);
   }
 
-  describe("grammar", function() {
+  testData.forEach(function(test) {
+    var testGrammarFn = testGrammar.bind(testGrammar, test);
+
     it(test.name, function() {
       if (test.expectedError) {
-        assert.throws(testGrammar, test.expectedError, "should throw an error");
+        assert.throws(testGrammarFn, test.expectedError, "should throw an error");
       }
       else {
-        assert.deepEqual(testGrammar(), test.expectedGrammar, "the grammar should match");
+        assert.deepEqual(testGrammarFn(), test.expectedGrammar, "the grammar should match");
       }
     });
   });
