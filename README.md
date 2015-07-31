@@ -71,7 +71,7 @@ We can convert this to a reSTYLE definition as follows:
 @import "restyle";
 
 // define our UI element...
-@include restyle-add(button, (
+@include restyle-define(button, (
   // Note that this is different from a Sass $variable. The Sass $variable will
   //  be evaluated at definition time, whereas the special restyle variable is
   //  evaluated at invocation time. This is important for the cascading
