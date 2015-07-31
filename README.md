@@ -1,6 +1,6 @@
 # reSTYLE [![Build Status][travis-ci-badge]][travis-ci] [![Version][npm-version-badge]][npm-version] [![License][license-badge]][license]
 
-reSTYLE is an [`eyeglass`][eyeglass] framework for authoring configurable, composable UI definitions.
+reSTYLE is an [`eyeglass`][eyeglass] framework for authoring configurable, composable UI patterns.
 
 ## Installation
 
@@ -70,7 +70,7 @@ We can convert this to a reSTYLE definition as follows:
 ```scss
 @import "restyle";
 
-// define our UI element...
+// define our UI pattern...
 @include restyle-define(button, (
   // Note that this is different from a Sass $variable. The Sass $variable will
   //  be evaluated at definition time, whereas the special restyle variable is

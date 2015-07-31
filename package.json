@@ -1,7 +1,7 @@
 {
   "name": "eyeglass-restyle",
   "version": "0.1.6",
-  "description": "Themes. For Sass.",
+  "description": "UI pattern authoring. For Sass.",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
