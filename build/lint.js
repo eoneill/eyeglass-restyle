@@ -9,7 +9,8 @@ rules["max-len"] = undefined;
 rules["brace-style"] = [2, "stroustrup"];
 rules["max-depth"] = [1, 8];
 
-// for ESLint 1.0
+// for ESLint 1.0 support
+// can remove this once eyeglass-dev-eslint 2.x lands
 var SPACE_IN_BRACKETS = "space-in-brackets";
 var spaceInBracketsRule = rules[SPACE_IN_BRACKETS];
 if (spaceInBracketsRule) {
