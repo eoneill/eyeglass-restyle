@@ -42,8 +42,6 @@
     "eslint": "^1.0.0",
     "eyeglass-dev-eslint": "1.0.1",
     "eyeglass-dev-testutils": "^0.0.2",
-    "grunt": "^0.4.5",
-    "grunt-release": "^0.13.0",
     "gulp": "^3.9.0",
     "gulp-bump": "^0.3.1",
     "gulp-docco": "0.0.4",
