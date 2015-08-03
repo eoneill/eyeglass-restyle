@@ -3,6 +3,7 @@
 var git = require("gulp-git");
 var bump = require("gulp-bump");
 var prompt = require("gulp-prompt");
+var shell = require("gulp-shell");
 var tagVersion = require("gulp-tag-version");
 
 var pkgSource = ["./package.json"];
