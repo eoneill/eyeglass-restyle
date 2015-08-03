@@ -187,9 +187,10 @@
               @include restyle-custom-styler($property, $value, $method: post);
             }
 
-            @else if mixin-exists($property) {
-              /* TODO - invoke mixin */
-            }
+            // TODO - some day :)
+            //@else if mixin-exists($property) {
+            //  /* TODO - invoke mixin */
+            //}
 
             @else {
               // this is a temporary hack until node-sass correctly supported quoted strings
