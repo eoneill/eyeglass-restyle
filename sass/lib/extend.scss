@@ -6,19 +6,19 @@
 
   $start-time: timer-start();
 
-  @if (not map-get($-restyle--registered-components, $name)) {
+  @if (not map-get($-restyle--registered-patterns, $name)) {
     @warn "Attempting to extend `#{$name}` but it does not exist. You should use `restyle-define()` instead.";
     @return -restyle--define($name, $definition);
   }
 
   // get the current definition
-  $current-definition: map-get($-restyle--registered-components, $name);
+  $current-definition: map-get($-restyle--registered-patterns, $name);
 
   // extend it
   $extended-definition: -restyle--map-merge-deep($current-definition, $definition);
 
   // and merge it back in
-  $-restyle--registered-components: map-merge($-restyle--registered-components, (
+  $-restyle--registered-patterns: map-merge($-restyle--registered-patterns, (
     #{$name}: $extended-definition
   )) !global;
 

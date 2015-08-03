@@ -30,8 +30,11 @@
 /// adds a new restyle definition
 /// @param    {String} $name - the name of the item to define
 /// @param    {Map} $definition - the definition
+/// @content
 @mixin restyle-define($name, $definition: null) {
-  @include -restyle--define($name, $definition);
+  @include -restyle--define($name, $definition) {
+    @content;
+  }
 }
 
 /// adds a new restyle definition
@@ -41,9 +44,8 @@
   @return -restyle--define($name, $definition);
 }
 
-/// adds a new restyle definition
-/// @param    {String} $name - the name of the item to define
-/// @param    {Map} $definition - the definition
+/// @alias    restyle-define
+/// @deprecated
 @function restyle-add($name, $definition: null) {
   @warn "`restyle-add` will be deprecated in the next release, please use `restyle-define` instead";
   @return restyle-define($name, $definition);
@@ -56,8 +58,9 @@
   @include restyle-define($name, $definition);
 }
 
-/// @alias    restyle-define
-/// @deprecated
+/// convenience mixin for extending a restyle definition
+/// @param    {String} $name - the name of the item to extend
+/// @param    {Map} $definition - the definition
 @function restyle-extend($name, $definition: null) {
   @return -restyle--extend($name, $definition);
 }

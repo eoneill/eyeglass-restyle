@@ -1,0 +1,19 @@
+@import 'restyle';
+
+@include restyle-define(captured, (
+  "@restyle.modifiers": (
+    test: (
+      working: true
+    )
+  )
+)) {
+  captured: true;
+};
+
+.is-captured {
+  @include restyle(captured);
+
+  &.test {
+    @include restyle(test captured);
+  }
+}

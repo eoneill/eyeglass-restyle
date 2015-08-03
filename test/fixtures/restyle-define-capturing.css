@@ -1,0 +1,5 @@
+.is-captured, .is-captured.test {
+  captured: true; }
+
+.is-captured.test {
+  working: true; }

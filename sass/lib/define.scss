@@ -1,12 +1,12 @@
 @import "./shared";
 
 /// @alias restyle-define
-@function -restyle--define($name, $definition: null) {
+@function -restyle--define($name, $definition: null, $placeholder: null) {
   $debug-message: "took {time} to add definition for `#{name}`";
 
   $start-time: timer-start();
 
-  @if (map-get($-restyle--registered-components, $name)) {
+  @if (map-get($-restyle--registered-patterns, $name)) {
     @warn "A component named `#{$name}` already exists";
   }
 
@@ -14,9 +14,15 @@
   $-restyle--registered-types: append($-restyle--registered-types, $name) !global;
 
   // add the definition to the map...
-  $-restyle--registered-components: map-merge($-restyle--registered-components, (
+  $-restyle--registered-patterns: map-merge($-restyle--registered-patterns, (
     #{$name}: $definition
   )) !global;
+
+  @if ($placeholder) {
+    $-restyle--registered-pattern-placeholders: map-merge($-restyle--registered-pattern-placeholders, (
+      #{$name}: $placeholder
+    )) !global;
+  }
 
   $tmp: -restyle--log($debug-message, "time:add", (
     time: elapsed-time($start-time)
@@ -27,5 +33,9 @@
 
 /// @alias restyle-define
 @mixin -restyle--define($name, $definition: null) {
-  $tmp: -restyle--define($name, $definition);
+  $placeholder: -restyle--placeholder-name($name);
+  @at-root #{$placeholder} {
+    @content;
+  }
+  $tmp: -restyle--define($name, $definition, $placeholder: $placeholder);
 }

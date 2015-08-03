@@ -7,6 +7,16 @@
 /// @alias    restyle
 @mixin -restyle--main($descriptors...) {
   $styles: -restyle--main($descriptors...);
+
+  $grammars: -restyle--grammars($descriptors...);
+  @each $grammar in $grammars {
+    $type: map-get($grammar, type);
+    $placeholder: map-get($-restyle--registered-pattern-placeholders, $type);
+    @if ($placeholder) {
+      @extend #{$placeholder} !optional;
+    }
+  }
+
   @include -restyle--styles($styles) {
     @content;
   }
