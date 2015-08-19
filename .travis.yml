@@ -2,8 +2,5 @@ language: node_js
 node_js:
   - 0.12
   - node
-  - iojs
 matrix:
-  allow_failures:
-    - nodejs: iojs
   fast_finish: true
