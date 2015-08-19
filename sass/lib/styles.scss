@@ -68,7 +68,7 @@
 /// @param    {Boolean} $extend - if `false`, will force the content to be output in the current context, and not extended
 /// @content
 @mixin -restyle--smart-content($placeholder, $output: true, $extend: true) {
-  @if $placeholder and map-get($-restyle--config, smart-content-enabled) and $extend {
+  @if $placeholder and -restyle--config(smart-content-enabled) and $extend {
     @if type-of($placeholder) != string {
       $placeholder: -restyle--placeholder-name($placeholder);
     }
@@ -203,7 +203,7 @@
 
     // any original block content passed in...
     // if we're using smart content...
-    @if map-get($-restyle--config, smart-content-enabled) and $extend {
+    @if -restyle--config(smart-content-enabled) and $extend {
       // intentionally break out of the context
       & {
         @content;

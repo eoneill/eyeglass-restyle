@@ -2,8 +2,6 @@
 
 /// @alias restyle-define
 @function -restyle--define($name, $definition: null, $placeholder: null) {
-  $debug-message: "took {time} to add definition for `#{name}`";
-
   $start-time: timer-start();
 
   @if (map-get($-restyle--registered-patterns, $name)) {
@@ -24,8 +22,12 @@
     )) !global;
   }
 
-  $tmp: -restyle--log($debug-message, "time:add", (
+  $tmp: -restyle--log("took {time} to add definition for `#{$name}`", "time:define", (
     time: elapsed-time($start-time)
+  ));
+
+  $tmp: -restyle--log("defined `#{$name}` as {definition}", "define", (
+    definition: inspect($definition)
   ));
 
   @return true;
