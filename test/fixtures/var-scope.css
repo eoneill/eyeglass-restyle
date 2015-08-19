@@ -1,0 +1,10 @@
+.test {
+  color: red; }
+  .test.hover {
+    color: orange; }
+
+.alt {
+  color: blue;
+  alt: true; }
+  .alt.hover {
+    color: green; }

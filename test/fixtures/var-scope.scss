@@ -1,0 +1,29 @@
+@import "restyle";
+
+@include restyle-define(test, (
+  "@restyle.var color": red,
+  "@restyle.var color-hover": orange,
+  color: "@var.color",
+
+  "@restyle.states": (
+    hover: (
+      color: "@var.color-hover"
+    )
+  ),
+
+  "@restyle.modifiers": (
+    alt: (
+      "@restyle.var color": blue,
+      "@restyle.var color-hover": green,
+      alt: true
+    )
+  )
+));
+
+.test {
+  @include restyle(test);
+}
+
+.alt {
+  @include restyle(alt test);
+}
