@@ -1,0 +1,50 @@
+@import "restyle";
+
+@include restyle-define(alias-me, (
+  aliased: true
+));
+
+@include restyle-define(test, (
+  color: green,
+  height: 100%,
+
+  // modifiers...
+  "@restyle.modifiers": (
+    modified: (
+      color: red
+    ),
+    aliased: (
+      '@restyle.alias': alias-me
+    ),
+    extended: (
+      '@restyle.extends': modified
+    ),
+    extended-alias: (
+      '@restyle.extends': aliased
+    )
+  )
+));
+
+.test {
+  @include restyle(test);
+}
+
+.test2a {
+  @include restyle(modified test);
+}
+
+.test2b {
+  @include restyle(extended test);
+}
+
+.test3a {
+  @include restyle(alias-me);
+}
+
+.test3b {
+  @include restyle(aliased test);
+}
+
+.test3c {
+  @include restyle(extended-alias test);
+}

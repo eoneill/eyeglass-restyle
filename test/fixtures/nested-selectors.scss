@@ -1,0 +1,44 @@
+@import "restyle";
+
+@include restyle-define(test, (
+  color: red,
+  '& > .nested': (
+    color: blue,
+    height: 100%
+  ),
+
+  '&:last-child': (
+    border-right: 0
+  ),
+
+  '@restyle.modifiers': (
+    simple: (
+      '& > .nested': (
+        color: green,
+        width: 100%
+      )
+    ),
+    simple2: (
+      '& > .nested': (
+        color: purple
+      ),
+      '&:last-child': null
+    )
+  )
+));
+
+.test {
+  @include restyle(test);
+}
+
+.test2 {
+  @include restyle(simple test);
+}
+
+.test3 {
+  @include restyle(simple2 test);
+}
+
+.test4 {
+  @include restyle(simple simple2 test);
+}

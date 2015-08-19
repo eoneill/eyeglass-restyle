@@ -1,0 +1,29 @@
+.test {
+  color: red; }
+  .test > .nested {
+    color: blue;
+    height: 100%; }
+  .test:last-child {
+    border-right: 0; }
+
+.test2 {
+  color: red; }
+  .test2 > .nested {
+    color: green;
+    height: 100%;
+    width: 100%; }
+  .test2:last-child {
+    border-right: 0; }
+
+.test3 {
+  color: red; }
+  .test3 > .nested {
+    color: purple;
+    height: 100%; }
+
+.test4 {
+  color: red; }
+  .test4 > .nested {
+    color: purple;
+    height: 100%;
+    width: 100%; }

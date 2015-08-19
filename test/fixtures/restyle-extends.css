@@ -1,0 +1,20 @@
+.test {
+  color: green;
+  height: 100%; }
+
+.test2a {
+  color: red;
+  height: 100%; }
+
+.test2b {
+  color: red;
+  height: 100%; }
+
+.test3a {
+  aliased: true; }
+
+.test3b {
+  aliased: true; }
+
+.test3c {
+  aliased: true; }
