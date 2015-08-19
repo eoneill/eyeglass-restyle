@@ -4,4 +4,6 @@ node_js:
   - node
   - iojs
 matrix:
+  allow_failures:
+    - nodejs: iojs
   fast_finish: true
