@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "crc": "^3.3.0",
-    "eyeglass": ">=0.2.0",
+    "eyeglass": ">=0.5.0",
     "eyeglass-timer": ">=1.0.1",
     "lodash.clone": "^3.0.3",
     "node-sass": "^3.2.0",
@@ -39,8 +39,8 @@
     "node-sass-utils": "^1.1.2"
   },
   "devDependencies": {
-    "eslint": "^1.1.0",
-    "eyeglass-dev-eslint": "1.0.1",
+    "eslint": "^1.2.1",
+    "eyeglass-dev-eslint": "2.0.0",
     "eyeglass-dev-testutils": "^0.0.2",
     "gulp": "^3.9.0",
     "gulp-bump": "^0.3.1",
