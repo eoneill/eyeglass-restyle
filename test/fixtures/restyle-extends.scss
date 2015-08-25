@@ -48,3 +48,38 @@
 .test3c {
   @include restyle(extended-alias test);
 }
+
+
+
+// TODO - move to separate test
+@function bg-color($color) {
+  @return (
+    background-color: $color
+  );
+}
+
+@include restyle-define(test-special-props, (
+  '@restyle.var foo': red,
+  color: '@var.foo',
+
+  // modifiers...
+  "@restyle.modifiers": (
+    modified: (
+      '@restyle.function bg-color': (orange, ),
+      '@restyle.var foo': green
+    ),
+    extended: (
+      '@restyle.extends': modified
+    )
+  )
+));
+
+.test-special-props {
+  @include restyle(test-special-props);
+  &.modified {
+    @include restyle(modified test-special-props);
+  }
+  &.extended {
+    @include restyle(extended test-special-props);
+  }
+}

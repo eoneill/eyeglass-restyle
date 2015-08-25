@@ -18,3 +18,12 @@
 
 .test3c {
   aliased: true; }
+
+.test-special-props {
+  color: red; }
+  .test-special-props.modified {
+    color: green;
+    background-color: orange; }
+  .test-special-props.extended {
+    color: green;
+    background-color: orange; }
