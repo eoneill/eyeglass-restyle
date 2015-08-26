@@ -8,3 +8,8 @@
   alt: true; }
   .alt.hover {
     color: green; }
+
+.nested-vars {
+  a: red;
+  b: 1px solid red;
+  c: foo2 bar, red, baz; }

@@ -27,3 +27,18 @@
 .alt {
   @include restyle(alt test);
 }
+
+
+@include restyle-define(nested-vars, (
+  restyle-var(color): red,
+  restyle-var(foo): foo2,
+
+  a: var(color),
+  b: 1px solid var(color),
+  c: (var(foo) bar, restyle-var(color), baz)
+));
+
+.nested-vars {
+  @include restyle(nested-vars);
+}
+
