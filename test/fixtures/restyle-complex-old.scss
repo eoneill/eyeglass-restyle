@@ -6,51 +6,51 @@
   color: red,
   margin: 5px,
   font-size: 10px,
-  border-color: this(color),
+  border-color: '@this.color',
 
   // some variables
-  restyle-var(simple): simple,
+  '@restyle.var simple': simple,
 
   '&.test': (
-    simple: var(simple),
-    color: root(color),
+    simple: '@var.simple',
+    color: '@root.color',
 
     '& > .child': (
-      restyle-var(simple): simple2,
-      color1: this(root(color)),
-      color2: this(parent(color)),
-      color3: this(parent(parent(color))),
-      simple: var(simple)
+      '@restyle.var simple': simple2,
+      color1: '@root.color',
+      color2: '@this.@parent.color',
+      color3: '@this.@parent.@parent.color',
+      simple: '@var.simple'
     ),
 
-    restyle-states: (
+    '@restyle.states': (
       hover: (
-        test: var(simple),
-        color: this(parent(color))
+        test: '@var.simple',
+        color: '@this.@parent.color'
       )
     )
   ),
 
-  restyle-modifiers: (
+  '@restyle.modifiers': (
     fancy: (
       color: green,
       margin: null,
-      simple: var(simple),
+      simple: '@var.simple',
     ),
     simple: (
       color: null,
       '&.test': null
     ),
     nested-restyle: (
-      restyle: (simple test, fancy test),
+      '@restyle': (simple test, fancy test),
       font-size: 16px // test overriding a property from a nested restyle
     ),
     inherit-fancy: (
-      restyle-extends: fancy
+      '@restyle.extends': fancy
     )
   ),
 
-  restyle-states: (
+  -restyle-states: (
     hover: (
       color: purple,
 
@@ -105,7 +105,7 @@
     color: green
   ),
 
-  restyle-modifiers: (
+  '@restyle.modifiers': (
     selectorA: (
       '&::before': (
         color: red
@@ -142,7 +142,7 @@
   text-transform: uppercase,
   font-family: sans-serif,
 
-  restyle-modifiers: (
+  '@restyle.modifiers': (
     large: (
       padding-top: 0,
       position: relative,
