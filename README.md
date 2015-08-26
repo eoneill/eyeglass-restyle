@@ -86,42 +86,42 @@ We can convert this to a reSTYLE definition as follows:
   //  be evaluated at definition time, whereas the special restyle variable is
   //  evaluated at invocation time. This is important for the cascading
   //  behavior of modifiers/states
-  '@restyle.var border-color': #3079ed,
+  restyle-var(border-color): #3079ed,
 
   display: inline-block,
   padding: 5px 10px,
   font-weight: bold,
   text-align: center,
   vertical-align: middle,
-  border: 1px solid '@var.border-color',
+  border: 1px solid var(border-color),
   border-radius: 2px,
   background-color: #4787ed,
   color: #fff,
   cursor: pointer,
 
-  '@restyle.states': (
+  restyle-states: (
     hover: (
       background-color: #357ae8,
       border-color: #2f5bb7
     ),
 
     disabled: (
-      border-color: '@var.border-color',
+      border-color: var(border-color),
       // note that we can reference other values within the definition
-      background-color: '@root.background-color',
-      color: '@root.color',
+      background-color: root(background-color),
+      color: root(color),
       opacity: 0.8,
       cursor: default
     )
   ),
-  '@restyle.modifiers': (
+  restyle-modifiers: (
     secondary: (
-      '@restyle.var border-color': rgba(0, 0, 0, 0.1),
-      border: 1px solid '@var.border-color',
+      restyle-var(border-color): rgba(0, 0, 0, 0.1),
+      border: 1px solid var(border-color),
       background-color: #f5f5f5,
       color: #444,
 
-      '@restyle.states': (
+      restyle-states: (
         hover: (
           background-color: #e0e0e0,
           border-color: null,
