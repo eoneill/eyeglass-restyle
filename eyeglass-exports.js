@@ -77,7 +77,7 @@ module.exports = function(eyeglass, sass) {
       },
 
       "normalize-property($property)": function($property, done) {
-        var result = toJS($property).replace(/\{.*\}/g, "");
+        var result = toJS($property).replace(/(?:\{.*\}|\\.*)/g, "");
         done(toSass(result));
       },
 

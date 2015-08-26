@@ -39,7 +39,8 @@
     '& > .child': (
       'color{1}': '@root.color',
       'color{2}': '@this.@parent.color',
-      'color{3}': '@this.@parent.@parent.color'
+      'color{3}': '@this.@parent.@parent.color',
+      color\4: '@this.@parent.@parent.color'
     ),
 
     '@restyle.states': (
