@@ -1,6 +1,7 @@
 .test {
   color: red;
-  a: 1;
-  b: bar; }
+  my-func-a: 1;
+  my-func-b: bar;
+  fn: red; }
   .test.hover {
-    c: red; }
+    my-func-c: red; }

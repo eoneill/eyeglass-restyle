@@ -2,13 +2,19 @@
 
 @function my-func($a, $b, $c) {
   @return (
-    a: $a,
-    b: $b,
+    my-func-a: $a,
+    my-func-b: $b,
     restyle-states: (
       hover: (
-        c: $c
+        my-func-c: $c
       )
     )
+  );
+}
+
+@function fn($a) {
+  @return (
+    fn: $a
   );
 }
 
@@ -16,7 +22,14 @@
   restyle-var(foo): bar,
   color: red,
 
-  restyle-function(my-func): (1, restyle-var(foo), this(color))
+  restyle-function(my-func): (1, restyle-var(foo), this(color)),
+  restyle-function(fn): this(color),
+
+  restyle-states: (
+    active: (
+      restyle-function(fn): root(color)
+    )
+  )
 ));
 
 .test {

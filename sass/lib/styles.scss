@@ -143,6 +143,7 @@
             @else if (-restyle--get-directive-js($property) == "functions") {
               $calls: map-get($value, calls);
               @each $function, $args in $calls {
+                $args: join((), $args, comma);
                 @include -restyle--styles(call($function, $args...));
               }
             }
