@@ -64,6 +64,16 @@ module.exports = function(eyeglass, sass) {
         done(toSass(result));
       },
 
+      "is-directive($value)": function($value, done) {
+        var result = Styles.isDirective(toJS($value));
+        done(toSass(result));
+      },
+
+      "get-directive($value)": function($value, done) {
+        var result = Styles.getDirective(toJS($value));
+        done(toSass(result));
+      },
+
       "checksum($data)": function($data, done) {
         var data = sassUtils.sassString($data);
         var checksum = crc.crc32(data).toString(16);

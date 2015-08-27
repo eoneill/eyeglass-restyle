@@ -133,14 +133,14 @@
               @include restyle-custom-styler($property, $value, $method: pre);
             }
 
-            @if ($property == "@restyle.states") {
+            @if (-restyle--get-directive-js($property) == "states") {
               @each $state-name, $state in $value {
                 #{-restyle--get-state-selector($state-name)} {
                   @include -restyle--styles($state);
                 }
               }
             }
-            @else if ($property == "@restyle.functions") {
+            @else if (-restyle--get-directive-js($property) == "functions") {
               $calls: map-get($value, calls);
               @each $function, $args in $calls {
                 @include -restyle--styles(call($function, $args...));
