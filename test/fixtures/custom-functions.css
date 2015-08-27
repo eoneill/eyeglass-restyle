@@ -1,0 +1,6 @@
+.test {
+  color: red;
+  a: 1;
+  b: bar; }
+  .test.hover {
+    c: red; }

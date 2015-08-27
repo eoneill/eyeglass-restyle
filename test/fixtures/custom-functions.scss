@@ -1,0 +1,24 @@
+@import "restyle";
+
+@function my-func($a, $b, $c) {
+  @return (
+    a: $a,
+    b: $b,
+    restyle-states: (
+      hover: (
+        c: $c
+      )
+    )
+  );
+}
+
+@include restyle-define(test, (
+  restyle-var(foo): bar,
+  color: red,
+
+  restyle-function(my-func): (1, restyle-var(foo), this(color))
+));
+
+.test {
+  @include restyle(test);
+}
