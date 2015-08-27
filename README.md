@@ -93,7 +93,7 @@ We can convert this to a reSTYLE definition as follows:
   font-weight: bold,
   text-align: center,
   vertical-align: middle,
-  border: 1px solid var(border-color),
+  border: 1px solid restyle-var(border-color),
   border-radius: 2px,
   background-color: #4787ed,
   color: #fff,
@@ -106,7 +106,7 @@ We can convert this to a reSTYLE definition as follows:
     ),
 
     disabled: (
-      border-color: var(border-color),
+      border-color: restyle-var(border-color),
       // note that we can reference other values within the definition
       background-color: root(background-color),
       color: root(color),
@@ -117,7 +117,7 @@ We can convert this to a reSTYLE definition as follows:
   restyle-modifiers: (
     secondary: (
       restyle-var(border-color): rgba(0, 0, 0, 0.1),
-      border: 1px solid var(border-color),
+      border: 1px solid restyle-var(border-color),
       background-color: #f5f5f5,
       color: #444,
 

@@ -12,7 +12,7 @@
   restyle-var(simple): simple,
 
   '&.test': (
-    simple: var(simple),
+    simple: restyle-var(simple),
     color: root(color),
 
     '& > .child': (
@@ -20,12 +20,12 @@
       color1: this(root(color)),
       color2: this(parent(color)),
       color3: this(parent(parent(color))),
-      simple: var(simple)
+      simple: restyle-var(simple)
     ),
 
     restyle-states: (
       hover: (
-        test: var(simple),
+        test: restyle-var(simple),
         color: this(parent(color))
       )
     )
@@ -35,7 +35,7 @@
     fancy: (
       color: green,
       margin: null,
-      simple: var(simple),
+      simple: restyle-var(simple),
     ),
     simple: (
       color: null,

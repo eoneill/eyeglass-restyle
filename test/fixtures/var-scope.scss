@@ -33,9 +33,9 @@
   restyle-var(color): red,
   restyle-var(foo): foo2,
 
-  a: var(color),
-  b: 1px solid var(color),
-  c: (var(foo) bar, restyle-var(color), baz)
+  a: restyle-var(color),
+  b: 1px solid restyle-var(color),
+  c: (restyle-var(foo) bar, restyle-var(color), baz)
 ));
 
 .nested-vars {
