@@ -3,5 +3,7 @@
   my-func-a: 1;
   my-func-b: bar;
   fn: red; }
+  .test.active {
+    fn: red; }
   .test.hover {
     my-func-c: red; }
