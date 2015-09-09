@@ -6,6 +6,7 @@ $-restyle--default-config: (
 $-restyle--config: $-restyle--default-config !default;
 $restyle-config: null !default;
 
+/// @alias restyle-config
 @function -restyle--config($key: $-restyle--no-value, $value: $-restyle--no-value) {
   $has-incoming-map: type-of($key) == map;
   $is-setter: $has-incoming-map or $value != $-restyle--no-value;
@@ -31,10 +32,12 @@ $restyle-config: null !default;
   @return if($key == $-restyle--no-value, $-restyle--config, map-get($-restyle--config, $key));
 }
 
+/// @alias restyle-config
 @mixin -restyle--config($key: $-restyle--no-value, $value: $-restyle--no-value) {
   $tmp: -restyle--config($key, $value);
 }
 
+// if `$restyle-config` was set, merge it in to the configs...
 @if type-of($restyle-config) == map {
   @include -restyle--config($restyle-config);
   $restyle-config: null !global;
