@@ -30,6 +30,14 @@
   @return -restyle--is-logging-enabled-js($type, -restyle--config(log));
 }
 
+@function -restyle--cast-to-args($args) {
+  // if it's not a comma separated list, cast it to one...
+  @if (type-of($args) != list or list-separator($args) == space) {
+    @return ($args,);
+  }
+  @return $args;
+}
+
 @function -restyle--log($message, $type: null, $data: (), $severity: log) {
   // if a type is set, make sure the type logging is enabled
   @if ($type and not -restyle--is-logging-enabled($type)) {
