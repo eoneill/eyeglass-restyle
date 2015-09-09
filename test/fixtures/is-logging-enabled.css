@@ -1,0 +1,10 @@
+/* config: (a: true, b: false, c: (z: true), d: (x: (y: (z: true)))) */
+/* PASS: -restyle--is-logging-enabled-js('a') should be `true` */
+/* PASS: -restyle--is-logging-enabled-js('a:z') should be `true` */
+/* PASS: -restyle--is-logging-enabled-js('b') should be `false` */
+/* PASS: -restyle--is-logging-enabled-js('b:z') should be `false` */
+/* PASS: -restyle--is-logging-enabled-js('c') should be `false` */
+/* PASS: -restyle--is-logging-enabled-js('c:z') should be `true` */
+/* PASS: -restyle--is-logging-enabled-js('c:z:y:z') should be `true` */
+/* PASS: -restyle--is-logging-enabled-js('d') should be `false` */
+/* PASS: -restyle--is-logging-enabled-js('d:x:y:z') should be `true` */

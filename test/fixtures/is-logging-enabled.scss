@@ -1,0 +1,67 @@
+@import "restyle";
+
+$config: (
+  a: true,
+  b: false,
+  c: (
+    z: true
+  ),
+  d: (
+    x: (
+      y: (
+        z: true
+      )
+    )
+  )
+);
+
+$tests: (
+  (
+    test: 'a',
+    expected: true
+  ),
+  (
+    test: 'a:z',
+    expected: true
+  ),
+  (
+    test: 'b',
+    expected: false
+  ),
+  (
+    test: 'b:z',
+    expected: false
+  ),
+  (
+    test: 'c',
+    expected: false
+  ),
+  (
+    test: 'c:z',
+    expected: true
+  ),
+  (
+    test: 'c:z:y:z',
+    expected: true
+  ),
+  (
+    test: 'd',
+    expected: false
+  ),
+  (
+    test: 'd:x:y:z',
+    expected: true
+  )
+);
+
+/* config: #{inspect($config)} */
+@each $test in $tests {
+  $log: map-get($test, test);
+  $expected: map-get($test, expected);
+
+  $actual: -restyle--is-logging-enabled-js($log, $config);
+
+  $result: if($actual == $expected, 'PASS', 'FAIL');
+
+  /* #{$result}: -restyle--is-logging-enabled-js('#{$log}') should be `#{$expected}` */
+}

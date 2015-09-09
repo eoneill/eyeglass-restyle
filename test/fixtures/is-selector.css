@@ -1,0 +1,6 @@
+/* PASS: -restyle--is-selector-js('.test') should be `true` */
+/* PASS: -restyle--is-selector-js('color') should be `false` */
+/* PASS: -restyle--is-selector-js('&:disabled') should be `true` */
+/* PASS: -restyle--is-selector-js('test') should be `false` */
+/* PASS: -restyle--is-selector-js('& test') should be `true` */
+/* PASS: -restyle--is-selector-js('> test') should be `true` */

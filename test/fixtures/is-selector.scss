@@ -1,0 +1,16 @@
+@import "restyle";
+
+$tests: (
+  '.test': true,
+  color: false,
+  '&:disabled': true,
+  test: false,
+  '& test': true,
+  '> test': true
+);
+
+@each $test, $expected in $tests {
+  $actual: -restyle--is-selector-js($test);
+  $result: if($actual == $expected, 'PASS', 'FAIL');
+  /* #{$result}: -restyle--is-selector-js('#{$test}') should be `#{$expected}` */
+}

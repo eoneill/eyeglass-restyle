@@ -1,0 +1,27 @@
+@import "restyle";
+
+$tests: (
+  (
+    data: a,
+    expected: false
+  ),
+  (
+    data: true,
+    expected: false
+  ),
+  (
+    data: multiple-values(a, b, c),
+    expected: true
+  )
+);
+
+@each $test in $tests {
+  $data: map-get($test, data);
+  $expected: map-get($test, expected);
+
+  $actual: -restyle--is-multivalue-js($data);
+
+  @if ($actual != $expected) {
+    @error "-restyle--is-multivalue-js(#{inspect($data)}) should be `#{$expected}` but got #{$actual}";
+  }
+}

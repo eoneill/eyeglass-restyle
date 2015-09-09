@@ -1,0 +1,31 @@
+@import "restyle";
+
+$tests: (
+  '{a}, {b}, {c}': (
+    (
+      data: (a: 1, b: 2, c: 3),
+      expected: '1, 2, 3'
+    ),
+    (
+      data: (a: 1),
+      expected: '1, {b}, {c}'
+    ),
+    (
+      data: null,
+      expected: '{a}, {b}, {c}'
+    )
+  )
+);
+
+@each $str, $test in $tests {
+  @each $case in $test {
+    $data: map-get($case, data);
+    $expected: map-get($case, expected);
+
+    $actual: -restyle--str-substitute-js($str, $data);
+
+    @if ($actual != $expected) {
+      @error "-restyle--str-substitute-js('#{$str}', #{inspect($data)}) should be `#{$expected}` but got #{$actual}";
+    }
+  }
+}
