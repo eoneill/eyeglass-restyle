@@ -37,12 +37,13 @@ module.exports = function(eyeglass, sass) {
   return {
     sassDir: SASS_DIR,
     functions: namespaceFunctions({
-      "grammar-from-description($description, $type, $allowed-types: ())": function($description, $type, $allowedTypes, done) {
+      "grammar-from-description($description, $type, $allowed-types: (), $aliases: ())": function($description, $type, $allowedTypes, $aliases, done) {
         // get the grammar
         var grammar = new Grammar(
           toJS($description),
           toJS($type),
-          toJS($allowedTypes)
+          toJS($allowedTypes),
+          toJS($aliases)
         );
         // and return a SassMap
         done(toSass(grammar));

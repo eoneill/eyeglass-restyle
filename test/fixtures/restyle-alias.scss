@@ -1,0 +1,46 @@
+@import "restyle";
+
+// define our UI element...
+@include restyle-define(test, (
+  color: red,
+  height: 100%,
+
+  restyle-modifiers: (
+    alt: (
+      color: green
+    ),
+    alt2: (
+      color: blue
+    ),
+    small: (
+      height: 75%,
+    )
+  )
+));
+
+@include restyle-alias(alias1, test);
+@include restyle-alias((
+  alias2: alt2 test,
+  alias3: alt small test
+));
+
+.alias1 {
+  @include restyle(alias1);
+  &.alt2 {
+    @include restyle(alt2 alias1);
+  }
+}
+
+.alias2 {
+  @include restyle(alias2);
+  &.small {
+    @include restyle(small alias2);
+  }
+}
+
+.alias3 {
+  @include restyle(alias3);
+  &.alt2 {
+    @include restyle(alt2 alias3);
+  }
+}

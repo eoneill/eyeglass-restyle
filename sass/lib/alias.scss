@@ -1,0 +1,19 @@
+@import "./shared";
+
+/// @alias restyle-alias
+@function -restyle--alias($alias, $maps-to: null) {
+  @if (type-of($alias) != map) {
+    $alias: (
+      #{$alias}: $maps-to
+    );
+  }
+
+  $-restyle--registered-aliases: map-merge($-restyle--registered-aliases, $alias) !global;
+
+  @return true;
+}
+
+/// @alias restyle-alias
+@mixin -restyle--alias($alias, $maps-to: null) {
+  $tmp: -restyle--alias($alias, $maps-to);
+}

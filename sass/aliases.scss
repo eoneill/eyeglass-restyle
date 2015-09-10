@@ -58,7 +58,21 @@
   @include restyle-define($name, $definition);
 }
 
-/// convenience mixin for extending a restyle definition
+/// function for aliasing definitions
+/// @param    {String} $alias - the alias string
+/// @param    {String|List} $maps-to - the definition to alias to
+@function restyle-alias($alias, $maps-to: null) {
+  @return -restyle--alias($alias, $maps-to);
+}
+
+/// convenience mixin for aliasing definitions
+/// @param    {String} $alias - the alias string
+/// @param    {String|List} $maps-to - the definition to alias to
+@mixin restyle-alias($alias, $maps-to: null) {
+  @include -restyle--alias($alias, $maps-to);
+}
+
+/// function for extending a restyle definition
 /// @param    {String} $name - the name of the item to extend
 /// @param    {Map} $definition - the definition
 @function restyle-extend($name, $definition: null) {

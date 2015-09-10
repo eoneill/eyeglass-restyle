@@ -4,6 +4,9 @@ var Grammar = require("../lib/grammar");
 var assert = require("assert");
 
 var knownTypes = ["button", "close-button", "dialog", "container", "window"];
+var aliases = new Map();
+aliases.set("alias1", "button");
+aliases.set("alias2", ["small", "button"]);
 
 var ERRORS = {
   noType: /A type could not be found in the description .*\. Please specify one of the registered types: .*/,
@@ -11,6 +14,16 @@ var ERRORS = {
 };
 
 var testData = [
+  {
+    name: "single type",
+    data: {
+      description: "button"
+    },
+    expectedGrammar: {
+      description: null,
+      type: "button"
+    }
+  },
   {
     name: "description only (Array)",
     data: {
@@ -175,6 +188,46 @@ var testData = [
       description: "something else in a window"
     },
     expectedError: ERRORS.ambiguous
+  },
+  {
+    name: "simple alias (as description)",
+    data: {
+      description: "alias1"
+    },
+    expectedGrammar: {
+      description: null,
+      type: "button"
+    }
+  },
+  {
+    name: "simple alias (as type)",
+    data: {
+      type: "alias1"
+    },
+    expectedGrammar: {
+      description: null,
+      type: "button"
+    }
+  },
+  {
+    name: "alias with modifier",
+    data: {
+      description: "small alias1"
+    },
+    expectedGrammar: {
+      description: ["small"],
+      type: "button"
+    }
+  },
+  {
+    name: "complex alias with modifier",
+    data: {
+      description: "super alias2"
+    },
+    expectedGrammar: {
+      description: ["super", "small"],
+      type: "button"
+    }
   }
 ];
 
@@ -182,7 +235,7 @@ var testData = [
 
 describe("grammar", function() {
   function testGrammar(test) {
-    return new Grammar(test.data.description, test.data.type, knownTypes);
+    return new Grammar(test.data.description, test.data.type, knownTypes, aliases);
   }
 
   testData.forEach(function(test) {

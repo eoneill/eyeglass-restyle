@@ -1,0 +1,20 @@
+.alias1 {
+  color: red;
+  height: 100%; }
+  .alias1.alt2 {
+    color: blue;
+    height: 100%; }
+
+.alias2 {
+  color: blue;
+  height: 100%; }
+  .alias2.small {
+    color: blue;
+    height: 75%; }
+
+.alias3 {
+  color: green;
+  height: 75%; }
+  .alias3.alt2 {
+    color: blue;
+    height: 75%; }

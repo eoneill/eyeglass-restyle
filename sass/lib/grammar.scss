@@ -15,7 +15,8 @@
   $result: -restyle--grammar-from-description-js(
     map-get($descriptor, description),
     map-get($descriptor, type),
-    $-restyle--registered-types
+    $-restyle--registered-types,
+    $-restyle--registered-aliases
   );
 
   $tmp: -restyle--log($debug-message, "time:grammar", (
