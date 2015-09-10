@@ -1,0 +1,33 @@
+@import "restyle";
+
+@include restyle-define(test, (
+  restyle-debug: "debugging",
+
+  restyle-modifiers: (
+    deprecated: (
+      restyle-deprecated: "deprecated test is deprecated"
+    ),
+    warn: (
+      restyle-warn: "this is a warning"
+    ),
+    error: (
+      restyle-error: "this is an error"
+    )
+  )
+));
+
+.test {
+  @include restyle(test);
+
+  &.deprecated {
+    @include restyle(deprecated test);
+  }
+
+  &.warn {
+    @include restyle(warn test);
+  }
+
+  &.error {
+    //@include restyle(error test);
+  }
+}

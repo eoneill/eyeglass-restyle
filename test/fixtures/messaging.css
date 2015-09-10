@@ -1,0 +1,8 @@
+.test {
+  /* [restyle:debug] debugging */ }
+  .test.deprecated {
+    /* [restyle:debug] debugging */
+    /* [restyle:deprecated] deprecated test is deprecated */ }
+  .test.warn {
+    /* [restyle:debug] debugging */
+    /* [restyle:warn] this is a warning */ }

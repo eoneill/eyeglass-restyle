@@ -133,19 +133,33 @@
               @include restyle-custom-styler($property, $value, $method: pre);
             }
 
-            @if (-restyle--get-directive-js($property) == "states") {
+            $directive: -restyle--get-directive-js($property);
+
+            @if ($directive == states) {
               @each $state-name, $state in $value {
                 #{-restyle--get-state-selector($state-name)} {
                   @include -restyle--styles($state);
                 }
               }
             }
-            @else if (-restyle--get-directive-js($property) == "functions") {
+            @else if ($directive == functions) {
               $calls: map-get($value, calls);
               @each $function, $args in $calls {
                 $args: -restyle--cast-to-args($args);
                 @include -restyle--styles(call($function, $args...));
               }
+            }
+            @else if ($directive == debug) {
+              /* [restyle:debug] #{$value} */
+              @debug "[restyle] #{$value}";
+            }
+            @else if ($directive == warn or $directive == deprecated) {
+              /* [restyle:#{$directive}] #{$value} */
+              @warn "[restyle] #{$value}";
+            }
+            @else if ($directive == error) {
+              /* [restyle:error] #{$value} */
+              @error "[restyle] #{$value}";
             }
             @else if (-restyle--is-selector-js($property)) {
               #{$property} {
