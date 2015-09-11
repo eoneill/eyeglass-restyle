@@ -8,7 +8,7 @@
 
   $start-time: timer-start();
 
-  $result: -restyle--styles-from-grammar-js($grammars, $-restyle--registered-types, $-restyle--registered-patterns);
+  $result: -restyle--styles-from-grammar-js($grammars, $-restyle--registered-types, $-restyle--registered-patterns, $-restyle--registered-aliases);
 
   $tmp: -restyle--log($debug-message, "time:styles-from-grammar", (
     time: elapsed-time($start-time)

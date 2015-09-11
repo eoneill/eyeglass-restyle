@@ -7,6 +7,7 @@ var Grammar = require("./lib/grammar");
 var Styles = require("./lib/styles");
 var util = require("./lib/util");
 var crc = require("crc");
+var merge = require("lodash.merge");
 
 var SASS_DIR = path.join(__dirname, "sass");
 
@@ -31,6 +32,13 @@ module.exports = function(eyeglass, sass) {
   var sassUtils = require("node-sass-utils")(sass);
   var moreSassUtils = require("node-sass-more-utils")(sass, sassUtils);
 
+  eyeglass.options.restyle = merge({
+    _grammarEngines: [],
+    addGrammarEngine: function(engine) {
+      eyeglass.options.restyle._grammarEngines.push(engine);
+    }
+  }, eyeglass.options.restyle);
+
   var toJS = moreSassUtils.toJS;
   var toSass = moreSassUtils.toSass;
 
@@ -43,17 +51,22 @@ module.exports = function(eyeglass, sass) {
           toJS($description),
           toJS($type),
           toJS($allowedTypes),
-          toJS($aliases)
+          toJS($aliases),
+          // pass along the custom grammar engines
+          eyeglass.options.restyle._grammarEngines
         );
         // and return a SassMap
         done(toSass(grammar));
       },
 
-      "styles-from-grammar($grammars, $allowed-types, $registered-components)": function($grammars, $allowedTypes, $registeredComponents, done) {
+      "styles-from-grammar($grammars, $allowed-types, $registered-components, $aliases: ())": function($grammars, $allowedTypes, $registeredComponents, $aliases, done) {
         var styles = new Styles(
           toJS($grammars),
           toJS($allowedTypes),
-          toJS($registeredComponents)
+          toJS($registeredComponents),
+          toJS($aliases),
+          // pass along the custom grammar engines
+          eyeglass.options.restyle._grammarEngines
         );
 
         // and return a SassMap

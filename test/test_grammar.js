@@ -4,9 +4,30 @@ var Grammar = require("../lib/grammar");
 var assert = require("assert");
 
 var knownTypes = ["button", "close-button", "dialog", "container", "window"];
+
 var aliases = new Map();
 aliases.set("alias1", "button");
 aliases.set("alias2", ["small", "button"]);
+
+var grammarEngines = [
+  function splitOnDots(Grammar) {
+    if (this.description) {
+      this.description = this.description.join(Grammar.WORD_DELIM).replace(/\.+/g, Grammar.WORD_DELIM).split(Grammar.WORD_DELIM);
+    }
+  },
+
+  function btnsAreButtons(Grammars, allowedTypes) {
+    if (!this.type && this.description && allowedTypes.indexOf("button") !== -1) {
+      this.description = this.description.filter(function(word) {
+        if (word === "btn") {
+          this.type = "button";
+          return false;
+        }
+        return true;
+      }.bind(this));
+    }
+  }
+];
 
 var ERRORS = {
   noType: /A type could not be found in the description .*\. Please specify one of the registered types: .*/,
@@ -228,6 +249,26 @@ var testData = [
       description: ["super", "small"],
       type: "button"
     }
+  },
+  {
+    name: "custom grammar engine",
+    data: {
+      description: "this will test.a.custom.engine button"
+    },
+    expectedGrammar: {
+      description: ["will", "test", "custom", "engine"],
+      type: "button"
+    }
+  },
+  {
+    name: "custom grammar engine 2",
+    data: {
+      description: "custom btn"
+    },
+    expectedGrammar: {
+      description: ["custom"],
+      type: "button"
+    }
   }
 ];
 
@@ -235,7 +276,7 @@ var testData = [
 
 describe("grammar", function() {
   function testGrammar(test) {
-    return new Grammar(test.data.description, test.data.type, knownTypes, aliases);
+    return new Grammar(test.data.description, test.data.type, knownTypes, aliases, grammarEngines);
   }
 
   testData.forEach(function(test) {
