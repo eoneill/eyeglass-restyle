@@ -1,0 +1,91 @@
+@import "restyle";
+
+@include restyle-define(test, (
+  restyle-meta: (
+    description: "this is a test pattern",
+    class: default
+  ),
+
+  color: green,
+
+  restyle-modifiers: (
+    alt: (
+      restyle-meta: (
+        description: "this is an alternate test pattern",
+        class: type
+      ),
+      color: red
+    ),
+    primary: (
+      restyle-meta: (
+        description: "this is the primary test pattern",
+        class: type
+      )
+    ),
+
+    small: (
+      restyle-meta: (
+        description: "this is the small size",
+        class: size
+      ),
+      font-size: 70%
+    ),
+
+    large: (
+      restyle-meta: (
+        description: "this is the large size",
+        class: size
+      ),
+      font-size: 100%
+    ),
+
+    small primary: (
+      restyle-meta: (
+        description: "this is a compound size and type",
+        class: size type
+      ),
+      font-size: 95%,
+      color: blue
+    )
+  )
+));
+
+.test {
+  @include restyle(test);
+
+  &.alt {
+    @include restyle(alt test);
+  }
+
+  &.primary {
+    @include restyle(primary test);
+  }
+
+  &.small {
+    @include restyle(small test);
+  }
+
+  &.small.alt {
+    @include restyle(small alt test);
+  }
+
+  &.large {
+    @include restyle(large test);
+  }
+
+  &.small.large {
+    @include restyle(small large test);
+  }
+
+  &.small.primary {
+    @include restyle(small primary test);
+  }
+
+  &.small.large.primary {
+    @include restyle(small large primary test);
+  }
+
+  &.small.alt.primary {
+    @include restyle(small alt primary test);
+  }
+}

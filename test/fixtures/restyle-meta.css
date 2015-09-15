@@ -1,0 +1,27 @@
+.test {
+  color: green; }
+  .test.alt {
+    color: red; }
+  .test.primary {
+    color: green; }
+  .test.small {
+    color: green;
+    font-size: 70%; }
+  .test.small.alt {
+    color: red;
+    font-size: 70%; }
+  .test.large {
+    color: green;
+    font-size: 100%; }
+  .test.small.large {
+    color: green;
+    font-size: 100%; }
+  .test.small.primary {
+    color: blue;
+    font-size: 95%; }
+  .test.small.large.primary {
+    color: blue;
+    font-size: 95%; }
+  .test.small.alt.primary {
+    color: blue;
+    font-size: 95%; }
