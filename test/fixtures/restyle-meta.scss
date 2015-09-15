@@ -34,7 +34,8 @@
     large: (
       restyle-meta: (
         description: "this is the large size",
-        class: size
+        class: size,
+        allow-conflicts: true
       ),
       font-size: 100%
     ),
