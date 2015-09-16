@@ -31,7 +31,8 @@ var grammarEngines = [
 
 var ERRORS = {
   noType: /A type could not be found in the description .*\. Please specify one of the registered types: .*/,
-  ambiguous: /The description .* is incomplete and cannot be understood\. Ambiguous word .* found but no type was found\./
+  ambiguous: /The description .* is incomplete and cannot be understood\. Ambiguous word .* found but no type was found\./,
+  unused: /The description .* could not be understood\. The following words were found without being bound to a type: .*/
 };
 
 var testData = [
@@ -209,6 +210,13 @@ var testData = [
       description: "something else in a window"
     },
     expectedError: ERRORS.ambiguous
+  },
+  {
+    name: "invalid description with unused words",
+    data: {
+      description: "button in a car in a window"
+    },
+    expectedError: ERRORS.unused
   },
   {
     name: "simple alias (as description)",
