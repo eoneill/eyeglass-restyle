@@ -73,6 +73,12 @@ module.exports = function(eyeglass, sass) {
         done(toSass(styles));
       },
 
+      "styles-from-diff($original, $other)": function($original, $other, done) {
+        var styles = Styles.diff(toJS($original), toJS($other));
+
+        done(toSass(styles));
+      },
+
       "is-selector($key)": function($key, done) {
         var result = Styles.isSelector(toJS($key));
         done(toSass(result));
@@ -101,7 +107,7 @@ module.exports = function(eyeglass, sass) {
       },
 
       "normalize-property($property)": function($property, done) {
-        var result = toJS($property).replace(/(?:\{.*\}|\\.*)/g, "");
+        var result = util.normalizeProperty(toJS($property), true);
         done(toSass(result));
       },
 

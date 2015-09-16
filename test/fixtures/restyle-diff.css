@@ -1,0 +1,62 @@
+.test {
+  a: true;
+  b: true;
+  c: true;
+  d: true;
+  background-size: 100%; }
+  .test .nested {
+    nested-a: true;
+    nested-b: true;
+    nested-c: true;
+    nested-d: true; }
+    .test .nested .deep-nested {
+      deep-nested-a: true;
+      deep-nested-b: true;
+      deep-nested-c: true;
+      deep-nested-d: true; }
+  .test.state1 {
+    state1-a: true;
+    state1-b: true;
+    state1-c: true;
+    state1-d: true; }
+  .test.state2 {
+    state2-a: true; }
+
+.alt {
+  a: true;
+  b: false;
+  d: true;
+  e: true; }
+  .alt .nested {
+    nested-a: true;
+    nested-b: false;
+    nested-d: true;
+    nested-e: true; }
+    .alt .nested .deep-nested {
+      deep-nested-a: true;
+      deep-nested-b: false;
+      deep-nested-d: true;
+      deep-nested-e: true; }
+  .alt.state1 {
+    state1-a: true;
+    state1-b: false;
+    state1-d: true;
+    state1-e: true; }
+  .alt.state3 {
+    state3-a: true; }
+
+.test.alt {
+  b: false;
+  background-size: auto auto;
+  e: true; }
+  .test.alt .nested {
+    nested-b: false;
+    nested-e: true; }
+    .test.alt .nested .deep-nested {
+      deep-nested-b: false;
+      deep-nested-e: true; }
+  .test.alt.state1 {
+    state1-b: false;
+    state1-e: true; }
+  .test.alt.state3 {
+    state3-a: true; }

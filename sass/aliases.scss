@@ -18,14 +18,23 @@
   @return -restyle--main($descriptors...);
 }
 
-// returns a diff of two `restyle` objects
-// TODO - need to implement this...
-// @param    {Map|List|String} $original - the original `restyle` object
-// @param    {Map|List|String} $other - the other `restyle` object to compare
-// @returns  {Map} the style map
-//@function restyle-diff($original, $other) {
-//  @return -restyle--diff($original, $other);
-//}
+/// returns a diff of two `restyle` objects
+/// @param    {Map|List|String} $original - the original `restyle` object
+/// @param    {Map|List|String} $other - the other `restyle` object to compare
+/// @returns  {Map} the style map
+@function restyle-diff($original, $other) {
+  @return -restyle--diff($original, $other);
+}
+
+/// outputs the style difference between the two definitions
+/// @content
+/// @param    {Map|List|String} $original - the original `restyle` object
+/// @param    {Map|List|String} $other - the other `restyle` object to compare
+@mixin restyle-diff($original, $other) {
+  @include -restyle--diff($original, $other) {
+    @content;
+  };
+}
 
 /// adds a new restyle definition
 /// @param    {String} $name - the name of the item to define

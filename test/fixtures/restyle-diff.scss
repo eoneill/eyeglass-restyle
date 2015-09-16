@@ -1,0 +1,80 @@
+@import "restyle";
+
+@include restyle-define(test, (
+  a: true,
+  b: true,
+  c: true,
+  d: true,
+  background-size: 100%,
+
+  '.nested': (
+    nested-a: true,
+    nested-b: true,
+    nested-c: true,
+    nested-d: true,
+    '.deep-nested': (
+      deep-nested-a: true,
+      deep-nested-b: true,
+      deep-nested-c: true,
+      deep-nested-d: true
+    )
+  ),
+  restyle-states: (
+    state1: (
+      state1-a: true,
+      state1-b: true,
+      state1-c: true,
+      state1-d: true
+    ),
+    state2: (
+      state2-a: true
+    )
+  ),
+
+  restyle-modifiers: (
+    alt: (
+      a: true,
+      b: false,
+      c: null,
+      e: true,
+      background-size: null,
+
+      '.nested': (
+        nested-a: true,
+        nested-b: false,
+        nested-c: null,
+        nested-e: true,
+        '.deep-nested': (
+          deep-nested-a: true,
+          deep-nested-b: false,
+          deep-nested-c: null,
+          deep-nested-e: true
+        )
+      ),
+      restyle-states: (
+        state1: (
+          state1-a: true,
+          state1-b: false,
+          state1-c: null,
+          state1-e: true
+        ),
+        state2: null,
+        state3: (
+          state3-a: true
+        )
+      )
+    )
+  )
+));
+
+.test {
+  @include restyle(test);
+}
+
+.alt {
+  @include restyle(alt test);
+}
+
+.test.alt {
+  @include restyle-diff(test, alt test);
+}

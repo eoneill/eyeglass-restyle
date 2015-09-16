@@ -22,7 +22,20 @@
   }
 }
 
-// @alias    restyle-diff
-//@mixin -restyle--diff($original, $other) {
-//  @warn "TODO - diff";
-//}
+/// @alias    restyle-diff
+@function -restyle--diff($original, $other) {
+  // make sure we're working with restyle maps...
+  $original: if(type-of($original) == map, $original, -restyle--main(-restyle--cast-to-args($original)...));
+  $other: if(type-of($other) == map, $other, -restyle--main(-restyle--cast-to-args($other)...));
+
+  @return -restyle--styles-from-diff-js($original, $other);
+}
+
+/// @alias    restyle-diff
+@mixin -restyle--diff($original, $other) {
+  $styles: -restyle--diff($original, $other);
+
+  @include -restyle--styles($styles) {
+    @content;
+  }
+}
