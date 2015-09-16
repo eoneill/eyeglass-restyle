@@ -60,3 +60,27 @@
     state1-e: true; }
   .test.alt.state3 {
     state3-a: true; }
+
+.test2.test {
+  a: true;
+  b: true;
+  c: true;
+  d: true;
+  background-size: 100%; }
+  .test2.test .nested {
+    nested-a: true;
+    nested-b: true;
+    nested-c: true;
+    nested-d: true; }
+    .test2.test .nested .deep-nested {
+      deep-nested-a: true;
+      deep-nested-b: true;
+      deep-nested-c: true;
+      deep-nested-d: true; }
+  .test2.test.state1 {
+    state1-a: true;
+    state1-b: true;
+    state1-c: true;
+    state1-d: true; }
+  .test2.test.state2 {
+    state2-a: true; }

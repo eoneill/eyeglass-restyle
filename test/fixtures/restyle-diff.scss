@@ -78,3 +78,15 @@
 .test.alt {
   @include restyle-diff(test, alt test);
 }
+
+.test.test2 {
+  @include restyle-diff(test, null);
+}
+
+.test2.test {
+  @include restyle-diff(null, test);
+}
+
+.test.test {
+  @include restyle-diff(test, test);
+}
