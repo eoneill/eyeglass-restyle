@@ -12,6 +12,34 @@
   )
 ));
 
-.test {
-  @include restyle(test);
+@include restyle-define(test2, (
+  restyle-state(state1): (
+    state: 1
+  ),
+
+  restyle-states: (
+    state2: (
+      state: 2
+    )
+  )
+));
+
+@include restyle-define(test3, (
+  restyle-state(state1): (
+    state: 1
+  )
+));
+
+@include restyle-define(test4, (
+  restyle-states: (
+    state1: (
+      state: 1
+    )
+  )
+));
+
+@each $test in (test, test2, test3, test4) {
+  .#{$test} {
+    @include restyle($test);
+  }
 }

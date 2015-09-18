@@ -4,3 +4,16 @@
     modifier: 1; }
   .test.modifier2 {
     modifier: 2; }
+
+.test2 {
+  modifier: none; }
+  .test2.modifier1 {
+    modifier: 1; }
+  .test2.modifier2 {
+    modifier: 2; }
+
+.test3 {
+  modifier: 1; }
+
+.test4 {
+  modifier: 1; }

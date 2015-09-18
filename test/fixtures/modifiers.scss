@@ -14,6 +14,34 @@
   )
 ));
 
+@include restyle-define(test2, (
+  modifier: none,
+
+  restyle-modifier(modifier1): (
+    modifier: 1
+  ),
+
+  restyle-modifiers: (
+    modifier2: (
+      modifier: 2
+    )
+  )
+));
+
+@include restyle-define(test3, (
+  restyle-modifiers: (
+    modifier1: (
+      modifier: 1
+    )
+  )
+));
+
+@include restyle-define(test4, (
+  restyle-modifier(modifier1): (
+    modifier: 1
+  )
+));
+
 .test {
   @include restyle(test);
 
@@ -24,4 +52,24 @@
   &.modifier2 {
     @include restyle(modifier2 test);
   }
+}
+
+.test2 {
+  @include restyle(test2);
+
+  &.modifier1 {
+    @include restyle(modifier1 test2);
+  }
+
+  &.modifier2 {
+    @include restyle(modifier2 test2);
+  }
+}
+
+.test3 {
+  @include restyle(modifier1 test3);
+}
+
+.test4 {
+  @include restyle(modifier1 test4);
 }
