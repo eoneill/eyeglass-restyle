@@ -1,0 +1,17 @@
+@import "restyle";
+
+@include restyle-define(test, (
+  restyle-states: (
+    state1: (
+      state: 1
+    )
+  ),
+
+  restyle-state(state2): (
+    state: 2
+  )
+));
+
+.test {
+  @include restyle(test);
+}

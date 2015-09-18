@@ -1,0 +1,27 @@
+@import "restyle";
+
+@include restyle-define(test, (
+  modifier: none,
+
+  restyle-modifiers: (
+    modifier1: (
+      modifier: 1
+    )
+  ),
+
+  restyle-modifier(modifier2): (
+    modifier: 2
+  )
+));
+
+.test {
+  @include restyle(test);
+
+  &.modifier1 {
+    @include restyle(modifier1 test);
+  }
+
+  &.modifier2 {
+    @include restyle(modifier2 test);
+  }
+}

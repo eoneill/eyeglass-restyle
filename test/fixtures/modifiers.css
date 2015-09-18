@@ -1,0 +1,6 @@
+.test {
+  modifier: none; }
+  .test.modifier1 {
+    modifier: 1; }
+  .test.modifier2 {
+    modifier: 2; }
