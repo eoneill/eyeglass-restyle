@@ -88,6 +88,17 @@ var testData = [
     }
   },
   {
+    name: "empty description",
+    data: {
+      description: [],
+      type: "my-type"
+    },
+    expectedGrammar: {
+      description: null,
+      type: "my-type"
+    }
+  },
+  {
     name: "description only with a context",
     data: {
       description: "a large primary button in a dialog"
@@ -198,6 +209,16 @@ var testData = [
     }
   },
   {
+    name: "remove duplicate words",
+    data: {
+      description: "small small small primary button"
+    },
+    expectedGrammar: {
+      description: ["small", "primary"],
+      type: "button"
+    }
+  },
+  {
     name: "invalid description without a recognized type",
     data: {
       description: "something else"
@@ -277,6 +298,14 @@ var testData = [
       description: ["custom"],
       type: "button"
     }
+  },
+  {
+    name: "without knownTypes arg",
+    data: {
+      description: "a button",
+      knownTypes: null
+    },
+    expectedError: ERRORS.noType
   }
 ];
 
@@ -284,7 +313,13 @@ var testData = [
 
 describe("grammar", function() {
   function testGrammar(test) {
-    return new Grammar(test.data.description, test.data.type, knownTypes, aliases, grammarEngines);
+    return new Grammar(
+      test.data.description,
+      test.data.type,
+      test.data.knownTypes === undefined ? knownTypes : test.data.knownTypes,
+      test.data.aliases === undefined ? aliases : test.data.aliases,
+      test.data.grammarEngines === undefined ? grammarEngines : test.data.grammarEngines
+    );
   }
 
   testData.forEach(function(test) {
