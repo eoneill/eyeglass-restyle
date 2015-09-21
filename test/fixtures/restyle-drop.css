@@ -1,14 +1,22 @@
 .should-have-all-styles {
   color: green;
   width: 100%;
-  font-size: 10px; }
+  font-size: 10px;
+  my-fn: 2; }
 
 .should-have-no-color {
+  width: 100%;
+  font-size: 10px;
+  my-fn: 2; }
+
+.should-have-no-functions {
+  color: green;
   width: 100%;
   font-size: 10px; }
 
 .should-have-no-width-font-size {
-  color: green; }
+  color: green;
+  my-fn: 2; }
 
 .should-have-color-blue-height-10px {
   color: blue;

@@ -1,0 +1,5 @@
+@import "restyle";
+
+.test {
+  @include restyle(test);
+}

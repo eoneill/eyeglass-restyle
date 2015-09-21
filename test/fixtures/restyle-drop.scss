@@ -1,9 +1,17 @@
 @import 'restyle';
 
+@function my-fn($var) {
+  @return (
+    my-fn: $var * 2
+  );
+}
+
 @include restyle-define(test-cmpt, (
   color: green,
   width: 100%,
   font-size: 10px,
+
+  restyle-function(my-fn): 1,
 
   // modifiers...
   '@restyle.modifiers': (
@@ -20,6 +28,9 @@
       '@restyle.remove': all,
       color: blue,
       height: 10px
+    ),
+    drop-functions: (
+      restyle-remove: functions
     )
   )
 ));
@@ -72,6 +83,10 @@
 
 .should-have-no-color {
   @include restyle(drop-color test-cmpt);
+}
+
+.should-have-no-functions {
+  @include restyle(drop-functions test-cmpt);
 }
 
 .should-have-no-width-font-size {
