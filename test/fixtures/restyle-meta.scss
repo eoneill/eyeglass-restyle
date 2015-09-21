@@ -22,6 +22,21 @@
         class: type
       )
     ),
+    secondary: (
+      restyle-meta: (
+        description: this is the secondary test pattern,
+        class: type
+      )
+    ),
+    tertiary: (
+      restyle-meta: (
+        class: type
+      )
+    ),
+
+    not-a-map: (
+      restyle-meta: "this is not a map"
+    ),
 
     small: (
       restyle-meta: (
@@ -88,5 +103,17 @@
 
   &.small.alt.primary {
     @include restyle(small alt primary test);
+  }
+
+  &.small.secondary.primary {
+    @include restyle(small secondary primary test);
+  }
+
+  &.small.tertiary.primary {
+    @include restyle(small tertiary primary test);
+  }
+
+  &.not-a-map {
+    @include restyle(not-a-map test);
   }
 }

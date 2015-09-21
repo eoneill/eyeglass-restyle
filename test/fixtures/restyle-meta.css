@@ -25,3 +25,11 @@
   .test.small.alt.primary {
     color: blue;
     font-size: 95%; }
+  .test.small.secondary.primary {
+    color: blue;
+    font-size: 95%; }
+  .test.small.tertiary.primary {
+    color: blue;
+    font-size: 95%; }
+  .test.not-a-map {
+    color: green; }
