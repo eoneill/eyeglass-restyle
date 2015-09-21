@@ -14,10 +14,10 @@ require("./build/test")(gulp, ["lint"], {
   coverage: {
     thresholds: {
       global: {
-        statements: 91.61,
-        branches: 94.92,
+        statements: 97.77,
+        branches: 95.13,
         functions: 98.9,
-        lines: 97.61
+        lines: 97.77
       }
     }
   }

@@ -1,0 +1,12 @@
+@import "restyle";
+
+@include restyle-define(test, (
+  color: red,
+  restyle-modifier(alt): (
+    restyle: invalid
+  )
+));
+
+.test {
+  @include restyle(alt test);
+}

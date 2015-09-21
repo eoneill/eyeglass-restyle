@@ -1,0 +1,3 @@
+{
+  "expectedError": "/A type could not be found in the description `invalid`. Please specify one of the registered types: .*/"
+}
