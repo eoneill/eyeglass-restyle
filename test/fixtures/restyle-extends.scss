@@ -13,11 +13,17 @@
     modified: (
       color: red
     ),
+    alt: (
+      width: 100%
+    ),
     aliased: (
       '@restyle.alias': alias-me
     ),
     extended: (
       '@restyle.extends': modified
+    ),
+    extended-alt: (
+      '@restyle.extends': alt modified
     ),
     extended-alias: (
       '@restyle.extends': aliased
@@ -47,6 +53,10 @@
 
 .test3c {
   @include restyle(extended-alias test);
+}
+
+.test4 {
+  @include restyle(extended-alt test);
 }
 
 

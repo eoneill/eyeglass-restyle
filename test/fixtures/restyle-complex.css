@@ -106,6 +106,14 @@
     .should-be-fancy-simple-test:hover .sub, .should-be-fancy-simple-test.hover .sub, .should-be-fancy-simple-test:focus .sub, .should-be-fancy-simple-test.focus .sub {
       color: orange; }
 
+.should-be-simple-test {
+  margin: 5px;
+  font-size: 10px; }
+  .should-be-simple-test:hover, .should-be-simple-test.hover, .should-be-simple-test:focus, .should-be-simple-test.focus {
+    color: purple; }
+    .should-be-simple-test:hover .sub, .should-be-simple-test.hover .sub, .should-be-simple-test:focus .sub, .should-be-simple-test.focus .sub {
+      color: orange; }
+
 .should-be-simple-test-and-fancy-test {
   color: green;
   font-size: 16px;
@@ -146,6 +154,27 @@
   .should-be-fancy-test:hover, .should-be-fancy-test.hover, .should-be-fancy-test:focus, .should-be-fancy-test.focus {
     color: purple; }
     .should-be-fancy-test:hover .sub, .should-be-fancy-test.hover .sub, .should-be-fancy-test:focus .sub, .should-be-fancy-test.focus .sub {
+      color: orange; }
+
+.null-nested-restyle {
+  color: red;
+  margin: 5px;
+  font-size: 10px;
+  border-color: red; }
+  .null-nested-restyle.test {
+    simple: simple;
+    color: red; }
+    .null-nested-restyle.test > .child {
+      color1: red;
+      color2: red;
+      color3: red;
+      simple: simple2; }
+    .null-nested-restyle.test:hover, .null-nested-restyle.test.hover, .null-nested-restyle.test:focus, .null-nested-restyle.test.focus {
+      test: simple;
+      color: red; }
+  .null-nested-restyle:hover, .null-nested-restyle.hover, .null-nested-restyle:focus, .null-nested-restyle.focus {
+    color: purple; }
+    .null-nested-restyle:hover .sub, .null-nested-restyle.hover .sub, .null-nested-restyle:focus .sub, .null-nested-restyle.focus .sub {
       color: orange; }
 
 .should-be-selectorTest-green::before {

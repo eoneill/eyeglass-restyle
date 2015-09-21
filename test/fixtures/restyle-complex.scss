@@ -41,9 +41,15 @@
       color: null,
       '&.test': null
     ),
+    single-nested-restyle: (
+      restyle: simple test
+    ),
     nested-restyle: (
       restyle: (simple test, fancy test),
       font-size: 16px // test overriding a property from a nested restyle
+    ),
+    null-nested-restyle: (
+      restyle: null
     ),
     inherit-fancy: (
       restyle-extends: fancy
@@ -89,12 +95,20 @@
   @include restyle(fancy simple test);
 }
 
+.should-be-simple-test {
+  @include restyle(single-nested-restyle test);
+}
+
 .should-be-simple-test-and-fancy-test {
   @include restyle(nested-restyle test);
 }
 
 .should-be-fancy-test {
   @include restyle(inherit-fancy test);
+}
+
+.null-nested-restyle{
+  @include restyle(null-nested-restyle test);
 }
 
 

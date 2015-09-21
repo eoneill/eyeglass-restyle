@@ -19,6 +19,9 @@
       '@restyle.remove': all
     ),
     drop-color: (
+      restyle-meta: (
+        description: drops color rule
+      ),
       '@restyle.remove': color
     ),
     drop-width-font-size: (
