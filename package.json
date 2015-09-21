@@ -44,7 +44,7 @@
   "devDependencies": {
     "eslint": "^1.4.3",
     "eyeglass-dev-eslint": "2.0.0",
-    "eyeglass-dev-testutils": "^0.0.3",
+    "eyeglass-dev-testutils": "^0.0.4",
     "gulp": "^3.9.0",
     "gulp-bump": "^0.3.1",
     "gulp-docco": "0.0.4",

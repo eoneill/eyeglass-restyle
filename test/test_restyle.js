@@ -14,3 +14,22 @@ describe("Compile Fixtures", function() {
     });
   });
 });
+
+describe("Show throw errors appropriately", function() {
+  var tests = [
+    {
+      description: "#restyle: should throw an exception when no valid type is found",
+      data: "@import 'restyle'; .test { @include restyle(test); }",
+      expectedError: /A type could not be found in the description `.*`/
+    }
+  ];
+
+  tests.forEach(function(test) {
+    it(test.description, function(done) {
+      testutils.assertCompilationError({
+        data: test.data
+      }, test.expectedError, done);
+    });
+  });
+
+});
