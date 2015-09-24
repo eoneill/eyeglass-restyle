@@ -24,11 +24,8 @@ reSTYLE depends on `eyeglass` being installed, so check out the [`eyeglass` inst
 
 - [reSTYLE Homepage](http://www.restylecss.com)
 - [Getting Started](http://www.restylecss.com/documentation/getting-started)
-<!--
 - [Documentation](http://www.restylecss.com/documentation)
 - [Configuration](http://www.restylecss.com/documentation/configuration)
-- [Tutorials](http://www.restylecss.com/tutorials)
--->
 
 ## Quick Example
 Take the following button styles...
