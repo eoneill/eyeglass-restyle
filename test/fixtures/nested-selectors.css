@@ -27,3 +27,13 @@
     color: purple;
     height: 100%;
     width: 100%; }
+
+.with-var {
+  color: red; }
+  .with-var > .nested {
+    color: blue;
+    height: 100%; }
+  .with-var:last-child {
+    border-right: 0; }
+  .with-var > .var {
+    test: test-var; }

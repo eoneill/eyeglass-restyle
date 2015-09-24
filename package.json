@@ -42,7 +42,7 @@
     "node-sass-utils": "^1.1.2"
   },
   "devDependencies": {
-    "eslint": "^1.4.3",
+    "eslint": "^1.5.1",
     "eyeglass-dev-eslint": "2.0.0",
     "eyeglass-dev-testutils": "^0.0.5",
     "gulp": "^3.9.0",

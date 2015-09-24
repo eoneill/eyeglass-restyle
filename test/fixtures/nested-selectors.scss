@@ -2,6 +2,7 @@
 
 @include restyle-define(test, (
   color: red,
+  restyle-var(test): test-var,
   '& > .nested': (
     color: blue,
     height: 100%
@@ -20,9 +21,14 @@
     ),
     simple2: (
       '& > .nested': (
-        color: purple
+        color: purple,
       ),
       '&:last-child': null
+    ),
+    with-var: (
+      '& > .var': (
+        test: restyle-var(test)
+      )
     )
   )
 ));
@@ -41,4 +47,8 @@
 
 .test4 {
   @include restyle(simple simple2 test);
+}
+
+.with-var {
+  @include restyle(with-var test);
 }

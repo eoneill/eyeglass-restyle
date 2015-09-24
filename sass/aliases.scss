@@ -130,3 +130,17 @@
 @mixin restyle-config($key: $-restyle--no-value, $value: $-restyle--no-value) {
   @include -restyle--config($key, $value);
 }
+
+/// allows iterating over a collection of `multiple-values`
+/// for each iteration, the result is available as `$restyle-current-value`
+/// @param    {*} $value - the collection to iterate over
+/// @content
+@mixin with-multiple-values($value) {
+  @include -restyle--with-multiple-values($value) {
+    @content;
+  }
+}
+
+@function get-multiple-values($value) {
+  @return -restyle--get-multiple-values($value);
+}

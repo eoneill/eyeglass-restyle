@@ -118,10 +118,9 @@
 
           // if it's a multivalue object...
           @if -restyle--is-multivalue-js($value) {
-            // iterate over each value
-            @each $val in map-get($value, "@restyle.multivalue") {
+            @include -restyle--with-multiple-values($value) {
               @include -restyle--styles((
-                #{$property}: $val
+                #{$property}: $restyle-current-value
               ), $extend: $extend)
             }
           }

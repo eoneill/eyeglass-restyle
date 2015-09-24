@@ -59,3 +59,25 @@
   }
   @return $message;
 }
+
+@function -restyle--get-multiple-values($value) {
+  @if -restyle--is-multivalue-js($value) {
+    // iterate over each value
+     @return map-get($value, "@restyle.multivalue");
+  }
+  @else {
+    @return append((), $value, comma);
+  }
+}
+
+$restyle-current-value: null !default;
+/// @alias    with-multiple-values
+@mixin -restyle--with-multiple-values($value) {
+  $value: -restyle--get-multiple-values($value);
+  @each $val in $value {
+    $previous-value: $restyle-current-value;
+    $restyle-current-value: $val !global;
+    @content;
+    $restyle-current-value: $previous-value !global;
+  }
+}

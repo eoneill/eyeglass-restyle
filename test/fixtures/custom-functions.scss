@@ -18,12 +18,19 @@
   );
 }
 
+@function fn2($values) {
+  @return (
+    fn2: $values
+  );
+}
+
 @include restyle-define(test, (
   restyle-var(foo): bar,
   color: red,
 
   restyle-function(my-func): (1, restyle-var(foo), this(color)),
   restyle-function(fn): this(color),
+  restyle-function(fn2): multiple-values(restyle-var(foo), this(color)),
 
   restyle-states: (
     active: (

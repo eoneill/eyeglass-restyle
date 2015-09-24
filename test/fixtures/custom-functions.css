@@ -2,7 +2,9 @@
   color: red;
   my-func-a: 1;
   my-func-b: bar;
-  fn: red; }
+  fn: red;
+  fn2: bar;
+  fn2: red; }
   .test.active {
     fn: red; }
   .test.hover {

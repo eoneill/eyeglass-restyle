@@ -1,0 +1,12 @@
+@import "restyle";
+
+@include restyle-define(test, (
+  color: red,
+  restyle-var(foo): this(color),
+
+  test: multiple-values(restyle-var(foo), this(color))
+));
+
+.test {
+  @include restyle(test);
+}
