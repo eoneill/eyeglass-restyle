@@ -28,6 +28,8 @@
     color: blue; }
   .should-have-hover-focus-state.focus {
     color: purple; }
+  .should-have-hover-focus-state.other {
+    color: red; }
 
 .should-have-no-state {
   color: green; }
@@ -36,6 +38,16 @@
   color: green; }
   .should-have-focus-state.focus {
     color: purple; }
+  .should-have-focus-state.other {
+    color: red; }
+
+.should-have-no-focus-no-hover {
+  color: green; }
+  .should-have-no-focus-no-hover.other {
+    color: red; }
+
+.should-have-no-focus-no-hover-no-color.other {
+  color: red; }
 
 .should-have-two-selectors {
   color: green; }

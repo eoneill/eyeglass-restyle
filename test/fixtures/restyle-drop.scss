@@ -46,6 +46,9 @@
     ),
     focus: (
       color: purple
+    ),
+    other: (
+      color: red
     )
   ),
   '@restyle.modifiers': (
@@ -54,6 +57,12 @@
     ),
     drop-hover-state: (
       '@restyle.remove': '@states.hover'
+    ),
+    drop-multi-states: (
+      restyle-remove: states(hover) states(focus)
+    ),
+    drop-multi-states-and-color: (
+      restyle-remove: states(hover) states(focus) color
     )
   )
 ));
@@ -110,6 +119,14 @@
 
 .should-have-focus-state {
   @include restyle(drop-hover-state test-states);
+}
+
+.should-have-no-focus-no-hover {
+  @include restyle(drop-multi-states test-states);
+}
+
+.should-have-no-focus-no-hover-no-color {
+  @include restyle(drop-multi-states-and-color test-states);
 }
 
 

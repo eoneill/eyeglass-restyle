@@ -1,0 +1,3 @@
+{
+  "expectedError": "/could not resolve values: 1,2,restyle-var\\(foo\\)/"
+}

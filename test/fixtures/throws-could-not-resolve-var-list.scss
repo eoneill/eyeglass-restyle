@@ -1,0 +1,9 @@
+@import "restyle";
+
+@include restyle-define(test, (
+  var: 1 2 restyle-var(foo)
+));
+
+.test {
+  @include restyle(test);
+}

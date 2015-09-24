@@ -3,6 +3,10 @@
 @include restyle-define(test, (
   color: red,
   restyle-var(foo): this(color),
+  map: (
+    foo: restyle-var(foo),
+    color: this(color)
+  ),
 
   test: multiple-values(restyle-var(foo), this(color))
 ));
