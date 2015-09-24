@@ -1,0 +1,9 @@
+@import "restyle";
+
+@include restyle-define(test, (
+  prop: this(foo)
+));
+
+.test {
+  @include restyle(test);
+}
