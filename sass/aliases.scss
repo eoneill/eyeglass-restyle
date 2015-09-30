@@ -117,16 +117,16 @@
 }
 
 /// helper for getting/setting config values
-/// @param    {Map|String} $key - TODO
-/// @param    {*} $value - TODO
+/// @param    {Map|String} $key - @see http://restylecss.com/documentation/configuration
+/// @param    {*} $value - @see http://restylecss.com/documentation/configuration
 /// @returns  {*} the entire config Map or the individual config value
 @function restyle-config($key: $-restyle--no-value, $value: $-restyle--no-value) {
   @return -restyle--config($key, $value);
 }
 
 /// convenience mixin for invoking restyle-config function without having to use the function result
-/// @param    {Map|String} $key - TODO
-/// @param    {*} $value - TODO
+/// @param    {Map|String} $key - @see http://restylecss.com/documentation/configuration
+/// @param    {*} $value - @see http://restylecss.com/documentation/configuration
 @mixin restyle-config($key: $-restyle--no-value, $value: $-restyle--no-value) {
   @include -restyle--config($key, $value);
 }
