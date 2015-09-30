@@ -1,0 +1,8 @@
+@import "restyle";
+
+@include restyle-define(test);
+
+.test {
+  /* this should be empty */
+  @include restyle(test);
+}
