@@ -14,7 +14,9 @@ var pkgSource = "package.json";
 
 var versionTypes = ["patch", "minor", "major"];
 
-module.exports = function(gulp, depends) {
+module.exports = function(gulp, depends, options) {
+  options = options || {};
+
   function increment(type) {
     // get all the files to bump version in
     return gulp.src(pkgSource)
@@ -27,7 +29,7 @@ module.exports = function(gulp, depends) {
       // update the CHANGELOG
       .pipe(addSrc(changelogSource))
       .pipe(gulpIf(changelogSource, conventionalChangelog({
-        preset: "eslint"
+        preset: options.changelogConvention || "angular"
       })))
       .pipe(gulpIf(changelogSource, gulp.dest("./")))
       .pipe(git.commit("update CHANGELOG"))
