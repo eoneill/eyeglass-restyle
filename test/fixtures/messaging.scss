@@ -9,9 +9,6 @@
     ),
     warn: (
       restyle-warn: "this is a warning"
-    ),
-    error: (
-      restyle-error: "this is an error"
     )
   )
 ));
@@ -25,9 +22,5 @@
 
   &.warn {
     @include restyle(warn test);
-  }
-
-  &.error {
-    //@include restyle(error test);
   }
 }

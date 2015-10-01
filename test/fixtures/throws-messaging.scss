@@ -1,0 +1,9 @@
+@import "restyle";
+
+@include restyle-define(test, (
+  restyle-error: "this will throw an exception"
+));
+
+.test {
+  @include restyle(test);
+}
