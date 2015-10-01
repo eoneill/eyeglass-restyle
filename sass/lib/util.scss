@@ -63,7 +63,7 @@
 @function -restyle--get-multiple-values($value) {
   @if -restyle--is-multivalue-js($value) {
     // iterate over each value
-     @return map-get($value, "@restyle.multivalue");
+    @return map-get($value, "@restyle.multivalue");
   }
   @else {
     @return append((), $value, comma);

@@ -42,6 +42,7 @@
     "node-sass-utils": "^1.1.2"
   },
   "devDependencies": {
+    "eclint": "^1.1.2",
     "eslint": "^1.5.1",
     "eyeglass-dev-eslint": "2.0.0",
     "eyeglass-dev-testutils": "^0.0.5",

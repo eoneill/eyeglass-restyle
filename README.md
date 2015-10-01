@@ -44,8 +44,8 @@ Take the following button styles...
   cursor: pointer;
 }
 .btn:hover {
-   background-color: #357ae8;
-   border-color: #2f5bb7;
+  background-color: #357ae8;
+  border-color: #2f5bb7;
 }
 .btn[disabled] {
   border-color: #3079ed;

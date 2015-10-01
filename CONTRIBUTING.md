@@ -33,6 +33,7 @@ npm test
 
 - Use two "soft spaces", not tabs for indentation
 - Always use proper indentation
+- Use `$gulp eclint` and `$gulp eclint:fix` to find and fix any whitespace convention issues, respectively
 
 ### Sass
 
