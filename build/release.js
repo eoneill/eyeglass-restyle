@@ -31,6 +31,7 @@ module.exports = function(gulp, depends) {
       })))
       .pipe(gulpIf(changelogSource, gulp.dest("./")))
       .pipe(git.commit("update CHANGELOG"))
+      .pipe(addSrc(pkgSource))
       .pipe(gulpIf(pkgSource, tagVersion()))
       // push it
       // can't use git.push until this is resolved...
