@@ -1,9 +1,14 @@
+/// @alias    multiple-values
 @function -restyle--multiple-values($values...) {
   @return (
     '@restyle.multivalue': $values
   );
 }
 
+/// deep merge a Sass Map
+/// @param    {Map} $destination - the Map to merge into
+/// @param    {Map} $source - the Map to merge from
+/// @returns  {Map} the merged map
 @function -restyle--map-merge-deep($destination, $source: ()){
   @if type-of($source) != map {
     @return $destination;
@@ -26,10 +31,16 @@
   @return $destination;
 }
 
+/// whether or not logging is enabled
+/// @param    {String} $type - the type of logging to check
+/// @returns  {Boolean} whether or not logging is enabled
 @function -restyle--is-logging-enabled($type) {
   @return -restyle--is-logging-enabled-js($type, -restyle--config(log));
 }
 
+/// casts an incoming values to a list of arguments
+/// @param    {*} $args - the value(s) to cast to args
+/// @returns  {List} the list of arguments
 @function -restyle--cast-to-args($args) {
   // if it's not a comma separated list, cast it to one...
   @if (type-of($args) != list or list-separator($args) == space) {
@@ -38,7 +49,14 @@
   @return $args;
 }
 
-@function -restyle--log($message, $type: null, $data: (), $severity: log) {
+/// helper for logging messages
+/// @param    {String} $message - the message to log
+/// @param    {String} $type - the type of log message
+/// @param    {Map} $data - the data to substitute into the $message
+/// @param    {String} $severity - the serverity of the message being logged
+/// @param    {Boolean} $silent - if `true`, will not output the message
+/// @returns  {String} the message
+@function -restyle--log($message, $type: null, $data: (), $severity: log, $silent: false) {
   // if a type is set, make sure the type logging is enabled
   @if ($type and not -restyle--is-logging-enabled($type)) {
     @return null;
@@ -51,15 +69,19 @@
   $message: "[#{$type}] #{-restyle--str-substitute-js($message, $data)}";
 
   // log based on severity
-  @if ($severity == warn) {
-    @warn $message;
+  @if (not $silent) {
+    @if ($severity == warn) {
+      @warn $message;
+    }
+    @else if ($severity != silent) {
+      @debug $message;
+    }
   }
-  @else if ($severity != silent) {
-    @debug $message;
-  }
+
   @return $message;
 }
 
+/// @alias    get-multiple-values
 @function -restyle--get-multiple-values($value) {
   @if -restyle--is-multivalue-js($value) {
     // iterate over each value
