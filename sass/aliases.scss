@@ -120,14 +120,14 @@
 /// @param    {Map|String} $key - @see http://restylecss.com/documentation/configuration
 /// @param    {*} $value - @see http://restylecss.com/documentation/configuration
 /// @returns  {*} the entire config Map or the individual config value
-@function restyle-config($key: $-restyle--no-value, $value: $-restyle--no-value) {
+@function restyle-config($key: $-restyle--undefined, $value: $-restyle--undefined) {
   @return -restyle--config($key, $value);
 }
 
 /// convenience mixin for invoking restyle-config function without having to use the function result
 /// @param    {Map|String} $key - @see http://restylecss.com/documentation/configuration
 /// @param    {*} $value - @see http://restylecss.com/documentation/configuration
-@mixin restyle-config($key: $-restyle--no-value, $value: $-restyle--no-value) {
+@mixin restyle-config($key: $-restyle--undefined, $value: $-restyle--undefined) {
   @include -restyle--config($key, $value);
 }
 

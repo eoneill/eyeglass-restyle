@@ -7,9 +7,9 @@ $-restyle--config: $-restyle--default-config !default;
 $restyle-config: null !default;
 
 /// @alias restyle-config
-@function -restyle--config($key: $-restyle--no-value, $value: $-restyle--no-value) {
+@function -restyle--config($key: $-restyle--undefined, $value: $-restyle--undefined) {
   $has-incoming-map: type-of($key) == map;
-  $is-setter: $has-incoming-map or $value != $-restyle--no-value;
+  $is-setter: $has-incoming-map or $value != $-restyle--undefined;
   @if ($is-setter) {
     // if it's a map...
     @if ($has-incoming-map) {
@@ -29,11 +29,11 @@ $restyle-config: null !default;
 
   // otherwise, it's a getter
   // if a $key exists, return the config entry. if a $key does not exist, return the entire config map
-  @return if($key == $-restyle--no-value, $-restyle--config, map-get($-restyle--config, $key));
+  @return if($key == $-restyle--undefined, $-restyle--config, map-get($-restyle--config, $key));
 }
 
 /// @alias restyle-config
-@mixin -restyle--config($key: $-restyle--no-value, $value: $-restyle--no-value) {
+@mixin -restyle--config($key: $-restyle--undefined, $value: $-restyle--undefined) {
   $tmp: -restyle--config($key, $value);
 }
 
