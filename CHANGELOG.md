@@ -1,3 +1,13 @@
+<a name="0.2.8"></a>
+## [0.2.8](https://github.com/eoneill/eyeglass-restyle/compare/v0.2.7...v0.2.8) (2015-10-01)
+
+
+### Build
+
+* fix changelog update order in release ([61d027a6915d48d664ac15630fc62db68ee2be29](https://github.com/eoneill/eyeglass-restyle/commit/61d027a6915d48d664ac15630fc62db68ee2be29))
+
+
+
 <a name="0.2.7"></a>
 ## [0.2.7](https://github.com/eoneill/eyeglass-restyle/compare/v0.2.6...v0.2.7) (2015-10-01)
 
