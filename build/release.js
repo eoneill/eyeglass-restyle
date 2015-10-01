@@ -10,7 +10,7 @@ var gulpIf = require("gulp-if");
 var conventionalChangelog = require("gulp-conventional-changelog");
 
 var changelogSource = "CHANGELOG.md";
-var pkgSource = "./package.json";
+var pkgSource = "package.json";
 
 var versionTypes = ["patch", "minor", "major"];
 
@@ -24,16 +24,16 @@ module.exports = function(gulp, depends) {
       .pipe(gulp.dest("./"))
       // commit the changed version number
       .pipe(git.commit("bump version"))
-      // tag it in the repository
+      // update the CHANGELOG
       .pipe(addSrc(changelogSource))
       .pipe(gulpIf(changelogSource, conventionalChangelog({
         preset: "eslint"
       })))
       .pipe(gulpIf(changelogSource, gulp.dest("./")))
       .pipe(git.commit("update CHANGELOG"))
-      .pipe(addSrc(pkgSource))
+      // tag it
       .pipe(gulpIf(pkgSource, tagVersion()))
-      // push it
+      // push it all
       // can't use git.push until this is resolved...
       // https://github.com/ikari-pl/gulp-tag-version/issues/8
       //.pipe(git.push("origin", "master", {args: "--tags"}));
