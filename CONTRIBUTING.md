@@ -52,6 +52,12 @@ npm test
 
 - Follow the ESLint conventions. You can test syntax via `$ gulp lint`
 
+## Commit Messages
+
+When submitting pull requests, please follow the conventions outlined in [AngularJS Git Commit Message Conventions](https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y)
+
+This will help us triage pull requests more effectively as well as help us maintain an accurate [CHANGELOG](./CHANGELOG.md)
+
 ## Thanks!
 
 Thanks for contributing and helping push the web forward.
