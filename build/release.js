@@ -10,7 +10,7 @@ var gulpIf = require("gulp-if");
 var conventionalChangelog = require("gulp-conventional-changelog");
 
 var changelogSource = "CHANGELOG.md";
-var pkgSource = ["./package.json"];
+var pkgSource = "./package.json";
 
 var versionTypes = ["patch", "minor", "major"];
 
@@ -35,9 +35,7 @@ module.exports = function(gulp, depends) {
       // push it
       // can't use git.push until this is resolved...
       // https://github.com/ikari-pl/gulp-tag-version/issues/8
-      //.pipe(git.push("origin", "master"));
       //.pipe(git.push("origin", "master", {args: "--tags"}));
-      .pipe(shell("git push origin master"))
       .pipe(shell("git push origin master --tags"));
   }
 
