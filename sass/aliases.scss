@@ -141,6 +141,9 @@
   }
 }
 
+/// returns a list of values from a multiple-values() decorated object
+/// @param    {*} $value - the collection to fetch values from
+/// @returns  {List} the values as a list
 @function get-multiple-values($value) {
   @return -restyle--get-multiple-values($value);
 }
