@@ -16,7 +16,8 @@
     map-get($descriptor, description),
     map-get($descriptor, type),
     $-restyle--registered-types,
-    $-restyle--registered-aliases
+    $-restyle--registered-aliases,
+    $-restyle--grammar-context-stack
   );
 
   $tmp: -restyle--log($debug-message, "time:grammar", (

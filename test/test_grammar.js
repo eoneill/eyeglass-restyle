@@ -5,6 +5,24 @@ var assert = require("assert");
 
 var knownTypes = ["button", "close-button", "dialog", "container", "window"];
 
+var nestedContextStack = [
+  [
+    new Map([
+      ["description", ["small"]],
+      ["type", "window"]
+    ]),
+    new Map([
+      ["description", ["large"]],
+      ["type", "window"]
+    ])
+  ],
+  [
+    new Map([
+      ["type", "dialog"]
+    ])
+  ]
+];
+
 var aliases = new Map();
 aliases.set("alias1", "button");
 aliases.set("alias2", ["small", "button"]);
@@ -306,9 +324,31 @@ var testData = [
       knownTypes: null
     },
     expectedError: ERRORS.noType
+  },
+  {
+    name: "nested context",
+    data: {
+      type: "button",
+      contextStack: nestedContextStack
+    },
+    expectedGrammar: {
+      description: ["within-window-small", "within-window", "within-window-large", "within-dialog"],
+      type: "button"
+    }
+  },
+  {
+    name: "nested context",
+    data: {
+      type: "button",
+      description: ["small"],
+      contextStack: nestedContextStack
+    },
+    expectedGrammar: {
+      description: ["small", "within-window-small", "within-window", "within-window-large", "within-dialog"],
+      type: "button"
+    }
   }
 ];
-
 
 
 describe("grammar", function() {
@@ -318,6 +358,7 @@ describe("grammar", function() {
       test.data.type,
       test.data.knownTypes === undefined ? knownTypes : test.data.knownTypes,
       test.data.aliases === undefined ? aliases : test.data.aliases,
+      test.data.contextStack || [],
       test.data.grammarEngines === undefined ? grammarEngines : test.data.grammarEngines
     );
   }

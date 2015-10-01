@@ -1,0 +1,41 @@
+@import "restyle";
+
+@include restyle-define(test, (
+  test1: true,
+
+  restyle-modifiers: (
+    'within a test2': (
+      within-test2: true
+    ),
+    'within a test3': (
+      within-test3: true
+    )
+  )
+));
+
+@include restyle-define(test2);
+@include restyle-define(test3);
+
+@mixin test {
+  .test {
+    @include restyle(test);
+  }
+}
+
+.test2 {
+  @include restyle(test2) {
+    @include test;
+
+    &.test3 {
+      @include restyle(test3) {
+        @include test;
+      }
+    }
+  }
+}
+
+.test3 {
+  @include restyle(test3) {
+    @include test;
+  }
+}

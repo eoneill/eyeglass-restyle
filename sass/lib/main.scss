@@ -18,8 +18,12 @@
   }
 
   @include -restyle--styles($styles) {
+    $previous-grammar-context-stack: $-restyle--grammar-context-stack;
+    $-restyle--grammar-context-stack: append($-restyle--grammar-context-stack, $grammars) !global;
     @content;
+    $-restyle--grammar-context-stack: $previous-grammar-context-stack !global;
   }
+
 }
 
 /// @alias    restyle-diff

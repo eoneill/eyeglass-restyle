@@ -1,0 +1,12 @@
+.test2 .test {
+  test1: true;
+  within-test2: true; }
+
+.test2.test3 .test {
+  test1: true;
+  within-test2: true;
+  within-test3: true; }
+
+.test3 .test {
+  test1: true;
+  within-test3: true; }

@@ -45,13 +45,14 @@ module.exports = function(eyeglass, sass) {
   return {
     sassDir: SASS_DIR,
     functions: namespaceFunctions({
-      "grammar-from-description($description, $type, $allowed-types: (), $aliases: ())": function($description, $type, $allowedTypes, $aliases, done) {
+      "grammar-from-description($description, $type, $allowed-types: (), $aliases: (), $context-stack: ())": function($description, $type, $allowedTypes, $aliases, $contextStack, done) {
         // get the grammar
         var grammar = new Grammar(
           toJS($description),
           toJS($type),
           toJS($allowedTypes),
           toJS($aliases),
+          toJS($contextStack),
           // pass along the custom grammar engines
           eyeglass.options.restyle._grammarEngines
         );
@@ -59,12 +60,13 @@ module.exports = function(eyeglass, sass) {
         done(toSass(grammar));
       },
 
-      "styles-from-grammar($grammars, $allowed-types, $registered-components, $aliases: ())": function($grammars, $allowedTypes, $registeredComponents, $aliases, done) {
+      "styles-from-grammar($grammars, $allowed-types, $registered-components, $aliases: (), $context-stack: ())": function($grammars, $allowedTypes, $registeredComponents, $aliases, $contextStack, done) {
         var styles = new Styles(
           toJS($grammars),
           toJS($allowedTypes),
           toJS($registeredComponents),
           toJS($aliases),
+          toJS($contextStack),
           // pass along the custom grammar engines
           eyeglass.options.restyle._grammarEngines
         );
