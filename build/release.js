@@ -25,13 +25,13 @@ module.exports = function(gulp, depends) {
       // commit the changed version number
       .pipe(git.commit("bump version"))
       // tag it in the repository
-      .pipe(tagVersion())
       .pipe(addSrc(changelogSource))
       .pipe(gulpIf(changelogSource, conventionalChangelog({
         preset: "eslint"
       })))
       .pipe(gulpIf(changelogSource, gulp.dest("./")))
       .pipe(git.commit("update CHANGELOG"))
+      .pipe(tagVersion())
       // push it
       // can't use git.push until this is resolved...
       // https://github.com/ikari-pl/gulp-tag-version/issues/8
