@@ -31,7 +31,7 @@ module.exports = function(gulp, depends) {
       })))
       .pipe(gulpIf(changelogSource, gulp.dest("./")))
       .pipe(git.commit("update CHANGELOG"))
-      .pipe(tagVersion())
+      .pipe(gulpIf(pkgSource, tagVersion()))
       // push it
       // can't use git.push until this is resolved...
       // https://github.com/ikari-pl/gulp-tag-version/issues/8
