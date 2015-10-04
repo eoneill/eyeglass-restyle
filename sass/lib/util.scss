@@ -81,9 +81,13 @@
   @return $message;
 }
 
+@function -restyle--is-multivalue($value) {
+  @return (type-of($value) == map and map-has-key($value, "@restyle.multivalue"));
+}
+
 /// @alias    get-multiple-values
 @function -restyle--get-multiple-values($value) {
-  @if -restyle--is-multivalue-js($value) {
+  @if -restyle--is-multivalue($value) {
     // iterate over each value
     @return map-get($value, "@restyle.multivalue");
   }

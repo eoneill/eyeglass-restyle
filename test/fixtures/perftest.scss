@@ -1,0 +1,18 @@
+@import "restyle";
+
+$data: ();
+
+@for $i from 0 to 1000 {
+  $data: map-merge($data, (
+    foo#{$i}: if($i == 0, bar, this(foo#{$i - 1}))
+  ));
+}
+
+
+@include restyle-config(log, (time: true));
+
+@include restyle-define(test, $data);
+
+.test {
+  @include restyle(test);
+}
