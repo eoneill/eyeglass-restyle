@@ -25,14 +25,14 @@ module.exports = function(gulp, depends, options) {
       // save it back to filesystem
       .pipe(gulp.dest("./"))
       // commit the changed version number
-      .pipe(git.commit("bump version"))
+      .pipe(git.commit("chore(release): bump version"))
       // update the CHANGELOG
       .pipe(addSrc(changelogSource))
       .pipe(gulpIf(changelogSource, conventionalChangelog({
         preset: options.changelogConvention || "angular"
       })))
       .pipe(gulpIf(changelogSource, gulp.dest("./")))
-      .pipe(git.commit("update CHANGELOG"))
+      .pipe(git.commit("chore(release): update CHANGELOG"))
       // tag it
       .pipe(gulpIf(pkgSource, tagVersion()))
       // push it all
