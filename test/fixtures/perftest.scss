@@ -1,18 +1,35 @@
 @import "restyle";
 
 $data: ();
+$data-static: ();
 
-@for $i from 0 to 1000 {
+@for $i from 0 to 100 {
   $data: map-merge($data, (
     foo#{$i}: if($i == 0, bar, this(foo#{$i - 1}))
+  ));
+  $data-static: map-merge($data-static, (
+    foo#{$i}: bar
   ));
 }
 
 
-@include restyle-config(log, (time: true));
+@include restyle-config(log, (
+  time: (
+    styles-from-grammar: true,
+    styles: true
+  )
+));
 
-@include restyle-define(test, $data);
+@for $i from 0 to 100 {
+  @include restyle-define(test#{$i}, $data);
+}
+
+@include restyle-define(test-static, $data-static);
 
 .test {
-  @include restyle(test);
+  @include restyle(test0);
+}
+
+.test-static {
+  @include restyle(test-static);
 }
