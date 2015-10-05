@@ -64,11 +64,15 @@ module.exports = function(eyeglass, sass) {
         var styles = new Styles(
           toJS($grammars),
           toJS($allowedTypes),
-          toJS($registeredComponents),
+          toJS($registeredComponents, {
+            shallow: true
+          }),
           toJS($aliases),
           toJS($contextStack),
           // pass along the custom grammar engines
-          eyeglass.options.restyle._grammarEngines
+          eyeglass.options.restyle._grammarEngines,
+          // pass along moreSassUtils
+          moreSassUtils
         );
 
         // and return a SassMap
@@ -104,7 +108,9 @@ module.exports = function(eyeglass, sass) {
       },
 
       "is-multivalue($value)": function($value, done) {
-        var result = util.isMultiValue(toJS($value));
+        var result = util.isMultiValue(toJS($value, {
+          shallow: true
+        }));
         done(toSass(result));
       },
 
