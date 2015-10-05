@@ -1,3 +1,13 @@
+<a name="0.2.9"></a>
+## [0.2.9](https://github.com/eoneill/eyeglass-restyle/compare/v0.2.8...v0.2.9) (2015-10-05)
+
+
+### Performance Improvements
+
+* **styles-from-grammar:** use shallow map conversion until we know the type ([205397e](https://github.com/eoneill/eyeglass-restyle/commit/205397e))
+
+
+
 <a name="0.2.8"></a>
 ## [0.2.8](https://github.com/eoneill/eyeglass-restyle/compare/v0.2.7...v0.2.8) (2015-10-01)
 
