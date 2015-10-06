@@ -5,13 +5,12 @@ $data-static: ();
 
 @for $i from 0 to 100 {
   $data: map-merge($data, (
-    foo#{$i}: if($i == 0, bar, this(foo#{$i - 1}))
+    foo#{$i}: if($i == 99, bar, this(foo#{$i + 1}))
   ));
   $data-static: map-merge($data-static, (
     foo#{$i}: bar
   ));
 }
-
 
 @include restyle-config(log, (
   time: (
