@@ -33,7 +33,6 @@
   "dependencies": {
     "crc": "^3.3.0",
     "eyeglass": "^0.6.2",
-    "eyeglass-timer": "^1.0.1",
     "lodash.clone": "^3.0.3",
     "lodash.isequal": "^3.0.4",
     "lodash.merge": "^3.3.2",

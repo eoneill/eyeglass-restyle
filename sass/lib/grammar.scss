@@ -1,12 +1,10 @@
-@import "timer";
-
 /// returns a grammar map given a descriptor
 /// @param    {Map|List|String} $descriptor - the descriptor to convert
 /// @returns  {Map} the grammar map
 @function -restyle--grammar($descriptor) {
   $debug-message: "took {time} to parse the grammar for `#{inspect($descriptor)}`";
 
-  $start-time: timer-start();
+  $start-time: -restyle--timer-js();
 
   $descriptor: if(type-of($descriptor) == map, $descriptor, (
     description: $descriptor
@@ -21,7 +19,7 @@
   );
 
   $tmp: -restyle--log($debug-message, "time:grammar", (
-    time: elapsed-time($start-time)
+    time: -restyle--timer-js($start-time)
   ));
 
   @return $result;

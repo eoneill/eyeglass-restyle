@@ -127,6 +127,16 @@ module.exports = function(eyeglass, sass) {
       "is-logging-enabled($type, $config)": function($type, $config, done) {
         var result = util.isLoggingEnabled(toJS($config), toJS($type));
         done(toSass(result));
+      },
+
+      "timer($time: null)": function($time, done) {
+        var result = util.timer(toJS($time));
+        if (typeof result === "number") {
+          done(sass.types.Number(result, "ms"));
+        }
+        else {
+          done(toSass(result));
+        }
       }
     })
   };

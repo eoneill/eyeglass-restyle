@@ -6,7 +6,7 @@
 @function -restyle--styles-from-grammar($grammars...) {
   $debug-message: "took {time} to compute styles for `#{inspect($grammars)}`";
 
-  $start-time: timer-start();
+  $start-time: -restyle--timer-js();
 
   $result: -restyle--styles-from-grammar-js(
     $grammars,
@@ -17,7 +17,7 @@
   );
 
   $tmp: -restyle--log($debug-message, "time:styles-from-grammar", (
-    time: elapsed-time($start-time)
+    time: -restyle--timer-js($start-time)
   ));
 
   @return $result;
@@ -74,26 +74,28 @@
 /// @param    {Boolean} $extend - if `false`, will force the content to be output in the current context, and not extended
 /// @content
 @mixin -restyle--smart-content($placeholder, $output: true, $extend: true) {
-  @if $placeholder and -restyle--config(smart-content-enabled) and $extend {
-    @if type-of($placeholder) != string {
-      $placeholder: -restyle--placeholder-name($placeholder);
-    }
-
-    // if we haven't already registered this placeholder...
-    @if not index($-restyle--registered-smart-placeholders, $placeholder) {
-      // create it...
-      @at-root #{$placeholder} {
-        @content;
+  @include -restyle--log-time(smart-content) {
+    @if $placeholder and -restyle--config(smart-content-enabled) and $extend {
+      @if type-of($placeholder) != string {
+        $placeholder: -restyle--placeholder-name($placeholder);
       }
-      // and register it...
-      $-restyle--registered-smart-placeholders: append($-restyle--registered-smart-placeholders, $placeholder) !global;
+
+      // if we haven't already registered this placeholder...
+      @if not index($-restyle--registered-smart-placeholders, $placeholder) {
+        // create it...
+        @at-root #{$placeholder} {
+          @content;
+        }
+        // and register it...
+        $-restyle--registered-smart-placeholders: append($-restyle--registered-smart-placeholders, $placeholder) !global;
+      }
+      @if $output {
+        @extend #{$placeholder} !optional;
+      }
     }
-    @if $output {
-      @extend #{$placeholder} !optional;
+    @elseif $output {
+      @content;
     }
-  }
-  @elseif $output {
-    @content;
   }
 }
 
@@ -108,135 +110,129 @@
 /// @param    {Map} $styles - the styles to process
 /// @param    {Boolean} $extend - whether or not to extend (depends on config `smart-content-enabled` being `true`)
 @mixin -restyle--styles($styles, $extend: true) {
-  $debug-message: "took {time} to output styles";
-
-  $start-time: timer-start();
-
-  @if $styles {
-    @include -restyle--smart-content($styles, $extend: $extend) {
-      @each $property, $value in $styles {
-        @if ($value != null) {
-          @if $value == $-restyle--undefined {
-            $value: ();
-          }
-
-          $property: -restyle--normalize-property-js($property);
-
-          // if it's a multivalue object...
-          @if -restyle--is-multivalue($value) {
-            @include -restyle--with-multiple-values($value) {
-              @include -restyle--styles((
-                #{$property}: $restyle-current-value
-              ), $extend: $extend)
-            }
-          }
-
-          @else {
-            // for mixins, we need to do some custom work
-            // check to see if we have a custom output styler (pre)
-            @if -restyle--has-custom-styler($property, $value, pre) {
-              @include restyle-custom-styler($property, $value, $method: pre);
+  @include -restyle--log-time(styles, "took {time} to output styles") {
+    @if $styles {
+      @include -restyle--smart-content($styles, $extend: $extend) {
+        @each $property, $value in $styles {
+          @if ($value != null) {
+            @if $value == $-restyle--undefined {
+              $value: ();
             }
 
-            $directive: -restyle--get-directive-js($property);
+            $property: -restyle--normalize-property-js($property);
 
-            @if ($directive == states) {
-              @each $state-name, $state in $value {
-                #{-restyle--get-state-selector($state-name)} {
-                  @include -restyle--styles($state);
-                }
+            // if it's a multivalue object...
+            @if -restyle--is-multivalue($value) {
+              @include -restyle--with-multiple-values($value) {
+                @include -restyle--styles((
+                  #{$property}: $restyle-current-value
+                ), $extend: $extend)
               }
             }
-            @else if ($directive == functions) {
-              $calls: map-get($value, calls);
-              @each $function, $args in $calls {
-                $args: -restyle--cast-to-args($args);
-                @include -restyle--styles(call($function, $args...));
-              }
-            }
-            @else if ($directive == debug) {
-              /* [restyle:debug] #{$value} */
-              @debug "[restyle] #{$value}";
-            }
-            @else if ($directive == warn or $directive == deprecated) {
-              /* [restyle:#{$directive}] #{$value} */
-              @warn "[restyle] #{$value}";
-            }
-            @else if ($directive == error) {
-              /* [restyle:error] #{$value} */
-              @error "[restyle] #{$value}";
-            }
-            @else if (-restyle--is-selector-js($property)) {
-              #{$property} {
-                @include -restyle--styles($value);
-              }
-            }
-            @else if (-restyle--should-skip-mixin($value)) {
-              #{$property}: -restyle--list-remove($value, nomixin);
-            }
-
-            // for mixins, we need to do some custom work
-            // check to see if we have a custom output styler (pre)
-            @else if -restyle--has-custom-styler($property, $value, pre) {
-              @include restyle-custom-styler($property, $value, $method: pre);
-            }
-
-            // special case for @extend
-            @else if($property == '@extend') {
-              @if (type-of($value) == list) {
-                @each $v in $value {
-                  @extend #{$v} !optional;
-                }
-              }
-              @else {
-                @extend #{$value} !optional;
-              }
-            }
-
-            // special case for @media
-            @else if($property == '@media') {
-              @each $query, $styles in $value {
-                @media #{$query} {
-                  @include -restyle--styles($styles);
-                }
-              }
-            }
-
-            // check to see if we have a custom output styler (post)
-            @else if -restyle--has-custom-styler($property, $value, post) {
-              @include restyle-custom-styler($property, $value, $method: post);
-            }
-
-            // TODO - some day :)
-            //@else if mixin-exists($property) {
-            //  /* TODO - invoke mixin */
-            //}
 
             @else {
-              // this is a temporary hack until node-sass correctly supported quoted strings
-              #{$property}: if($property == content, quote($value), $value);
+              // for mixins, we need to do some custom work
+              // check to see if we have a custom output styler (pre)
+              @if -restyle--has-custom-styler($property, $value, pre) {
+                @include restyle-custom-styler($property, $value, $method: pre);
+              }
+
+              $directive: -restyle--get-directive-js($property);
+
+              @if ($directive == states) {
+                @each $state-name, $state in $value {
+                  #{-restyle--get-state-selector($state-name)} {
+                    @include -restyle--styles($state);
+                  }
+                }
+              }
+              @else if ($directive == functions) {
+                $calls: map-get($value, calls);
+                @each $function, $args in $calls {
+                  $args: -restyle--cast-to-args($args);
+                  @include -restyle--styles(call($function, $args...));
+                }
+              }
+              @else if ($directive == debug) {
+                /* [restyle:debug] #{$value} */
+                @debug "[restyle] #{$value}";
+              }
+              @else if ($directive == warn or $directive == deprecated) {
+                /* [restyle:#{$directive}] #{$value} */
+                @warn "[restyle] #{$value}";
+              }
+              @else if ($directive == error) {
+                /* [restyle:error] #{$value} */
+                @error "[restyle] #{$value}";
+              }
+              @else if (-restyle--is-selector-js($property)) {
+                #{$property} {
+                  @include -restyle--styles($value);
+                }
+              }
+              @else if (-restyle--should-skip-mixin($value)) {
+                #{$property}: -restyle--list-remove($value, nomixin);
+              }
+
+              // for mixins, we need to do some custom work
+              // check to see if we have a custom output styler (pre)
+              @else if -restyle--has-custom-styler($property, $value, pre) {
+                @include restyle-custom-styler($property, $value, $method: pre);
+              }
+
+              // special case for @extend
+              @else if($property == '@extend') {
+                @if (type-of($value) == list) {
+                  @each $v in $value {
+                    @extend #{$v} !optional;
+                  }
+                }
+                @else {
+                  @extend #{$value} !optional;
+                }
+              }
+
+              // special case for @media
+              @else if($property == '@media') {
+                @each $query, $styles in $value {
+                  @media #{$query} {
+                    @include -restyle--styles($styles);
+                  }
+                }
+              }
+
+              // check to see if we have a custom output styler (post)
+              @else if -restyle--has-custom-styler($property, $value, post) {
+                @include restyle-custom-styler($property, $value, $method: post);
+              }
+
+              // TODO - some day :)
+              //@else if mixin-exists($property) {
+              //  /* TODO - invoke mixin */
+              //}
+
+              @else {
+                // this is a temporary hack until node-sass correctly supported quoted strings
+                #{$property}: if($property == content, quote($value), $value);
+              }
             }
           }
         }
       }
-    }
 
-    // any original block content passed in...
-    // if we're using smart content...
-    @if -restyle--config(smart-content-enabled) and $extend {
-      // intentionally break out of the context
-      & {
+      // any original block content passed in...
+      // if we're using smart content...
+      @if -restyle--config(smart-content-enabled) and $extend {
+        // intentionally break out of the context
+        & {
+          @content;
+        }
+      }
+      // otherwise...
+      @else {
+        // just put it here
         @content;
       }
     }
-    // otherwise...
-    @else {
-      // just put it here
-      @content;
-    }
-  }
-
-  $tmp: -restyle--log($debug-message, "time:styles", (
-    time: elapsed-time($start-time)
-  ));
+  };
 }

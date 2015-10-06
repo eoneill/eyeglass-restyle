@@ -2,7 +2,7 @@
 
 /// @alias restyle-define
 @function -restyle--define($name, $definition: null, $placeholder: null) {
-  $start-time: timer-start();
+  $start-time: -restyle--timer-js();
 
   @if (map-get($-restyle--registered-patterns, $name)) {
     @warn "A component named `#{$name}` already exists";
@@ -23,7 +23,7 @@
   }
 
   $tmp: -restyle--log("took {time} to add definition for `#{$name}`", "time:define", (
-    time: elapsed-time($start-time)
+    time: -restyle--timer-js($start-time)
   ));
 
   $tmp: -restyle--log("defined `#{$name}` as {definition}", "define", (

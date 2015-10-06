@@ -57,6 +57,7 @@
 /// @param    {Boolean} $silent - if `true`, will not output the message
 /// @returns  {String} the message
 @function -restyle--log($message, $type: null, $data: (), $severity: log, $silent: false) {
+
   // if a type is set, make sure the type logging is enabled
   @if ($type and not -restyle--is-logging-enabled($type)) {
     @return null;
@@ -81,6 +82,9 @@
   @return $message;
 }
 
+/// whether or not the value is a multivalue
+/// @param    {*} $value - the value to check
+/// @returns  {Boolean} - whether or not the value is a multivalue
 @function -restyle--is-multivalue($value) {
   @return (type-of($value) == map and map-has-key($value, "@restyle.multivalue"));
 }
@@ -106,4 +110,18 @@ $restyle-current-value: null !default;
     @content;
     $restyle-current-value: $previous-value !global;
   }
+}
+
+/// a helper mixin for measuring the time it takes to do stuff
+/// @content
+/// @param    {String} $name - the name of the timer
+/// @param    {String} $message - the message to log (must contain a `{time}` placeholder)
+@mixin -restyle--log-time($name: generic, $message: "elapsed time: {time}") {
+  $start-time: -restyle--timer-js();
+
+  @content;
+
+  $tmp: -restyle--log($message, "time:#{$name}", (
+    time: -restyle--timer-js($start-time)
+  ));
 }

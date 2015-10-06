@@ -15,20 +15,23 @@ $data-static: ();
 @include restyle-config(log, (
   time: (
     styles-from-grammar: true,
-    styles: true
+    styles: true,
+    total: true
   )
 ));
 
-@for $i from 0 to 100 {
-  @include restyle-define(test#{$i}, $data);
-}
+@include -restyle--log-time(total) {
+  @for $i from 0 to 100 {
+    @include restyle-define(test#{$i}, $data);
+  }
 
-@include restyle-define(test-static, $data-static);
+  @include restyle-define(test-static, $data-static);
 
-.test {
-  @include restyle(test0);
-}
+  .test {
+    @include restyle(test0);
+  }
 
-.test-static {
-  @include restyle(test-static);
+  .test-static {
+    @include restyle(test-static);
+  }
 }
