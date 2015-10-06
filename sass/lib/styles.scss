@@ -116,7 +116,7 @@
     @include -restyle--smart-content($styles, $extend: $extend) {
       @each $property, $value in $styles {
         @if ($value != null) {
-          @if $value == -restyle-no-value {
+          @if $value == $-restyle--undefined {
             $value: ();
           }
 
