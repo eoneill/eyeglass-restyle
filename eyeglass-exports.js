@@ -2,7 +2,7 @@
 
 var path = require("path");
 var pkg = require("./package.json");
-var pkgName = pkg.eyeglass && pkg.eyeglass.name || pkg.name;
+var pkgName = pkg.eyeglass && pkg.eyeglass.name;
 var Grammar = require("./lib/grammar");
 var Styles = require("./lib/styles");
 var util = require("./lib/util");
@@ -39,6 +39,12 @@ module.exports = function(eyeglass, sass) {
     }
   }, eyeglass.options.restyle);
 
+  var _grammarEngines = eyeglass.options.restyle._grammarEngines;
+  var grammarEngines = eyeglass.options.restyle.grammarEngines;
+  if (grammarEngines) {
+    _grammarEngines.push.apply(_grammarEngines, grammarEngines);
+  }
+
   var toJS = moreSassUtils.toJS;
   var toSass = moreSassUtils.toSass;
 
@@ -54,7 +60,7 @@ module.exports = function(eyeglass, sass) {
           toJS($aliases),
           toJS($contextStack),
           // pass along the custom grammar engines
-          eyeglass.options.restyle._grammarEngines
+          _grammarEngines
         );
         // and return a SassMap
         done(toSass(grammar));
@@ -70,7 +76,7 @@ module.exports = function(eyeglass, sass) {
           toJS($aliases),
           toJS($contextStack),
           // pass along the custom grammar engines
-          eyeglass.options.restyle._grammarEngines,
+          _grammarEngines,
           // pass along moreSassUtils
           moreSassUtils
         );
@@ -87,11 +93,6 @@ module.exports = function(eyeglass, sass) {
 
       "is-selector($key)": function($key, done) {
         var result = Styles.isSelector(toJS($key));
-        done(toSass(result));
-      },
-
-      "is-directive($value)": function($value, done) {
-        var result = Styles.isDirective(toJS($value));
         done(toSass(result));
       },
 

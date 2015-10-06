@@ -2,8 +2,9 @@
 
 var Grammar = require("../lib/grammar");
 var assert = require("assert");
+var testutils = require("eyeglass-dev-testutils");
 
-var knownTypes = ["button", "close-button", "dialog", "container", "window"];
+var defaultKnownTypes = ["button", "close-button", "dialog", "container", "window"];
 
 var nestedContextStack = [
   [
@@ -23,11 +24,11 @@ var nestedContextStack = [
   ]
 ];
 
-var aliases = new Map();
-aliases.set("alias1", "button");
-aliases.set("alias2", ["small", "button"]);
+var defaultAliases = new Map();
+defaultAliases.set("alias1", "button");
+defaultAliases.set("alias2", ["small", "button"]);
 
-var grammarEngines = [
+var defaultGrammarEngines = [
   function splitOnDots(Grammar) {
     if (this.description) {
       this.description = this.description.join(Grammar.WORD_DELIM).replace(/\.+/g, Grammar.WORD_DELIM).split(Grammar.WORD_DELIM);
@@ -268,6 +269,14 @@ var testData = [
     }
   },
   {
+    name: "alias without aliases",
+    data: {
+      description: "alias1",
+      aliases: []
+    },
+    expectedError: ERRORS.noType
+  },
+  {
     name: "simple alias (as type)",
     data: {
       type: "alias1"
@@ -318,6 +327,14 @@ var testData = [
     }
   },
   {
+    name: "no custom grammar engine",
+    data: {
+      description: "custom btn",
+      grammarEngines: []
+    },
+    expectedError: ERRORS.noType
+  },
+  {
     name: "without knownTypes arg",
     data: {
       description: "a button",
@@ -356,10 +373,10 @@ describe("grammar", function() {
     return new Grammar(
       test.data.description,
       test.data.type,
-      test.data.knownTypes === undefined ? knownTypes : test.data.knownTypes,
-      test.data.aliases === undefined ? aliases : test.data.aliases,
+      test.data.knownTypes === undefined ? defaultKnownTypes : test.data.knownTypes,
+      test.data.aliases === undefined ? defaultAliases : test.data.aliases,
       test.data.contextStack || [],
-      test.data.grammarEngines === undefined ? grammarEngines : test.data.grammarEngines
+      test.data.grammarEngines === undefined ? defaultGrammarEngines : test.data.grammarEngines
     );
   }
 
@@ -374,5 +391,34 @@ describe("grammar", function() {
         assert.deepEqual(testGrammarFn(), test.expectedGrammar, "the grammar should match");
       }
     });
+  });
+});
+
+describe("adding custom grammar engine", function() {
+  var data = "@import 'restyle'; @include restyle-define(test); /* #{inspect(-restyle--grammar(simple test))} */";
+  var expectedCSS = "/* (description: custom, type: test) */";
+
+  function customGrammarEngine() {
+    this.description = ["custom"];
+  }
+
+  it("should allow a custom engine via options", function(done) {
+    var options = {
+      data: data,
+      restyle: {
+        grammarEngines: [customGrammarEngine]
+      }
+    };
+    testutils.assertCompiles(options, expectedCSS, done);
+  });
+
+  it("should allow a custom engine via #addGrammarEngine", function(done) {
+    var options = testutils.sassOptions({
+      data: data
+    });
+
+    options.eyeglass.options.restyle.addGrammarEngine(customGrammarEngine);
+
+    testutils.assertCompiles(options, expectedCSS, done);
   });
 });

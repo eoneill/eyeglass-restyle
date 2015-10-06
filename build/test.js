@@ -6,7 +6,7 @@ var mocha = require("gulp-mocha");
 module.exports = function(gulp, depends, options) {
   options = options || {};
   gulp.task("test", depends, function (cb) {
-    gulp.src(["lib/**/*.js"])
+    gulp.src(["*.js", "lib/**/*.js", "test/*.js"])
     .pipe(istanbul()) // Covering files
     .pipe(istanbul.hookRequire()) // Force `require` to return covered files
     .on("finish", function () {
@@ -23,9 +23,7 @@ module.exports = function(gulp, depends, options) {
       .on("end", cb)
       .on("error", function(e) {
         console.error(e.toString());
-        /*eslint-disable */
         process.exit(1);
-        /*eslint-enable */
       });
     });
   });
