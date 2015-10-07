@@ -24,8 +24,15 @@
   );
 }
 
+@function fn3($a, $b) {
+  @return (
+    fn3: ($a, $b)
+  );
+}
+
 @include restyle-define(test, (
   restyle-var(foo): bar,
+  restyle-var(baz): 1,
   color: red,
 
   restyle-function(my-func): (1, restyle-var(foo), this(color)),
@@ -34,7 +41,8 @@
 
   restyle-states: (
     active: (
-      restyle-function(fn): root(color)
+      restyle-function(fn): root(color),
+      restyle-function(fn3): (restyle-var(foo), parent(color))
     )
   )
 ));

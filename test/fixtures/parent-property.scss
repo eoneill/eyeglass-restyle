@@ -1,0 +1,14 @@
+@import "restyle";
+
+@include restyle-define(test, (
+  foo: bar,
+  bar: this(foo),
+
+  restyle-state(hover): (
+    foo: this(parent(foo))
+  )
+));
+
+.test {
+  @include restyle(test);
+}

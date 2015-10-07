@@ -6,6 +6,7 @@
   fn2: bar;
   fn2: red; }
   .test.active {
-    fn: red; }
+    fn: red;
+    fn3: bar, red; }
   .test.hover {
     my-func-c: red; }
