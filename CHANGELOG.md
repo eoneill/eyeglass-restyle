@@ -1,3 +1,14 @@
+<a name="0.2.10"></a>
+## [0.2.10](https://github.com/eoneill/eyeglass-restyle/compare/v0.2.9...v0.2.10) (2015-10-07)
+
+
+### Bug Fixes
+
+* **no-value:** fix no-value reference to use $-restyle--undefined ([4d1b737](https://github.com/eoneill/eyeglass-restyle/commit/4d1b737))
+* **resolver:** fix the parent() resolver, add test case ([9b3ff19](https://github.com/eoneill/eyeglass-restyle/commit/9b3ff19))
+
+
+
 <a name="0.2.9"></a>
 ## [0.2.9](https://github.com/eoneill/eyeglass-restyle/compare/v0.2.8...v0.2.9) (2015-10-05)
 
