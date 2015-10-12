@@ -1,3 +1,17 @@
+<a name="0.2.11"></a>
+## [0.2.11](https://github.com/eoneill/eyeglass-restyle/compare/v0.2.10...v0.2.11) (2015-10-12)
+
+
+### Features
+
+* **restyle-with-config:** add restyle-with-config mixin ([d6eada2](https://github.com/eoneill/eyeglass-restyle/commit/d6eada2))
+
+### Performance Improvements
+
+* **styles:** use sass methods over js methods if possible ([df04e72](https://github.com/eoneill/eyeglass-restyle/commit/df04e72))
+
+
+
 <a name="0.2.10"></a>
 ## [0.2.10](https://github.com/eoneill/eyeglass-restyle/compare/v0.2.9...v0.2.10) (2015-10-07)
 
