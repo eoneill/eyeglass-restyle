@@ -131,6 +131,16 @@
   @include -restyle--config($key, $value);
 }
 
+/// temporarily use a different config within a block
+/// @content
+/// @param    {Map|String} $key - @see http://restylecss.com/documentation/configuration
+/// @param    {*} $value - @see http://restylecss.com/documentation/configuration
+@mixin restyle-with-config($key: $-restyle--undefined, $value: $-restyle--undefined) {
+  @include -restyle--with-config($key, $value) {
+    @content;
+  }
+}
+
 /// allows iterating over a collection of `multiple-values`
 /// for each iteration, the result is available as `$restyle-current-value`
 /// @param    {*} $value - the collection to iterate over

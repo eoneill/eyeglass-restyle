@@ -37,6 +37,14 @@ $restyle-config: null !default;
   $tmp: -restyle--config($key, $value);
 }
 
+/// @alias restyle-with-config
+@mixin -restyle--with-config($key: $-restyle--undefined, $value: $-restyle--undefined) {
+  $previous-config: $-restyle--config;
+  $tmp: -restyle--config($key, $value);
+  @content;
+  $-restyle--config: $previous-config !global;
+}
+
 // if `$restyle-config` was set, merge it in to the configs...
 @if type-of($restyle-config) == map {
   @include -restyle--config($restyle-config);

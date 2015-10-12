@@ -1,0 +1,23 @@
+@import "restyle";
+
+@mixin test() {
+  /* #{-restyle--config(test)} */
+}
+
+.true {
+  @include restyle-with-config(test, true) {
+    @include test;
+  }
+}
+
+
+.false {
+  @include restyle-with-config(test, false) {
+    @include test;
+  }
+}
+
+
+.null {
+  @include test;
+}
