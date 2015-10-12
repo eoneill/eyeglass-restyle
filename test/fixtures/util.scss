@@ -1,0 +1,53 @@
+@import "restyle";
+
+.is-selector {
+  $tests: (
+    ".test": true,
+    "#test": true,
+    "%test": false,
+    "test": false,
+    "& test": true,
+    "> test": true,
+    "test a": true,
+    "test{foo}": false
+  );
+
+  @each $test, $expected in $tests {
+    $actual: -restyle--is-selector($test);
+    /* [#{if($actual == $expected, PASS, FAIL)}] -restyle--is-selector(#{$test}): #{$actual} */
+    $actual: -restyle--is-selector-js($test);
+    /* [#{if($actual == $expected, PASS, FAIL)}] -restyle--is-selector-js(#{$test}): #{$actual} */
+  }
+
+}
+
+.get-directive {
+  $tests: (
+    "@restyle.foo": foo,
+    "foo": false,
+    "restyle-foo": foo
+  );
+
+  @each $test, $expected in $tests {
+    $actual: -restyle--get-directive($test);
+    /* [#{if($actual == $expected, PASS, FAIL)}] -restyle--get-directive(#{$test}): #{$actual} */
+    $actual: -restyle--get-directive-js($test);
+    /* [#{if($actual == $expected, PASS, FAIL)}] -restyle--get-directive-js(#{$test}): #{$actual} */
+  }
+}
+
+.normalize-property {
+  $tests: (
+    test\foo: test,
+    "test{foo}": test,
+    test-foo: test-foo,
+    "test": test
+  );
+
+  @each $test, $expected in $tests {
+    $actual: -restyle--normalize-property($test);
+    /* [#{if($actual == $expected, PASS, FAIL)}] -restyle--normalize-property(#{$test}): #{$actual} */
+    $actual: -restyle--normalize-property-js($test);
+    /* [#{if($actual == $expected, PASS, FAIL)}] -restyle--normalize-property-js(#{$test}): #{$actual} */
+  }
+}

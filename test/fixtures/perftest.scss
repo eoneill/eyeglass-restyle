@@ -21,11 +21,14 @@ $data-static: ();
 ));
 
 @include -restyle--log-time(total) {
-  @for $i from 0 to 100 {
-    @include restyle-define(test#{$i}, $data);
-  }
 
-  @include restyle-define(test-static, $data-static);
+  @include -restyle--log-time(all-define) {
+    @for $i from 0 to 100 {
+      @include restyle-define(test#{$i}, $data);
+    }
+
+    @include restyle-define(test-static, $data-static);
+  }
 
   .test {
     @include restyle(test0);

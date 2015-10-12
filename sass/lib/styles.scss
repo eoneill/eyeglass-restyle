@@ -58,7 +58,7 @@
 /// @param    {String} $state - the state to search for
 /// @returns  {String} the computed selector
 @function -restyle--get-state-selector($state) {
-  @if (-restyle--is-selector-js($state)) {
+  @if (-restyle--is-selector($state)) {
     @return $state;
   }
   $state-mappings: -restyle--config(state-mappings);
@@ -119,7 +119,7 @@
               $value: ();
             }
 
-            $property: -restyle--normalize-property-js($property);
+            $property: -restyle--normalize-property($property);
 
             // if it's a multivalue object...
             @if -restyle--is-multivalue($value) {
@@ -137,7 +137,7 @@
                 @include restyle-custom-styler($property, $value, $method: pre);
               }
 
-              $directive: -restyle--get-directive-js($property);
+              $directive: -restyle--get-directive($property);
 
               @if ($directive == states) {
                 @each $state-name, $state in $value {
@@ -165,7 +165,7 @@
                 /* [restyle:error] #{$value} */
                 @error "[restyle] #{$value}";
               }
-              @else if (-restyle--is-selector-js($property)) {
+              @else if (-restyle--is-selector($property)) {
                 #{$property} {
                   @include -restyle--styles($value);
                 }

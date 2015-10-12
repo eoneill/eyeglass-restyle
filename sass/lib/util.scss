@@ -1,7 +1,10 @@
+$-restyle--directive-prefix: ("@restyle.", "restyle-");
+$-restyle--selector-chars: ("[", "*", "#", ".", "&", ":", " ");
+
 /// @alias    multiple-values
 @function -restyle--multiple-values($values...) {
   @return (
-    '@restyle.multivalue': $values
+    "#{nth($-restyle--directive-prefix, 1)}multivalue": $values
   );
 }
 
@@ -42,7 +45,7 @@
 /// @param    {*} $args - the value(s) to cast to args
 /// @returns  {List} the list of arguments
 @function -restyle--cast-to-args($args) {
-  // if it's not a comma separated list, cast it to one...
+  // if it"s not a comma separated list, cast it to one...
   @if (type-of($args) != list or list-separator($args) == space) {
     @return ($args,);
   }
@@ -67,7 +70,7 @@
   $type: if($type, "restyle:#{$type}", "restyle");
 
   // adjust the message
-  $message: "[#{$type}] #{-restyle--str-substitute-js($message, $data)}";
+  $message: "[#{$type}] #{if($data, -restyle--str-substitute-js($message, $data), $message)}";
 
   // log based on severity
   @if (not $silent) {
@@ -124,4 +127,43 @@ $restyle-current-value: null !default;
   $tmp: -restyle--log($message, "time:#{$name}", (
     time: -restyle--timer-js($start-time)
   ));
+}
+
+@function -restyle--normalize-property($property) {
+  // @return -restyle--normalize-property-js($property);
+  $property: -restyle--str-trim-from-char($property, "{");
+  $property: -restyle--str-trim-from-char($property, "\\");
+  @return $property;
+}
+
+@function -restyle--str-trim-from-char($str, $char, $including: true) {
+  $idx: str-index($str, $char);
+  @if ($idx != null) {
+    $offset: if($including, 1, 0);
+    @return str-slice($str, 0, ($idx - $offset));
+  }
+  @return $str;
+}
+
+
+@function -restyle--get-directive($str) {
+  // @return -restyle--get-directive-js($str);
+  @each $prefix in $-restyle--directive-prefix {
+    $idx: str-index($str, $prefix);
+    @if $idx == 1 {
+      @return str-slice($str, str-length($prefix) + 1, -1);
+    }
+  }
+
+  @return false;
+}
+
+@function -restyle--is-selector($str) {
+  // @return -restyle--is-selector-js($str);
+  @each $char in $-restyle--selector-chars {
+    @if (str-index($str, $char) != null) {
+      @return true;
+    }
+  }
+  @return false;
 }
