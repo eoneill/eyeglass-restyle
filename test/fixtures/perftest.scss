@@ -1,14 +1,24 @@
 @import "restyle";
 
-$data: ();
+$data-this: ();
+$data-var: ();
 $data-static: ();
 
-@for $i from 0 to 100 {
-  $data: map-merge($data, (
-    foo#{$i}: if($i == 99, bar, this(foo#{$i + 1}))
+$limit: 100;
+@for $i from 0 to $limit {
+  $data-this: map-merge($data-this, (
+    // create a reference to the next property (this is a worst-case scenario)
+    foo#{$i}: if($i == ($limit - 1), bar, this(foo#{$i + 1}))
   ));
   $data-static: map-merge($data-static, (
     foo#{$i}: bar
+  ));
+}
+
+@for $i from 0 to ($limit / 2) {
+  $data-var: map-merge($data-var, (
+    restyle-var(foo#{$i}): if($i == (($limit / 2) - 1), bar, restyle-var(foo#{$i + 1})),
+    foo#{$i}: restyle-var(foo#{$i})
   ));
 }
 
@@ -23,15 +33,21 @@ $data-static: ();
 @include -restyle--log-time(total) {
 
   @include -restyle--log-time(all-define) {
-    @for $i from 0 to 100 {
-      @include restyle-define(test#{$i}, $data);
+    @for $i from 0 to $limit {
+      @include restyle-define(test-this#{$i}, $data-this);
     }
+
+    @include restyle-define(test-var, $data-var);
 
     @include restyle-define(test-static, $data-static);
   }
 
-  .test {
-    @include restyle(test0);
+  .test-this {
+    @include restyle(test-this0);
+  }
+
+  .test-var {
+    @include restyle(test-var);
   }
 
   .test-static {

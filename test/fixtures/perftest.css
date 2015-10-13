@@ -1,4 +1,4 @@
-.test {
+.test-this {
   foo0: bar;
   foo1: bar;
   foo2: bar;
@@ -99,6 +99,58 @@
   foo97: bar;
   foo98: bar;
   foo99: bar; }
+
+.test-var {
+  foo0: bar;
+  foo1: bar;
+  foo2: bar;
+  foo3: bar;
+  foo4: bar;
+  foo5: bar;
+  foo6: bar;
+  foo7: bar;
+  foo8: bar;
+  foo9: bar;
+  foo10: bar;
+  foo11: bar;
+  foo12: bar;
+  foo13: bar;
+  foo14: bar;
+  foo15: bar;
+  foo16: bar;
+  foo17: bar;
+  foo18: bar;
+  foo19: bar;
+  foo20: bar;
+  foo21: bar;
+  foo22: bar;
+  foo23: bar;
+  foo24: bar;
+  foo25: bar;
+  foo26: bar;
+  foo27: bar;
+  foo28: bar;
+  foo29: bar;
+  foo30: bar;
+  foo31: bar;
+  foo32: bar;
+  foo33: bar;
+  foo34: bar;
+  foo35: bar;
+  foo36: bar;
+  foo37: bar;
+  foo38: bar;
+  foo39: bar;
+  foo40: bar;
+  foo41: bar;
+  foo42: bar;
+  foo43: bar;
+  foo44: bar;
+  foo45: bar;
+  foo46: bar;
+  foo47: bar;
+  foo48: bar;
+  foo49: bar; }
 
 .test-static {
   foo0: bar;
