@@ -5,6 +5,7 @@ var path = require("path");
 
 var sources = [
   "*",
+  ".*",
   "{lib,sass,test,build}/**/*"
 ];
 
