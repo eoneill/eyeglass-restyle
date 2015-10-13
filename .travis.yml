@@ -2,6 +2,8 @@ language: node_js
 node_js:
   - 0.12
   - 4.0
+  - 4.1
+  - 4.2
   - node
 matrix:
   fast_finish: true
