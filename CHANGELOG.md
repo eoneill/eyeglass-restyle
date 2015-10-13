@@ -1,3 +1,13 @@
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/eoneill/eyeglass-restyle/compare/v0.2.11...v1.0.0) (2015-10-13)
+
+
+### Bug Fixes
+
+* **Styles:** properties listed after selectors were incorrectly handled ([1dd4b1e](https://github.com/eoneill/eyeglass-restyle/commit/1dd4b1e))
+
+
+
 <a name="0.2.11"></a>
 ## [0.2.11](https://github.com/eoneill/eyeglass-restyle/compare/v0.2.10...v0.2.11) (2015-10-12)
 
