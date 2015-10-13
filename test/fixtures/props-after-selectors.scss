@@ -1,0 +1,13 @@
+@import "restyle";
+
+@include restyle-define(test, (
+  a: 1,
+  ".selector": (
+    a: 1,
+  ),
+  b: 2
+));
+
+.test {
+  @include restyle(test);
+}
