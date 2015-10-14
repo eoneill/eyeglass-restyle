@@ -12,7 +12,7 @@ var conventionalChangelog = require("gulp-conventional-changelog");
 var changelogSource = "CHANGELOG.md";
 var pkgSource = "package.json";
 
-var versionTypes = ["patch", "minor", "major"];
+var versionTypes = ["patch", "minor", "major", "prerelease"];
 
 module.exports = function(gulp, depends, options) {
   options = options || {};
