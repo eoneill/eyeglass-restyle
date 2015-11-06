@@ -36,7 +36,7 @@
     "lodash.clone": "^3.0.3",
     "lodash.isequal": "^3.0.4",
     "lodash.merge": "^3.3.2",
-    "node-sass": "^3.2.0",
+    "node-sass": "3.3.3",
     "node-sass-more-utils": "^0.0.1",
     "node-sass-utils": "^1.1.2"
   },
@@ -44,7 +44,7 @@
     "eclint": "^1.1.2",
     "eslint": "^1.5.1",
     "eyeglass-dev-eslint": "2.0.0",
-    "eyeglass-dev-testutils": "^0.0.5",
+    "eyeglass-dev-testutils": "^0.0.7",
     "gulp": "^3.9.0",
     "gulp-add-src": "^0.2.0",
     "gulp-bump": "^1.0.0",
