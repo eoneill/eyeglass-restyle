@@ -1,3 +1,14 @@
+<a name="1.0.1"></a>
+## [1.0.1](https://github.com/eoneill/eyeglass-restyle/compare/v1.0.0...v1.0.1) (2015-11-06)
+
+
+### Bug Fixes
+
+* lock node-sass version to 3.3.3 until issues are resolved ([a35311f](https://github.com/eoneill/eyeglass-restyle/commit/a35311f))
+* use a Set for custom grammar engines to avoid duplicate methods ([a94362c](https://github.com/eoneill/eyeglass-restyle/commit/a94362c))
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/eoneill/eyeglass-restyle/compare/v0.2.11...v1.0.0) (2015-10-13)
 
