@@ -33,17 +33,18 @@ module.exports = function(eyeglass, sass) {
   var moreSassUtils = require("node-sass-more-utils")(sass, sassUtils);
 
   eyeglass.options.restyle = merge({
-    _grammarEngines: [],
+    _grammarEngines: new Set(),
     addGrammarEngine: function(engine) {
-      eyeglass.options.restyle._grammarEngines.push(engine);
+      eyeglass.options.restyle._grammarEngines.add(engine);
     }
   }, eyeglass.options.restyle);
 
-  var _grammarEngines = eyeglass.options.restyle._grammarEngines;
+
   var grammarEngines = eyeglass.options.restyle.grammarEngines;
   if (grammarEngines) {
-    _grammarEngines.push.apply(_grammarEngines, grammarEngines);
+    grammarEngines.forEach(eyeglass.options.restyle.addGrammarEngine);
   }
+  grammarEngines = eyeglass.options.restyle._grammarEngines;
 
   var toJS = moreSassUtils.toJS;
   var toSass = moreSassUtils.toSass;
@@ -60,7 +61,7 @@ module.exports = function(eyeglass, sass) {
           toJS($aliases),
           toJS($contextStack),
           // pass along the custom grammar engines
-          _grammarEngines
+          grammarEngines
         );
         // and return a SassMap
         done(toSass(grammar));
@@ -76,7 +77,7 @@ module.exports = function(eyeglass, sass) {
           toJS($aliases),
           toJS($contextStack),
           // pass along the custom grammar engines
-          _grammarEngines,
+          grammarEngines,
           // pass along moreSassUtils
           moreSassUtils
         );
