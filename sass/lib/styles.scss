@@ -146,11 +146,12 @@
                   }
                 }
               }
-              @else if ($directive == functions) {
-                $calls: map-get($value, calls);
-                @each $function, $args in $calls {
-                  $args: -restyle--cast-to-args($args);
-                  @include -restyle--styles(call($function, $args...));
+              @else if ($directive == function) {
+                @each $function, $args in $value {
+                  @if (type-of($function) == string) {
+                    $args: -restyle--cast-to-args($args);
+                    @include -restyle--styles(call($function, $args...));
+                  }
                 }
               }
               @else if ($directive == debug) {

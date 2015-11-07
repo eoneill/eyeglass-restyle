@@ -36,6 +36,7 @@
   color: red,
 
   restyle-function(my-func): (1, restyle-var(foo), this(color)),
+  background: none, // this should be between the function output
   restyle-function(fn): this(color),
   restyle-function(fn2): multiple-values(restyle-var(foo), this(color)),
 

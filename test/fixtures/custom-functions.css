@@ -2,11 +2,12 @@
   color: red;
   my-func-a: 1;
   my-func-b: bar;
+  background: none;
   fn: red;
   fn2: bar;
   fn2: red; }
+  .test.hover {
+    my-func-c: red; }
   .test.active {
     fn: red;
     fn3: bar, red; }
-  .test.hover {
-    my-func-c: red; }
