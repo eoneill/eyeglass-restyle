@@ -1,0 +1,24 @@
+@import "restyle";
+
+@include restyle-define(foo, (
+  foo: true
+));
+
+@include restyle-define(test, (
+  color: red,
+  ".foo": (
+    width: 500px
+  ),
+  "@media": (
+    "only screen and (max-width: 330px)": (
+      ".foo": (
+        restyle: foo,
+        width: 100%
+      )
+    )
+  )
+));
+
+.test {
+  @include restyle(test);
+}
