@@ -2,7 +2,13 @@
 
 var Grammar = require("../lib/grammar");
 var assert = require("assert");
-var testutils = require("eyeglass-dev-testutils");
+var Testutils = require("eyeglass-dev-testutils");
+var testutils = new Testutils({
+  engines: {
+    sass: require("node-sass"),
+    eyeglass: require("eyeglass")
+  }
+});
 
 var defaultKnownTypes = ["button", "close-button", "dialog", "container", "window"];
 

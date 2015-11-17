@@ -1,7 +1,13 @@
 "use strict";
 
-var testutils = require("eyeglass-dev-testutils");
 var path = require("path");
+var Testutils = require("eyeglass-dev-testutils");
+var testutils = new Testutils({
+  engines: {
+    sass: require("node-sass"),
+    eyeglass: require("eyeglass")
+  }
+});
 
 var fixtureDir = path.join(__dirname, "fixtures");
 var fixtures = testutils.getSassFixtures(fixtureDir);
