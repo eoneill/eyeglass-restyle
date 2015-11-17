@@ -1,9 +1,13 @@
 @import "restyle";
 
+@function map($map) {
+  @return $map;
+}
+
 @include restyle-define(test, (
   color: red,
   restyle-var(foo): this(color),
-  map: (
+  restyle-function(map): (
     foo: restyle-var(foo),
     color: this(color)
   ),
