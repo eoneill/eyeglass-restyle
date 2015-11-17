@@ -1,5 +1,6 @@
 .test {
   color: red;
-  map: (foo: red, color: red);
+  foo: red;
+  color: red;
   test: red;
   test: red; }
