@@ -31,26 +31,27 @@ function namespaceFunctions(functions) {
 module.exports = function(eyeglass, sass) {
   var sassUtils = require("node-sass-utils")(sass);
   var moreSassUtils = require("node-sass-more-utils")(sass, sassUtils);
+  var grammarEngines = new Set();
 
-  eyeglass.options.restyle = merge({
-    _grammarEngines: new Set(),
-    addGrammarEngine: function(engine) {
-      eyeglass.options.restyle._grammarEngines.add(engine);
-    }
-  }, eyeglass.options.restyle);
-
-
-  var grammarEngines = eyeglass.options.restyle.grammarEngines;
-  if (grammarEngines) {
-    grammarEngines.forEach(eyeglass.options.restyle.addGrammarEngine);
+  function addGrammarEngine(engine) {
+    grammarEngines.add(engine);
   }
-  grammarEngines = eyeglass.options.restyle._grammarEngines;
+
+  var options = eyeglass.options.restyle = merge({}, eyeglass.options.restyle, {
+    // here for back-compat with eyeglass < 0.8.0
+    addGrammarEngine: addGrammarEngine
+  });
+
+  if (options.grammarEngines) {
+    options.grammarEngines.forEach(addGrammarEngine);
+  }
 
   var toJS = moreSassUtils.toJS;
   var toSass = moreSassUtils.toSass;
 
   return {
     sassDir: SASS_DIR,
+    addGrammarEngine: addGrammarEngine,
     functions: namespaceFunctions({
       "grammar-from-description($description, $type, $allowed-types: (), $aliases: (), $context-stack: ())": function($description, $type, $allowedTypes, $aliases, $contextStack, done) {
         // get the grammar

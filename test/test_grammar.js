@@ -419,12 +419,16 @@ describe("adding custom grammar engine", function() {
   });
 
   it("should allow a custom engine via #addGrammarEngine", function(done) {
-    var options = testutils.sassOptions({
+    // create a new instance of eyeglass
+    var Eyeglass = testutils.engines.eyeglass;
+    var eyeglass = new Eyeglass({
       data: data
     });
+    // find the restyle module
+    var restyle = eyeglass.modules.find("restyle");
+    // invoke the addGrammarEngine
+    restyle.addGrammarEngine(customGrammarEngine);
 
-    options.eyeglass.options.restyle.addGrammarEngine(customGrammarEngine);
-
-    testutils.assertCompiles(options, expectedCSS, done);
+    testutils.assertCompiles(eyeglass.options, expectedCSS, done);
   });
 });
