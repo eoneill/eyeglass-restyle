@@ -1,3 +1,13 @@
+<a name="1.0.4"></a>
+## [1.0.4](https://github.com/eoneill/eyeglass-restyle/compare/v1.0.3...v1.0.4) (2016-01-25)
+
+
+### Bug Fixes
+
+* update for eyeglass 0.8.x compatibility ([bc1f2b5](https://github.com/eoneill/eyeglass-restyle/commit/bc1f2b5))
+
+
+
 <a name="1.0.3"></a>
 ## [1.0.3](https://github.com/eoneill/eyeglass-restyle/compare/v1.0.2...v1.0.3) (2015-11-10)
 
