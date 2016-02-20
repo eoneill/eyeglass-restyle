@@ -1,3 +1,13 @@
+<a name="1.0.5"></a>
+## [1.0.5](https://github.com/eoneill/eyeglass-restyle/compare/v1.0.4...v1.0.5) (2016-02-20)
+
+
+### Bug Fixes
+
+* **package.json:** update eyeglass:needs to <1.0 for now ([0ab4655](https://github.com/eoneill/eyeglass-restyle/commit/0ab4655))
+
+
+
 <a name="1.0.4"></a>
 ## [1.0.4](https://github.com/eoneill/eyeglass-restyle/compare/v1.0.3...v1.0.4) (2016-01-25)
 
