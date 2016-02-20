@@ -28,7 +28,7 @@
   ],
   "eyeglass": {
     "name": "restyle",
-    "needs": "^0.8.1"
+    "needs": "<1.0"
   },
   "dependencies": {
     "crc": "^3.3.0",
