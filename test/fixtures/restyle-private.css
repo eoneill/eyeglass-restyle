@@ -1,0 +1,10 @@
+.test.extends {
+  private: true;
+  extends: true; }
+
+.test.aliases {
+  private: true; }
+
+.test.external-extends {
+  external-private: true;
+  external-extends: true; }

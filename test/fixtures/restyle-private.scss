@@ -1,0 +1,65 @@
+@import "restyle";
+
+// define our UI element...
+@include restyle-define(test, (
+  restyle-modifiers: (
+    // we CAN extend private within the same defn
+    extends: (
+      restyle-extends: private,
+      extends: true
+    ),
+    // we CAN alias private within the same defn
+    aliases: (
+      restyle-alias: private this
+    ),
+    // we CAN alias external public modifiers
+    external-extends: (
+      restyle-alias: extends test2
+    ),
+    // we CANNOT alias external private modifiers
+    external-private: (
+      restyle-alias: private test2
+    ),
+    // we CANNOT reference private directly
+    restyle-private(private): (
+      private: true
+    )
+  )
+));
+
+@include restyle-define(test2, (
+  restyle-modifiers: (
+    extends: (
+      restyle-extends: private,
+      external-extends: true
+    ),
+    restyle-private(private): (
+      external-private: true
+    )
+  )
+));
+
+.test {
+  @include restyle(test);
+  &.extends {
+    @include restyle(extends test);
+  }
+  &.aliases {
+    @include restyle(aliases test);
+  }
+  // we cannot reference private directly
+  &.private {
+    @include restyle(private test);
+  }
+  // ensure that `restyle-private(...)` does not allow us to bypass the restriction
+  &.private-fn {
+    @include restyle(restyle-private(private) test);
+  }
+
+  &.external-extends {
+    @include restyle(external-extends test);
+  }
+  &.external-private {
+    @include restyle(external-private test);
+  }
+}
