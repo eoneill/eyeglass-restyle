@@ -1,7 +1,8 @@
 .test {
   color: green; }
   .test.alt {
-    color: red; }
+    color: red;
+    extended: true; }
   .test.primary {
     color: green; }
   .test.small {
@@ -9,6 +10,7 @@
     font-size: 70%; }
   .test.small.alt {
     color: red;
+    extended: true;
     font-size: 70%; }
   .test.large {
     color: green;
@@ -24,6 +26,7 @@
     font-size: 95%; }
   .test.small.alt.primary {
     color: blue;
+    extended: true;
     font-size: 95%; }
   .test.small.secondary.primary {
     color: blue;

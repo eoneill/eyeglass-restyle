@@ -14,7 +14,11 @@
         description: "this is an alternate test pattern",
         class: type
       ),
+      restyle-extends: ext,
       color: red
+    ),
+    ext: (
+      extended: true
     ),
     primary: (
       restyle-meta: (
