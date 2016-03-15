@@ -1,3 +1,13 @@
+<a name="1.0.7"></a>
+## [1.0.7](https://github.com/eoneill/eyeglass-restyle/compare/v1.0.6...v1.0.7) (2016-03-15)
+
+
+### Bug Fixes
+
+* **restyle-meta:** correctly handle meta values when they are preserved ([f19e668](https://github.com/eoneill/eyeglass-restyle/commit/f19e668))
+
+
+
 <a name="1.0.6"></a>
 ## [1.0.6](https://github.com/eoneill/eyeglass-restyle/compare/v1.0.5...v1.0.6) (2016-03-14)
 
