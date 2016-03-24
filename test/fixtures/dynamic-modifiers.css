@@ -1,0 +1,16 @@
+.test {
+  columns: none; }
+  .test.cols-2 {
+    columns: 2; }
+  .test.cols-4 {
+    columns: 4; }
+  .test.4x3 {
+    columns: 4;
+    rows: 3; }
+  .test.2x2 {
+    columns: 2;
+    rows: 2; }
+  .test.4x4.foo-bar {
+    columns: 4;
+    rows: 4;
+    foo: foo; }

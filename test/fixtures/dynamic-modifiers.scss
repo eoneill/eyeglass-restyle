@@ -1,0 +1,37 @@
+@import "restyle";
+
+@include restyle-define(test, (
+  columns: none,
+  restyle-modifiers: (
+    '{cols}-column': (
+      columns: restyle-var(cols)
+    ),
+    '{cols}x{rows}': (
+      rows: restyle-var(rows),
+      columns: restyle-var(cols),
+    ),
+    '{foo}-bar': (
+      foo: restyle-var(foo)
+    )
+  )
+));
+
+.test {
+  @include restyle(test);
+
+  &.cols-2 {
+    @include restyle(2-column test);
+  }
+  &.cols-4 {
+    @include restyle(4-column test);
+  }
+  &.4x3 {
+    @include restyle(4x3 test);
+  }
+  &.2x2 {
+    @include restyle(2x2 test);
+  }
+  &.4x4.foo-bar {
+    @include restyle(4x4 foo-bar test);
+  }
+}
