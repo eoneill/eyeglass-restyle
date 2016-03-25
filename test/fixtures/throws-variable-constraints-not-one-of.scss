@@ -1,0 +1,15 @@
+@import "restyle";
+
+@include restyle-define(test, (
+  restyle-var(foo): 2,
+  restyle-var-constraints: (
+    foo: (
+      not-one-of: (1, 2, 3)
+    )
+  ),
+  foo: restyle-var(foo)
+));
+
+.test {
+  @include restyle(test);
+}

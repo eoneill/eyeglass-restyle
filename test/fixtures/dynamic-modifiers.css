@@ -1,9 +1,11 @@
 .test {
   columns: none; }
   .test.cols-2 {
-    columns: 2; }
+    columns: 2;
+    width: 50%; }
   .test.cols-4 {
-    columns: 4; }
+    columns: 4;
+    width: 25%; }
   .test.4x3 {
     columns: 4;
     rows: 3; }
@@ -14,3 +16,9 @@
     columns: 4;
     rows: 4;
     foo: foo; }
+  .test.is-disabled {
+    columns: none;
+    disabled: true; }
+  .test.is-not-disabled {
+    columns: none;
+    disabled: false; }

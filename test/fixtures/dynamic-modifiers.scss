@@ -1,10 +1,23 @@
 @import "restyle";
 
+@function get-width($numCols) {
+  @return (
+    width: percentage(1 / $numCols)
+  );
+}
+
 @include restyle-define(test, (
   columns: none,
   restyle-modifiers: (
     '{cols}-column': (
-      columns: restyle-var(cols)
+      columns: restyle-var(cols),
+      restyle-function(get-width): restyle-var(cols)
+    ),
+    '{rows}-rows': (
+      rows: restyle-var(rows)
+    ),
+    'disabled-{is-disabled}': (
+      disabled: restyle-var(is-disabled)
     ),
     '{cols}x{rows}': (
       rows: restyle-var(rows),
@@ -33,5 +46,13 @@
   }
   &.4x4.foo-bar {
     @include restyle(4x4 foo-bar test);
+  }
+
+
+  &.is-disabled {
+    @include restyle(disabled-true test);
+  }
+  &.is-not-disabled {
+    @include restyle(disabled-false test);
   }
 }
