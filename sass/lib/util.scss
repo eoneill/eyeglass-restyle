@@ -167,3 +167,19 @@ $restyle-current-value: null !default;
   }
   @return false;
 }
+
+@function -restyle--kvargs($kvargs...) {
+  $kwargs: keywords($kvargs);
+  $args: ();
+
+  @if (length($kvargs) > 0) {
+    @for $i from 1 through length($kvargs) {
+      $args: append($args, nth($kvargs, $i));
+    }
+  }
+
+  @return (
+    args: $args,
+    kwargs: $kwargs
+  );
+}

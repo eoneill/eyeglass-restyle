@@ -3,7 +3,12 @@
 /// given a grammar, retrieves style definition
 /// @param    {Map|List|String} $grammars... - the grammars to process
 /// @returns  {Map} the styles as a map
-@function -restyle--styles-from-grammar($grammars...) {
+@function -restyle--styles-from-grammar($kvargs...) {
+  $args: -restyle--kvargs($kvargs...);
+  $kwargs: map-get($args, kwargs);
+  $grammars: map-get($kwargs, grammars) or map-get($args, args);
+  $variables: map-get($kwargs, variables);
+
   $debug-message: "took {time} to compute styles for `#{inspect($grammars)}`";
 
   $start-time: -restyle--timer-js();
@@ -13,7 +18,8 @@
     $-restyle--registered-types,
     $-restyle--registered-patterns,
     $-restyle--registered-aliases,
-    $-restyle--grammar-context-stack
+    $-restyle--grammar-context-stack,
+    $variables
   );
 
   $tmp: -restyle--log($debug-message, "time:styles-from-grammar", (

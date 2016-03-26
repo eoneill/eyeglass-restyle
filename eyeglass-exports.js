@@ -68,7 +68,7 @@ module.exports = function(eyeglass, sass) {
         done(toSass(grammar));
       },
 
-      "styles-from-grammar($grammars, $allowed-types, $registered-components, $aliases: (), $context-stack: ())": function($grammars, $allowedTypes, $registeredComponents, $aliases, $contextStack, done) {
+      "styles-from-grammar($grammars, $allowed-types, $registered-components, $aliases: (), $context-stack: (), $variables: ())": function($grammars, $allowedTypes, $registeredComponents, $aliases, $contextStack, $variables, done) {
         var styles = new Styles(
           toJS($grammars),
           toJS($allowedTypes),
@@ -80,7 +80,9 @@ module.exports = function(eyeglass, sass) {
           // pass along the custom grammar engines
           grammarEngines,
           // pass along moreSassUtils
-          moreSassUtils
+          moreSassUtils,
+          // incoming custom variables
+          toJS($variables)
         );
 
         // and return a SassMap

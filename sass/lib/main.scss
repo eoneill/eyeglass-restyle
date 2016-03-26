@@ -1,14 +1,22 @@
 /// @alias    restyle
-@function -restyle--main($descriptors...) {
-  $grammars: -restyle--grammars($descriptors...);
-  @return -restyle--styles-from-grammar($grammars...);
+@function -restyle--main($kvargs...) {
+  $args: -restyle--restyle-args($kvargs...);
+
+  $descriptors: map-get($args, descriptors);
+  $grammars: map-get($args, grammars) or -restyle--grammars($descriptors...);
+  $variables: map-get($args, variables);
+
+  @return -restyle--styles-from-grammar($grammars: $grammars, $variables: $variables);
 }
 
 /// @alias    restyle
-@mixin -restyle--main($descriptors...) {
-  $styles: -restyle--main($descriptors...);
-
+@mixin -restyle--main($kvargs...) {
+  $args: -restyle--restyle-args($kvargs...);
+  $descriptors: map-get($args, descriptors);
   $grammars: -restyle--grammars($descriptors...);
+
+  $styles: -restyle--main($kvargs...);
+
   @each $grammar in $grammars {
     $type: map-get($grammar, type);
     $placeholder: map-get($-restyle--registered-pattern-placeholders, $type);
@@ -42,4 +50,15 @@
   @include -restyle--styles($styles) {
     @content;
   }
+}
+
+@function -restyle--restyle-args($kvargs...) {
+  $args: -restyle--kvargs($kvargs...);
+  $kwargs: map-get($args, kwargs);
+
+  @return (
+    descriptors: map-get($args, args),
+    grammars: map-get($kwargs, grammars),
+    variables: map-get($kwargs, variables)
+  );
 }
