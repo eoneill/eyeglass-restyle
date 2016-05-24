@@ -402,7 +402,7 @@ describe("grammar", function() {
 
 describe("adding custom grammar engine", function() {
   var data = "@import 'restyle'; @include restyle-define(test); /* #{inspect(-restyle--grammar(simple test))} */";
-  var expectedCSS = "/* (description: custom, type: test) */";
+  var expectedCSS = "/* (description: (custom,), type: test) */";
 
   function customGrammarEngine() {
     this.description = ["custom"];
