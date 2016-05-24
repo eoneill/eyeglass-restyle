@@ -1,3 +1,16 @@
+<a name="1.0.8"></a>
+## [1.0.8](https://github.com/eoneill/eyeglass-restyle/compare/v1.0.7...v1.0.8) (2016-05-24)
+
+
+### Features
+
+* **dynamic-modifiers:** add support for dynamic modifiers ([10b698b](https://github.com/eoneill/eyeglass-restyle/commit/10b698b))
+* **restyle-meta:** add support for required modifiers ([2343e3e](https://github.com/eoneill/eyeglass-restyle/commit/2343e3e))
+* **user-variables:** allow user provided variables ([9da8c79](https://github.com/eoneill/eyeglass-restyle/commit/9da8c79))
+* **var-constraints:** add support for variable constraints ([7743ecb](https://github.com/eoneill/eyeglass-restyle/commit/7743ecb))
+
+
+
 <a name="1.0.7"></a>
 ## [1.0.7](https://github.com/eoneill/eyeglass-restyle/compare/v1.0.6...v1.0.7) (2016-03-15)
 
