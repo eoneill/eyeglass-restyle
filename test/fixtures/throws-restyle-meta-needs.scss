@@ -1,0 +1,26 @@
+@import "restyle";
+
+@include restyle-define(test, (
+  restyle-meta: (
+    needs: size
+  ),
+
+  color: green,
+
+  restyle-modifiers: (
+    some-size: (
+      restyle-meta: (
+        description: "this is size",
+        class: size
+      ),
+      font-size: 10px
+    )
+  )
+));
+
+.test {
+  // should not error
+  @include restyle(some-size test);
+  // should error
+  @include restyle(test);
+}
