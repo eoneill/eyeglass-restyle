@@ -1,0 +1,25 @@
+@import "restyle";
+
+@include restyle-define(test, (
+  restyle-modifiers: (
+    black: (
+      color: black
+    ),
+    red: (
+      color: rgba(255,0,0,1)
+    ),
+    aqua: (
+      color: cyan
+    )
+  )
+));
+
+.test {
+  // because of the way Sass handles color names, we need to allow `cyan` and `aqua` to represent the same thing
+  // @see https://github.com/sass/sass/blob/stable/lib/sass/script/value/color.rb
+  @each $color in (black red aqua cyan) {
+    &.#{$color} {
+      @include restyle($color test);
+    }
+  }
+}
