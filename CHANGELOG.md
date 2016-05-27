@@ -1,3 +1,13 @@
+<a name="1.0.9"></a>
+## [1.0.9](https://github.com/eoneill/eyeglass-restyle/compare/v1.0.8...v1.0.9) (2016-05-27)
+
+
+### Bug Fixes
+
+* **color-modifiers:** improve support for color names as modifiers ([f023863](https://github.com/eoneill/eyeglass-restyle/commit/f023863))
+
+
+
 <a name="1.0.8"></a>
 ## [1.0.8](https://github.com/eoneill/eyeglass-restyle/compare/v1.0.7...v1.0.8) (2016-05-24)
 
