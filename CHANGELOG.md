@@ -1,3 +1,13 @@
+<a name="1.0.10"></a>
+## [1.0.10](https://github.com/eoneill/eyeglass-restyle/compare/v1.0.9...v1.0.10) (2016-06-02)
+
+
+### Bug Fixes
+
+* **restyle:** allow restyle results with functions to merge cleanly ([853a153](https://github.com/eoneill/eyeglass-restyle/commit/853a153))
+
+
+
 <a name="1.0.9"></a>
 ## [1.0.9](https://github.com/eoneill/eyeglass-restyle/compare/v1.0.8...v1.0.9) (2016-05-27)
 
