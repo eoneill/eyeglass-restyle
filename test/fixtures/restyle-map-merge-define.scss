@@ -1,0 +1,24 @@
+@import "restyle";
+
+@function -get-color($color) {
+  @return (
+    color: rgba($color, 0.8)
+  );
+}
+
+@include restyle-define(test, (
+  restyle-var(color): red,
+  restyle-function(-get-color): restyle-var(color)
+));
+
+// take the restyle result of test and augment it with a map-merge
+@include restyle-define(test2, map-merge(restyle(test), (
+  width: 100%
+)));
+
+.test {
+  @include restyle(test);
+}
+.test2 {
+  @include restyle(test2);
+}

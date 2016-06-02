@@ -152,7 +152,7 @@
                   }
                 }
               }
-              @else if ($directive == function) {
+              @else if ($directive == function-call) {
                 @each $function, $args in $value {
                   @if (type-of($function) == string) {
                     $args: -restyle--cast-to-args($args);
