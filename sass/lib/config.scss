@@ -1,7 +1,11 @@
 $-restyle--default-config: (
   init: true,
   state-mappings: (),
-  smart-content-enabled: false
+  smart-content-enabled: false,
+  log: (
+    // enable ui messages by default
+    ui: true
+  )
 );
 $-restyle--config: $-restyle--default-config !default;
 $restyle-config: null !default;

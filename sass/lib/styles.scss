@@ -160,17 +160,13 @@
                   }
                 }
               }
-              @else if ($directive == debug) {
-                /* [restyle:debug] #{$value} */
-                @debug "[restyle] #{$value}";
-              }
-              @else if ($directive == warn or $directive == deprecated) {
-                /* [restyle:#{$directive}] #{$value} */
-                @warn "[restyle] #{$value}";
+              @else if ($directive == debug or $directive == warn or $directive == deprecated) {
+                /* [restyle:ui:#{$directive}] #{$value} */
+                $tmp: -restyle--log($value, "ui:#{$directive}", $severity: if($directive == debug, log, warn));
               }
               @else if ($directive == error) {
-                /* [restyle:error] #{$value} */
-                @error "[restyle] #{$value}";
+                /* [restyle:ui:error] #{$value} */
+                @error "[restyle:ui:error] #{$value}";
               }
               @else if (-restyle--is-selector($property)) {
                 #{$property} {
