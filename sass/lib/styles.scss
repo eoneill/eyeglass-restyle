@@ -164,6 +164,18 @@
                 /* [restyle:ui:#{$directive}] #{$value} */
                 $tmp: -restyle--log($value, "ui:#{$directive}", $severity: if($directive == debug, log, warn));
               }
+              @else if ($directive == debug-once or $directive == warn-once or $directive == deprecated-once) {
+                // if we haven't logged it yet...
+                @if (index($-restyle--log-msg-history, $value) == null) {
+                  /* [restyle:ui:#{$directive}] #{$value} */
+                  $tmp: -restyle--log($value, "ui:#{$directive}", $severity: if($directive == debug-once, log, warn));
+                  // if it was logged...
+                  @if ($tmp != null) {
+                    // keep track of it so we don't log it again
+                    $-restyle--log-msg-history: append($-restyle--log-msg-history, $value) !global;
+                  }
+                }
+              }
               @else if ($directive == error) {
                 /* [restyle:ui:error] #{$value} */
                 @error "[restyle:ui:error] #{$value}";

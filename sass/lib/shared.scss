@@ -8,5 +8,6 @@ $-restyle--registered-aliases: () !default;
 $-restyle--registered-pattern-placeholders: () !default;
 $-restyle--registered-smart-placeholders: () !default;
 $-restyle--grammar-context-stack: () !default;
+$-restyle--log-msg-history: () !default;
 
 @import "./util";

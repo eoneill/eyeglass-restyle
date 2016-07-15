@@ -1,8 +1,11 @@
-.test {
+.test.debug {
   /* [restyle:ui:debug] debugging */ }
-  .test.deprecated {
-    /* [restyle:ui:debug] debugging */
-    /* [restyle:ui:deprecated] deprecated test is deprecated */ }
-  .test.warn {
-    /* [restyle:ui:debug] debugging */
-    /* [restyle:ui:warn] this is a warning */ }
+
+.test.deprecated {
+  /* [restyle:ui:deprecated] deprecated test is deprecated */ }
+
+.test.warn {
+  /* [restyle:ui:warn] this is a warning */ }
+
+.test.once {
+  /* [restyle:ui:debug-once] should only log once */ }

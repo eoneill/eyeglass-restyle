@@ -1,20 +1,27 @@
 @import "restyle";
 
 @include restyle-define(test, (
-  restyle-debug: "debugging",
 
   restyle-modifiers: (
+    debug: (
+      restyle-debug: "debugging",
+    ),
     deprecated: (
       restyle-deprecated: "deprecated test is deprecated"
     ),
     warn: (
       restyle-warn: "this is a warning"
+    ),
+    once: (
+      restyle-debug-once: "should only log once"
     )
   )
 ));
 
 .test {
-  @include restyle(test);
+  &.debug {
+    @include restyle(debug test);
+  }
 
   &.deprecated {
     @include restyle(deprecated test);
@@ -22,5 +29,13 @@
 
   &.warn {
     @include restyle(warn test);
+  }
+
+  &.once {
+    @include restyle(once test);
+    @include restyle(once test);
+    @include restyle(once test);
+    @include restyle(once test);
+    @include restyle(once test);
   }
 }
