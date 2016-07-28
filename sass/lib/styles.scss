@@ -13,12 +13,21 @@
 
   $start-time: -restyle--timer-js();
 
+  // if the patterns are makred dirty, we need to update the memoized store
+  @if ($-restyle--is-registered-patterns-dirty) {
+    $tmp: -restyle--memoize-js(patterns, $-restyle--registered-patterns, (
+      shallow: true // only do a shallow conversion
+    ));
+    $-restyle--is-registered-patterns-dirty: false !global; // mark it as clean
+  }
+  // if the types are makred dirty, we need to update the memoized store
+  @if ($-restyle--is-registered-types-dirty) {
+    $tmp: -restyle--memoize-js(types, $-restyle--registered-types);
+    $-restyle--is-registered-types-dirty: false !global; // mark it as clean
+  }
+
   $result: -restyle--styles-from-grammar-js(
     $grammars,
-    $-restyle--registered-types,
-    $-restyle--registered-patterns,
-    $-restyle--registered-aliases,
-    $-restyle--grammar-context-stack,
     $variables
   );
 

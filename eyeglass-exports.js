@@ -6,6 +6,7 @@ var pkgName = pkg.eyeglass && pkg.eyeglass.name;
 var Grammar = require("./lib/grammar");
 var Styles = require("./lib/styles");
 var util = require("./lib/util");
+var Memoizer = require("./lib/memoizer");
 var crc = require("crc");
 var merge = require("lodash.merge");
 
@@ -15,17 +16,16 @@ var SASS_DIR = path.join(__dirname, "sass");
 function namespaceFunctions(functions) {
   var prefix = "-" + pkgName + "--";
   var suffix = "-js";
-  var namespacedFunctions = {};
   var SIGNATURE_START = "(";
 
-  Object.keys(functions).forEach(function(key) {
+  return Object.keys(functions).reduce(function(namespacedFunctions, key) {
     var fragments = key.split(SIGNATURE_START);
     fragments[0] = prefix + fragments[0].trim() + suffix;
 
     namespacedFunctions[fragments.join(SIGNATURE_START)] = functions[key];
-  });
 
-  return namespacedFunctions;
+    return namespacedFunctions;
+  }, {});
 }
 
 module.exports = function(eyeglass, sass) {
@@ -49,18 +49,51 @@ module.exports = function(eyeglass, sass) {
   var toJS = moreSassUtils.toJS;
   var toSass = moreSassUtils.toSass;
 
+  var globalContext = {};
+
+  function getMemoizer(context) {
+    /* istanbul ignore next - ignored because this is here for different node-sass/eyeglass versions */
+    if (!(context && context.options)) {
+      context = globalContext;
+    }
+
+    if (!(context.restyle && context.restyle.memoizer)) {
+      context = merge(context, {
+        restyle: {
+          memoizer: new Memoizer()
+        }
+      });
+    }
+
+    return context.restyle.memoizer;
+  }
+
   return {
     sassDir: SASS_DIR,
     addGrammarEngine: addGrammarEngine,
     functions: namespaceFunctions({
-      "grammar-from-description($description, $type, $allowed-types: (), $aliases: (), $context-stack: ())": function($description, $type, $allowedTypes, $aliases, $contextStack, done) {
+      "memoize($name, $value: undefined, $options: ())": function($name, $value, $options, done) {
+
+        var memoizer = getMemoizer(this);
+        var options = toJS($options);
+        var value = toJS($value, {
+          shallow: (options instanceof Map) && options.get("shallow")
+        });
+        var name = toJS($name);
+
+        memoizer.set(name, value);
+        done(toSass(value));
+      },
+
+      "grammar-from-description($description, $type)": function($description, $type, done) {
+        var memoizer = getMemoizer(this);
         // get the grammar
         var grammar = new Grammar(
           toJS($description),
           toJS($type),
-          toJS($allowedTypes),
-          toJS($aliases),
-          toJS($contextStack),
+          memoizer.get("types"),
+          memoizer.get("aliases"),
+          memoizer.get("grammar-context-stack"),
           // pass along the custom grammar engines
           grammarEngines
         );
@@ -68,15 +101,14 @@ module.exports = function(eyeglass, sass) {
         done(toSass(grammar));
       },
 
-      "styles-from-grammar($grammars, $allowed-types, $registered-components, $aliases: (), $context-stack: (), $variables: ())": function($grammars, $allowedTypes, $registeredComponents, $aliases, $contextStack, $variables, done) {
+      "styles-from-grammar($grammars, $variables: ())": function($grammars, $variables, done) {
+        var memoizer = getMemoizer(this);
         var styles = new Styles(
           toJS($grammars),
-          toJS($allowedTypes),
-          toJS($registeredComponents, {
-            shallow: true
-          }),
-          toJS($aliases),
-          toJS($contextStack),
+          memoizer.get("types"),
+          memoizer.get("patterns"),
+          memoizer.get("aliases"),
+          memoizer.get("grammar-context-stack"),
           // pass along the custom grammar engines
           grammarEngines,
           // pass along moreSassUtils

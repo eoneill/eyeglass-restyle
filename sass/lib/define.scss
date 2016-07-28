@@ -10,11 +10,13 @@
 
   // add the name to the known types...
   $-restyle--registered-types: append($-restyle--registered-types, $name) !global;
+  $-restyle--is-registered-types-dirty: true !global; // mark it as dirty
 
   // add the definition to the map...
   $-restyle--registered-patterns: map-merge($-restyle--registered-patterns, (
     #{$name}: $definition
   )) !global;
+  $-restyle--is-registered-patterns-dirty: true !global; // mark it as dirty
 
   @if ($placeholder) {
     $-restyle--registered-pattern-placeholders: map-merge($-restyle--registered-pattern-placeholders, (

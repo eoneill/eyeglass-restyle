@@ -10,6 +10,8 @@
 
   $-restyle--registered-aliases: map-merge($-restyle--registered-aliases, $alias) !global;
 
+  $tmp: -restyle--memoize-js(aliases, $-restyle--registered-aliases);
+
   @return true;
 }
 

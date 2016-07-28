@@ -9,5 +9,12 @@ $-restyle--registered-pattern-placeholders: () !default;
 $-restyle--registered-smart-placeholders: () !default;
 $-restyle--grammar-context-stack: () !default;
 $-restyle--log-msg-history: () !default;
+$-restyle--is-registered-types-dirty: true !default;
+$-restyle--is-registered-patterns-dirty: true !default;
+
+@at-root {
+  $tmp: -restyle--memoize-js(aliases, $-restyle--registered-aliases);
+  $tmp: -restyle--memoize-js(grammar-context-stack, $-restyle--grammar-context-stack);
+}
 
 @import "./util";
