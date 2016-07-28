@@ -21,6 +21,7 @@
   $-restyle--registered-patterns: map-merge($-restyle--registered-patterns, (
     #{$name}: $extended-definition
   )) !global;
+  $-restyle--is-registered-patterns-dirty: true !global; // mark it as dirty
 
   $tmp: -restyle--log($debug-message, "time:extend", (
     time: -restyle--timer-js($start-time)
