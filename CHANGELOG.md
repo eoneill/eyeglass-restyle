@@ -1,3 +1,14 @@
+<a name="1.0.13"></a>
+## [1.0.13](https://github.com/eoneill/eyeglass-restyle/compare/v1.0.12...v1.0.13) (2016-07-28)
+
+
+### Performance Improvements
+
+* **memoize:** memoize large data maps for perf reasons ([b3fdf54](https://github.com/eoneill/eyeglass-restyle/commit/b3fdf54))
+* **memoize:** memoize large data maps for perf reasons ([d9b47a3](https://github.com/eoneill/eyeglass-restyle/commit/d9b47a3))
+
+
+
 <a name="1.0.12"></a>
 ## [1.0.12](https://github.com/eoneill/eyeglass-restyle/compare/v1.0.11...v1.0.12) (2016-07-15)
 
