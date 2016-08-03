@@ -174,6 +174,12 @@ module.exports = function(eyeglass, sass) {
         else {
           done(toSass(result));
         }
+      },
+
+      "normalize-word($word)": function($word, done) {
+        var word = toJS($word);
+        var normalizedWord = util.normalizeWord(word);
+        done(toSass(normalizedWord));
       }
     })
   };

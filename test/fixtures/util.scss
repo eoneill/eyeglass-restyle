@@ -51,3 +51,14 @@
     /* [#{if($actual == $expected, PASS, FAIL)}] -restyle--normalize-property-js(#{$test}): #{$actual} */
   }
 }
+
+.normalize-word {
+  $tests: (
+    yellow: 'yellow'
+  );
+
+  @each $test, $expected in $tests {
+    $actual: -restyle--normalize-word-js($test);
+    /* [#{if($actual == $expected, PASS, FAIL)}] -restyle--normalize-word-js(#{$test}): #{$actual} */
+  }
+}

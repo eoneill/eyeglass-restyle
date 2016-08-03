@@ -33,3 +33,6 @@
   /* [PASS] -restyle--normalize-property-js(test-foo): test-foo */
   /* [PASS] -restyle--normalize-property(test): test */
   /* [PASS] -restyle--normalize-property-js(test): test */ }
+
+.normalize-word {
+  /* [PASS] -restyle--normalize-word-js(yellow): yellow */ }
