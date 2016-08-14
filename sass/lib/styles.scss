@@ -204,6 +204,13 @@
                 @include restyle-custom-styler($property, $value, $method: pre);
               }
 
+              // special case for @at-root
+              @else if ($property == '@at-root') {
+                @at-root {
+                  @include -restyle--styles($value);
+                }
+              }
+
               // special case for @extend
               @else if($property == '@extend') {
                 @if (type-of($value) == list) {

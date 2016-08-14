@@ -1,0 +1,16 @@
+@import "restyle";
+
+@include restyle-define(test, (
+  '.not-root': (
+    is-root: false
+  ),
+  '@at-root': (
+    '.root': (
+      is-root: true
+    )
+  )
+));
+
+.test {
+  @include restyle(test);
+}
