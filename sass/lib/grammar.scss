@@ -4,7 +4,7 @@
 @function -restyle--grammar($descriptor) {
   $debug-message: "took {time} to parse the grammar for `#{inspect($descriptor)}`";
 
-  $start-time: -restyle--timer-js();
+  $start-time: -restyle--timer-for-logging("time:grammar");
 
   $descriptor: if(type-of($descriptor) == map, $descriptor, (
     description: $descriptor
@@ -22,7 +22,7 @@
   );
 
   $tmp: -restyle--log($debug-message, "time:grammar", (
-    time: -restyle--timer-js($start-time)
+    time: -restyle--timer-for-logging("time:grammar", $start-time)
   ));
 
   @return $result;

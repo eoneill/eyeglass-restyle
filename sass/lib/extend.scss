@@ -4,7 +4,7 @@
 @function -restyle--extend($name, $definition: null) {
   $debug-message: "took {time} to extend definition for `#{name}`";
 
-  $start-time: -restyle--timer-js();
+  $start-time: -restyle--timer-for-logging("time:extend");
 
   @if (not map-get($-restyle--registered-patterns, $name)) {
     @warn "Attempting to extend `#{$name}` but it does not exist. You should use `restyle-define()` instead.";
@@ -24,7 +24,7 @@
   $-restyle--is-registered-patterns-dirty: true !global; // mark it as dirty
 
   $tmp: -restyle--log($debug-message, "time:extend", (
-    time: -restyle--timer-js($start-time)
+    time: -restyle--timer-for-logging("time:extend", $start-time)
   ));
 
   @return true;

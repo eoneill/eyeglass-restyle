@@ -11,7 +11,7 @@
 
   $debug-message: "took {time} to compute styles for `#{inspect($grammars)}`";
 
-  $start-time: -restyle--timer-js();
+  $start-time: -restyle--timer-for-logging("time:styles-from-grammar");
 
   // if the patterns are makred dirty, we need to update the memoized store
   @if ($-restyle--is-registered-patterns-dirty) {
@@ -32,7 +32,7 @@
   );
 
   $tmp: -restyle--log($debug-message, "time:styles-from-grammar", (
-    time: -restyle--timer-js($start-time)
+    time: -restyle--timer-for-logging("time:styles-from-grammar", $start-time)
   ));
 
   @return $result;

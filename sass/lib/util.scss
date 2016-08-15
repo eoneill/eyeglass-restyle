@@ -1,6 +1,10 @@
 $-restyle--directive-prefix: ("@restyle.", "restyle-");
 $-restyle--selector-chars: ("[", "*", "#", ".", "&", ":", " ");
 
+@function -restyle--timer-for-logging($type, $time: null) {
+  @return if(-restyle--is-logging-enabled($type), -restyle--timer-js($time), 0ms);
+}
+
 /// @alias    multiple-values
 @function -restyle--multiple-values($values...) {
   @return (
@@ -38,14 +42,20 @@ $-restyle--selector-chars: ("[", "*", "#", ".", "&", ":", " ");
 /// @param    {String} $type - the type of logging to check
 /// @returns  {Boolean} whether or not logging is enabled
 @function -restyle--is-logging-enabled($type) {
-  @return -restyle--is-logging-enabled-js($type, -restyle--config(log));
+  @if (not map-has-key($-restyle--logging-enabled-cache, $type)) {
+    $-restyle--logging-enabled-cache: map-merge($-restyle--logging-enabled-cache, (
+      $type: -restyle--is-logging-enabled-js($type, -restyle--config(log))
+    )) !global;
+  }
+
+  @return map-get($-restyle--logging-enabled-cache, $type);
 }
 
 /// casts an incoming values to a list of arguments
 /// @param    {*} $args - the value(s) to cast to args
 /// @returns  {List} the list of arguments
 @function -restyle--cast-to-args($args) {
-  // if it"s not a comma separated list, cast it to one...
+  // if it's not a comma separated list, cast it to one...
   @if (type-of($args) != list or list-separator($args) == space) {
     @return ($args,);
   }

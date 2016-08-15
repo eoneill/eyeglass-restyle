@@ -15,6 +15,9 @@ $restyle-config: null !default;
   $has-incoming-map: type-of($key) == map;
   $is-setter: $has-incoming-map or $value != $-restyle--undefined;
   @if ($is-setter) {
+    // empty the logging cache (perf)
+    $-restyle--logging-enabled-cache: () !global;
+
     // if it's a map...
     @if ($has-incoming-map) {
       // if the $value is `true`, replace it, otherwise merge it
