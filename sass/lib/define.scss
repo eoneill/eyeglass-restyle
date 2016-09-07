@@ -2,6 +2,8 @@
 
 /// @alias restyle-define
 @function -restyle--define($name, $definition: null, $placeholder: null) {
+  // clear the cache
+  $-restyle--patterns-cache: () !global;
   $start-time: -restyle--timer-for-logging("time:define");
 
   @if (map-get($-restyle--registered-patterns, $name)) {

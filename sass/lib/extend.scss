@@ -2,6 +2,9 @@
 
 /// @alias restyle-extend
 @function -restyle--extend($name, $definition: null) {
+  // clear the cache
+  $-restyle--patterns-cache: () !global;
+
   $debug-message: "took {time} to extend definition for `#{name}`";
 
   $start-time: -restyle--timer-for-logging("time:extend");

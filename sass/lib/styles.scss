@@ -9,18 +9,30 @@
   $grammars: map-get($kwargs, grammars) or map-get($args, args);
   $variables: map-get($kwargs, variables);
 
+  // get a key we can use for caching the result
+  $cache-key: inspect((
+    grammars: $grammars,
+    variables: $variables
+  ));
+
+  // if we already have the result in the cache...
+  @if (map-has-key($-restyle--patterns-cache, $cache-key)) {
+    // just return it
+    @return map-get($-restyle--patterns-cache, $cache-key);
+  }
+
   $debug-message: "took {time} to compute styles for `#{inspect($grammars)}`";
 
   $start-time: -restyle--timer-for-logging("time:styles-from-grammar");
 
-  // if the patterns are makred dirty, we need to update the memoized store
+  // if the patterns are marked dirty, we need to update the memoized store
   @if ($-restyle--is-registered-patterns-dirty) {
     $tmp: -restyle--memoize-js(patterns, $-restyle--registered-patterns, (
       shallow: true // only do a shallow conversion
     ));
     $-restyle--is-registered-patterns-dirty: false !global; // mark it as clean
   }
-  // if the types are makred dirty, we need to update the memoized store
+  // if the types are marked dirty, we need to update the memoized store
   @if ($-restyle--is-registered-types-dirty) {
     $tmp: -restyle--memoize-js(types, $-restyle--registered-types);
     $-restyle--is-registered-types-dirty: false !global; // mark it as clean
@@ -30,6 +42,11 @@
     $grammars,
     $variables
   );
+
+  // cache the result
+  $-restyle--patterns-cache: map-merge($-restyle--patterns-cache, (
+    #{$cache-key}: $result
+  )) !global;
 
   $tmp: -restyle--log($debug-message, "time:styles-from-grammar", (
     time: -restyle--timer-for-logging("time:styles-from-grammar", $start-time)
