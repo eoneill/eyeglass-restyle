@@ -11,14 +11,8 @@
 <a name="1.0.16"></a>
 ## [1.0.16](https://github.com/eoneill/eyeglass-restyle/compare/v1.0.14...v1.0.16) (2016-09-07)
 
-
-### Features
-
-* **at-root:** support at-root style selector ([9bc3cf3](https://github.com/eoneill/eyeglass-restyle/commit/9bc3cf3))
-
 ### Performance Improvements
 
-* **log-config-caching:** cache logging status and only invalidate when config changes ([a162cd2](https://github.com/eoneill/eyeglass-restyle/commit/a162cd2))
 * **result-caching:** cache the pattern result ([94ecf23](https://github.com/eoneill/eyeglass-restyle/commit/94ecf23))
 
 
