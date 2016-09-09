@@ -130,12 +130,14 @@ $restyle-current-value: null !default;
 /// @param    {String} $name - the name of the timer
 /// @param    {String} $message - the message to log (must contain a `{time}` placeholder)
 @mixin -restyle--log-time($name: generic, $message: "elapsed time: {time}") {
-  $start-time: -restyle--timer-js();
+  $type: "time:#{$name}";
+
+  $start-time: -restyle--timer-for-logging($type);
 
   @content;
 
-  $tmp: -restyle--log($message, "time:#{$name}", (
-    time: -restyle--timer-js($start-time)
+  $tmp: -restyle--log($message, $type, (
+    time: -restyle--timer-for-logging($type, $start-time)
   ));
 }
 
