@@ -1,3 +1,13 @@
+<a name="1.0.17"></a>
+## [1.0.17](https://github.com/eoneill/eyeglass-restyle/compare/v1.0.16...v1.0.17) (2016-09-09)
+
+
+### Performance Improvements
+
+* wrap one more call to timer when not needed ([a0bc14e](https://github.com/eoneill/eyeglass-restyle/commit/a0bc14e))
+
+
+
 <a name="1.0.16"></a>
 ## [1.0.16](https://github.com/eoneill/eyeglass-restyle/compare/v1.0.14...v1.0.16) (2016-09-07)
 
