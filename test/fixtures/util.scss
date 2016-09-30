@@ -54,7 +54,7 @@
 
 .normalize-word {
   $tests: (
-    yellow: 'yellow'
+    yellow: unquote('yellow')
   );
 
   @each $test, $expected in $tests {
