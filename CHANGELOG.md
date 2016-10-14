@@ -1,3 +1,13 @@
+<a name="1.0.19"></a>
+## [1.0.19](https://github.com/eoneill/eyeglass-restyle/compare/v1.0.18...v1.0.19) (2016-10-14)
+
+
+### Features
+
+* **force-new-context:** add config option to force a new context for styles ([7bd7048](https://github.com/eoneill/eyeglass-restyle/commit/7bd7048))
+
+
+
 <a name="1.0.18"></a>
 ## [1.0.18](https://github.com/eoneill/eyeglass-restyle/compare/v1.0.17...v1.0.18) (2016-09-16)
 
