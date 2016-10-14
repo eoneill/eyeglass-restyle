@@ -5,7 +5,9 @@ $-restyle--default-config: (
   log: (
     // enable ui messages by default
     ui: true
-  )
+  ),
+  // allow overrides to happen inline
+  force-new-context: false
 );
 $-restyle--config: $-restyle--default-config !default;
 $restyle-config: null !default;

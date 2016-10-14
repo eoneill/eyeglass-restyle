@@ -1,0 +1,12 @@
+.default {
+  test: true;
+  test: false; }
+
+.force-new-context--true {
+  test: false; }
+  .force-new-context--true {
+    test: true; }
+
+.force-new-context--false {
+  test: true;
+  test: false; }

@@ -1,0 +1,24 @@
+@import "restyle";
+
+
+@include restyle-define(test, (
+  test: true
+));
+
+@mixin test() {
+  @include restyle(test);
+  test: false;
+}
+
+.default {
+  @include test();
+}
+.force-new-context {
+  @each $value in (true false) {
+    #{&}--#{$value} {
+      @include restyle-with-config(force-new-context, $value) {
+        @include test();
+      }
+    }
+  }
+}
