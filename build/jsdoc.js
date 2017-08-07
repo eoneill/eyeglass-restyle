@@ -1,6 +1,6 @@
 "use strict";
 
-var jsdoc = require("gulp-jsdoc");
+var jsdoc = require("gulp-jsdoc3");
 var config = require("./config");
 
 var infos = {};
