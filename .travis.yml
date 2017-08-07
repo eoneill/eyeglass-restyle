@@ -3,7 +3,7 @@ node_js:
   - 4
   - 6
   - 7
-  - 8
+  - node
 matrix:
   fast_finish: true
   allow_failures:

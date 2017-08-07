@@ -15,7 +15,7 @@
 }
 .force-new-context {
   @each $value in (true false) {
-    #{&}--#{$value} {
+    &--#{$value} {
       @include restyle-with-config(force-new-context, $value) {
         @include test();
       }
