@@ -3651,9 +3651,9 @@ node-gyp@^3.3.1:
     tar "^2.0.0"
     which "1"
 
-node-sass-more-utils@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/node-sass-more-utils/-/node-sass-more-utils-0.0.1.tgz#6d2c3053b6b46d1d6e9948c9c8ed1c350e62408f"
+node-sass-more-utils@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/node-sass-more-utils/-/node-sass-more-utils-1.0.2.tgz#6dab38c9557b1ca51f5dd4594bef3ba48b30d9c4"
 
 node-sass-utils@^1.1.2:
   version "1.1.2"
