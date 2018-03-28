@@ -9,7 +9,7 @@ $data: (
   @each $name in $names {
     // TODO - support variable-exists as well
     $existsFn: "#{$type}-exists";
-    $result: call($existsFn, $name);
+    $result: call(get-function($existsFn), $name);
     /* #{$type} `#{$name}` exists? #{$result} */
   }
 }
