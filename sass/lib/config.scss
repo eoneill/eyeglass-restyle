@@ -7,7 +7,11 @@ $-restyle--default-config: (
     ui: true
   ),
   // allow overrides to happen inline
-  force-new-context: false
+  force-new-context: false,
+  // whether to ignore content passed to restyle-define
+  // work-around for perf issue that can't be solved
+  // with content-exists() due to this bug: https://github.com/sass/libsass/issues/2842
+  ignore-defined-content: false,
 );
 $-restyle--config: $-restyle--default-config !default;
 $restyle-config: null !default;
