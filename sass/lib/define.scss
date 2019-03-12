@@ -39,9 +39,12 @@
 
 /// @alias restyle-define
 @mixin -restyle--define($name, $definition: null) {
-  $placeholder: -restyle--placeholder-name($name);
-  @at-root #{$placeholder} {
-    @content;
+  $placeholder: null;
+  @if not -restyle--config(ignore-defined-content) {
+    $placeholder: -restyle--placeholder-name($name);
+    @at-root #{$placeholder} {
+      @content;
+    }
   }
   $tmp: -restyle--define($name, $definition, $placeholder: $placeholder);
 }

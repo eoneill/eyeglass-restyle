@@ -6,7 +6,7 @@ var Testutils = require("eyeglass-dev-testutils");
 var testutils = new Testutils({
   engines: {
     sass: require("node-sass"),
-    eyeglass: require("eyeglass")
+    eyeglass: require("eyeglass").bind(null)
   }
 });
 

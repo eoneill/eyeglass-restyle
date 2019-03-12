@@ -28,7 +28,7 @@
   ],
   "eyeglass": {
     "name": "restyle",
-    "needs": "^1.0"
+    "needs": "^1.0.0"
   },
   "dependencies": {
     "crc": "^3.3.0",
@@ -41,7 +41,7 @@
   "devDependencies": {
     "eclint": "^2.4.0",
     "eslint": "^4.4.1",
-    "eyeglass": "^1.2.1",
+    "eyeglass": "^2.0.0",
     "eyeglass-dev-eslint": "sass-eyeglass/eyeglass-dev-eslint",
     "eyeglass-dev-testutils": "^1.0.1",
     "gulp": "^3.9.0",
