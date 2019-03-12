@@ -1,3 +1,8 @@
+<a name="1.2.1"></a>
+## [1.2.1](https://github.com/eoneill/eyeglass-restyle/compare/v1.2.0...v1.2.1) (2019-03-12)
+
+
+
 <a name="1.0.19"></a>
 ## [1.0.19](https://github.com/eoneill/eyeglass-restyle/compare/v1.0.18...v1.0.19) (2016-10-14)
 
