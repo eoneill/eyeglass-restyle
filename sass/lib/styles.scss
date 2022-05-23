@@ -125,7 +125,7 @@
         @extend #{$placeholder} !optional;
       }
     }
-    @elseif $output {
+    @else if $output {
       @content;
     }
   }

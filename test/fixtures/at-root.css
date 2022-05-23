@@ -1,5 +1,7 @@
 .root {
-  is-root: true; }
+  is-root: true;
+}
 
 .test .not-root {
-  is-root: false; }
+  is-root: false;
+}

@@ -2,13 +2,8 @@
 
 var Grammar = require("../lib/grammar");
 var assert = require("assert");
-var Testutils = require("eyeglass-dev-testutils");
-var testutils = new Testutils({
-  engines: {
-    sass: require("node-sass"),
-    eyeglass: require("eyeglass").bind(null)
-  }
-});
+
+var testSuites = require("./lib/common").getTestSuites();
 
 var defaultKnownTypes = ["button", "close-button", "dialog", "container", "window"];
 
@@ -373,62 +368,72 @@ var testData = [
   }
 ];
 
+testSuites.forEach(function (suite) {
+  var testutils = suite.testutils;
 
-describe("grammar", function() {
-  function testGrammar(test) {
-    return new Grammar(
-      test.data.description,
-      test.data.type,
-      test.data.knownTypes === undefined ? defaultKnownTypes : test.data.knownTypes,
-      test.data.aliases === undefined ? defaultAliases : test.data.aliases,
-      test.data.contextStack || [],
-      test.data.grammarEngines === undefined ? defaultGrammarEngines : test.data.grammarEngines
-    );
-  }
-
-  testData.forEach(function(test) {
-    var testGrammarFn = testGrammar.bind(testGrammar, test);
-
-    it(test.name, function() {
-      if (test.expectedError) {
-        assert.throws(testGrammarFn, test.expectedError, "should throw an error");
+  describe("engine: " + suite.suiteName, function() {
+    describe("grammar", function() {
+      function testGrammar(test) {
+        return new Grammar(
+          test.data.description,
+          test.data.type,
+          test.data.knownTypes === undefined ? defaultKnownTypes : test.data.knownTypes,
+          test.data.aliases === undefined ? defaultAliases : test.data.aliases,
+          test.data.contextStack || [],
+          test.data.grammarEngines === undefined ? defaultGrammarEngines : test.data.grammarEngines
+        );
       }
-      else {
-        assert.deepEqual(testGrammarFn(), test.expectedGrammar, "the grammar should match");
-      }
+
+      testData.forEach(function(test) {
+        var testGrammarFn = testGrammar.bind(testGrammar, test);
+
+        it(test.name, function() {
+          if (test.expectedError) {
+            assert.throws(testGrammarFn, test.expectedError, "should throw an error");
+          }
+          else {
+            assert.deepEqual(testGrammarFn(), test.expectedGrammar, "the grammar should match");
+          }
+        });
+      });
+  });
+
+  describe("adding custom grammar engine", function() {
+    var data = "@import 'restyle'; @include restyle-define(test); /* #{inspect(-restyle--grammar(simple test))} */";
+    var expectedCSS = "/* (description: (custom,), type: test) */";
+
+    function customGrammarEngine() {
+      this.description = ["custom"];
+      this.type = "test";
+    }
+
+    it.only("should allow a custom engine via options", function(done) {
+      var options = {
+        data: data,
+        restyle: {
+          grammarEngines: [customGrammarEngine]
+        }
+      };
+      // debugger;
+      testutils.assertCompiles(options, expectedCSS, done);
     });
+
+    it("should allow a custom engine via #addGrammarEngine", function(done) {
+      // create a new instance of eyeglass
+      var Eyeglass = testutils.engines.eyeglass;
+      var eyeglass = new Eyeglass({
+        data: data
+      });
+      // find the restyle module
+      var restyle = eyeglass.modules.find("restyle");
+      // invoke the addGrammarEngine
+      restyle.addGrammarEngine(customGrammarEngine);
+
+      testutils.assertCompiles(eyeglass.options, expectedCSS, done);
+    });
+  });
+
   });
 });
 
-describe("adding custom grammar engine", function() {
-  var data = "@import 'restyle'; @include restyle-define(test); /* #{inspect(-restyle--grammar(simple test))} */";
-  var expectedCSS = "/* (description: (custom,), type: test) */";
 
-  function customGrammarEngine() {
-    this.description = ["custom"];
-  }
-
-  it("should allow a custom engine via options", function(done) {
-    var options = {
-      data: data,
-      restyle: {
-        grammarEngines: [customGrammarEngine]
-      }
-    };
-    testutils.assertCompiles(options, expectedCSS, done);
-  });
-
-  it("should allow a custom engine via #addGrammarEngine", function(done) {
-    // create a new instance of eyeglass
-    var Eyeglass = testutils.engines.eyeglass;
-    var eyeglass = new Eyeglass({
-      data: data
-    });
-    // find the restyle module
-    var restyle = eyeglass.modules.find("restyle");
-    // invoke the addGrammarEngine
-    restyle.addGrammarEngine(customGrammarEngine);
-
-    testutils.assertCompiles(eyeglass.options, expectedCSS, done);
-  });
-});

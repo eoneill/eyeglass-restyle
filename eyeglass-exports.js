@@ -12,13 +12,12 @@ var merge = require("lodash.merge");
 
 var SASS_DIR = path.join(__dirname, "sass");
 
-
 function namespaceFunctions(functions) {
   var prefix = "-" + pkgName + "--";
   var suffix = "-js";
   var SIGNATURE_START = "(";
 
-  return Object.keys(functions).reduce(function(namespacedFunctions, key) {
+  return Object.keys(functions).reduce(function (namespacedFunctions, key) {
     var fragments = key.split(SIGNATURE_START);
     fragments[0] = prefix + fragments[0].trim() + suffix;
 
@@ -28,7 +27,11 @@ function namespaceFunctions(functions) {
   }, {});
 }
 
-module.exports = function(eyeglass, sass) {
+function isDartSass(sass) {
+  return sass.info.startsWith("dart-sass");
+}
+
+module.exports = function (eyeglass, sass) {
   var sassUtils = require("node-sass-utils")(sass);
   var moreSassUtils = require("node-sass-more-utils")(sass, sassUtils);
   var grammarEngines = new Set();
@@ -53,11 +56,15 @@ module.exports = function(eyeglass, sass) {
 
   function getMemoizer(context) {
     /* istanbul ignore next - ignored because this is here for different node-sass/eyeglass versions */
-    if (!(context && context.options)) {
+    if (isDartSass(sass) || !(context && context.options)) {
+      // We use the global context because `this` in dart-sass is not consistent.
+      !isDartSass(sass) && console.log("context miss, binding to globalContext");  
+      
       context = globalContext;
     }
 
     if (!(context.restyle && context.restyle.memoizer)) {
+      console.log("Creating a Memoizer");
       context = merge(context, {
         restyle: {
           memoizer: new Memoizer()
@@ -73,7 +80,6 @@ module.exports = function(eyeglass, sass) {
     addGrammarEngine: addGrammarEngine,
     functions: namespaceFunctions({
       "memoize($name, $value: undefined, $options: ())": function($name, $value, $options, done) {
-
         var memoizer = getMemoizer(this);
         var options = toJS($options);
         var value = toJS($value, {
@@ -85,7 +91,7 @@ module.exports = function(eyeglass, sass) {
         done(toSass(value));
       },
 
-      "grammar-from-description($description, $type)": function($description, $type, done) {
+      "grammar-from-description($description, $type)": function ($description, $type, done) {
         var memoizer = getMemoizer(this);
         // get the grammar
         var grammar = new Grammar(
@@ -103,22 +109,60 @@ module.exports = function(eyeglass, sass) {
 
       "styles-from-grammar($grammars, $variables: ())": function($grammars, $variables, done) {
         var memoizer = getMemoizer(this);
+        var types = memoizer.get("types");
+        var patterns = memoizer.get("patterns");
+        var aliases = memoizer.get("aliases");
+        var stack = memoizer.get("grammar-context-stack") || [];
+        var userVariables = toJS($variables);
+        // debugger;
+        // console.log(types, patterns, aliases, stack, userVariables);
+
         var styles = new Styles(
           toJS($grammars),
-          memoizer.get("types"),
-          memoizer.get("patterns"),
-          memoizer.get("aliases"),
-          memoizer.get("grammar-context-stack"),
+          types,
+          patterns, 
+          aliases,
+          stack,
           // pass along the custom grammar engines
           grammarEngines,
           // pass along moreSassUtils
           moreSassUtils,
           // incoming custom variables
-          toJS($variables)
+          userVariables
         );
+        var $styles = toSass(styles);
+        // console.log(styles);
+        // function print(someSass) {
+        //   if (someSass instanceof sass.types.Map || someSass instanceof sass.types.List ) {
+        //     const length = someSass.getLength();
+
+        //     for (let i = 0; i < length; i++) {
+        //       if (someSass instanceof sass.types.Map) {
+        //         console.log(someSass.getKey(i).getValue())
+        //       }
+
+        //       const value = someSass.getValue(i);
+        //       if (value) {
+        //         print(value);
+        //       }
+        //       else {
+        //         console.log('bad value?');
+        //       }
+        //     }
+        //   }
+        //   else if (someSass && someSass.getValue) {
+        //     console.log(someSass.getValue());
+        //   }
+        //   else {
+        //     console.log("???", someSass);
+        //   }
+
+        // }
+
+        // print($styles);
 
         // and return a SassMap
-        done(toSass(styles));
+        done($styles);
       },
 
       "styles-from-diff($original, $other)": function($original, $other, done) {
@@ -141,7 +185,7 @@ module.exports = function(eyeglass, sass) {
         var data = sassUtils.sassString($data);
         var checksum = crc.crc32(data).toString(16);
 
-        done(toSass(checksum));
+        done(new sass.types.String(checksum));
       },
 
       "is-multivalue($value)": function($value, done) {

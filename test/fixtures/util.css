@@ -14,7 +14,8 @@
   /* [PASS] -restyle--is-selector(test a): true */
   /* [PASS] -restyle--is-selector-js(test a): true */
   /* [PASS] -restyle--is-selector(test{foo}): false */
-  /* [PASS] -restyle--is-selector-js(test{foo}): false */ }
+  /* [PASS] -restyle--is-selector-js(test{foo}): false */
+}
 
 .get-directive {
   /* [PASS] -restyle--get-directive(@restyle.foo): foo */
@@ -22,7 +23,8 @@
   /* [PASS] -restyle--get-directive(foo): false */
   /* [PASS] -restyle--get-directive-js(foo): false */
   /* [PASS] -restyle--get-directive(restyle-foo): foo */
-  /* [PASS] -restyle--get-directive-js(restyle-foo): foo */ }
+  /* [PASS] -restyle--get-directive-js(restyle-foo): foo */
+}
 
 .normalize-property {
   /* [PASS] -restyle--normalize-property(test\foo): test */
@@ -32,7 +34,9 @@
   /* [PASS] -restyle--normalize-property(test-foo): test-foo */
   /* [PASS] -restyle--normalize-property-js(test-foo): test-foo */
   /* [PASS] -restyle--normalize-property(test): test */
-  /* [PASS] -restyle--normalize-property-js(test): test */ }
+  /* [PASS] -restyle--normalize-property-js(test): test */
+}
 
 .normalize-word {
-  /* [PASS] -restyle--normalize-word-js(yellow): yellow */ }
+  /* [PASS] -restyle--normalize-word-js(yellow): yellow */
+}
